@@ -15,8 +15,8 @@ struct K {
     static let loginSegue = "loginToNote"
     
     struct BrandColors {
-        static let darkGreen = "DarkGreen"
-        static let lightGreen = "LightGreen"
+        static let darkBlue = "DarkBlue"
+        static let lightGreen = "VeryLightGreen"
         //static let blue = "BrandBlue"
         //static let lighBlue = "BrandLightBlue"
     }

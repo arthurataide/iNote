@@ -16,29 +16,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iNote" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dO-HZ-DNj" customClass="CLTypingLabel" customModule="CLTypingLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iNote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dO-HZ-DNj" customClass="CLTypingLabel" customModule="CLTypingLabel">
                                 <rect key="frame" x="122" y="183" width="170" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="QrC-Bo-XOp"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="170" id="SmV-P4-uEJ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="38"/>
-                                <color key="textColor" name="DarkGreen"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="50"/>
+                                <color key="textColor" name="DarkBlue"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="charInterval">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="centerText" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l36-ok-fvQ">
                                 <rect key="frame" x="0.0" y="730" width="414" height="61"/>
-                                <color key="backgroundColor" name="LightGreen"/>
+                                <color key="backgroundColor" name="GreenCeladon"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="oPF-rw-diZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="tintColor" name="DarkGreen"/>
+                                <color key="tintColor" name="LightGreen"/>
                                 <state key="normal" title="Signup"/>
                                 <connections>
                                     <segue destination="Wb1-9b-6dc" kind="show" id="1Et-Ke-bSn"/>
@@ -57,14 +55,14 @@
                                     <segue destination="eBO-g0-18U" kind="show" id="ibT-Ou-QNr"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="2Qm-At-tVd">
-                                <rect key="frame" x="-305" y="333" width="1024" height="230"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWelcome" translatesAutoresizingMaskIntoConstraints="NO" id="2Qm-At-tVd">
+                                <rect key="frame" x="36.5" y="333" width="341" height="230"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="Jno-hZ-haQ"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="VeryLightGreen"/>
                         <constraints>
                             <constraint firstItem="Pbw-0o-SPP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9hg-fc-w1Q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Pbw-0o-SPP" secondAttribute="trailing" id="CvC-fO-11W"/>
@@ -115,12 +113,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="textfield" translatesAutoresizingMaskIntoConstraints="NO" id="ESE-iD-ibq">
-                                <rect key="frame" x="90" y="346" width="235" height="44"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="textfield" translatesAutoresizingMaskIntoConstraints="NO" id="ESE-iD-ibq">
+                                <rect key="frame" x="90" y="342" width="235" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="VeryLightGreen"/>
                         <viewLayoutGuide key="safeArea" id="P5n-yq-v2y"/>
                     </view>
                     <navigationItem key="navigationItem" id="bdi-6Q-tvX"/>
@@ -157,7 +155,7 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="DarkGreen"/>
+                        <color key="barTintColor" name="DarkBlue"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -176,13 +174,22 @@
         <segue reference="UXl-bW-aFi"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="logo" width="1024" height="1024"/>
+        <image name="logoWelcome" width="341" height="341"/>
         <image name="textfield" width="298" height="93"/>
+        <namedColor name="DarkBlue">
+            <color red="0.066666666666666666" green="0.29411764705882354" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="DarkGreen">
-            <color red="0.16862745098039217" green="0.34509803921568627" blue="0.047058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.066666666666666666" green="0.29411764705882354" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GreenCeladon">
+            <color red="0.27843137254901962" green="0.45490196078431372" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LightGreen">
-            <color red="0.38823529411764707" green="0.60392156862745094" blue="0.40392156862745099" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.90588235294117647" green="0.93333333333333335" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="VeryLightGreen">
+            <color red="0.92156862745098034" green="0.97647058823529409" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
