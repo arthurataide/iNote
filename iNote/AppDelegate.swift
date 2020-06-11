@@ -3,7 +3,7 @@
 //  iNote
 //
 //  Created by Arthur Ataide on 2020-06-05.
-//  Copyright © 2020 Arthur Ataide. All rights reserved.
+//  Copyright © 2020 Arthur Ataide and Jose Marmolejos. All rights reserved.
 //
 
 import UIKit

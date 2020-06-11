@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19516F202491341600B3053B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19516F1F2491341600B3053B /* SignUpViewController.swift */; };
+		19516F222491342E00B3053B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19516F212491342E00B3053B /* LogInViewController.swift */; };
+		19516F822492707E00B3053B /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19516F812492707E00B3053B /* NoteViewController.swift */; };
 		1962737C248B0928009CC1AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1962737B248B0928009CC1AF /* AppDelegate.swift */; };
 		1962737E248B0928009CC1AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1962737D248B0928009CC1AF /* SceneDelegate.swift */; };
-		19627380248B0928009CC1AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1962737F248B0928009CC1AF /* ViewController.swift */; };
+		19627380248B0928009CC1AF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1962737F248B0928009CC1AF /* WelcomeViewController.swift */; };
 		19627383248B0928009CC1AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19627381248B0928009CC1AF /* Main.storyboard */; };
 		19627385248B092B009CC1AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19627384248B092B009CC1AF /* Assets.xcassets */; };
 		19627388248B092B009CC1AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19627386248B092B009CC1AF /* LaunchScreen.storyboard */; };
 		19627393248B092B009CC1AF /* iNoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19627392248B092B009CC1AF /* iNoteTests.swift */; };
 		1962739E248B092B009CC1AF /* iNoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1962739D248B092B009CC1AF /* iNoteUITests.swift */; };
+		196273AE249119CB009CC1AF /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196273AD249119CB009CC1AF /* Constraints.swift */; };
 		399A55A533D84A9AB0034938 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B178627304404F4680A51931 /* awsconfiguration.json */; };
 		42E70509E5F3A7F2B29F4462 /* Pods_iNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */; };
 		A6D07C6761B74129890DAF8C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E0E0F144DFC047EEAAF2597F /* amplifyconfiguration.json */; };
@@ -39,10 +43,13 @@
 
 /* Begin PBXFileReference section */
 		156EA09EB29843FAB2EDA7AD /* schema.graphql */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text; name = schema.graphql; path = amplify/backend/api/amplifyDatasource/schema.graphql; sourceTree = "<group>"; };
+		19516F1F2491341600B3053B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		19516F212491342E00B3053B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		19516F812492707E00B3053B /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		19627378248B0928009CC1AF /* iNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1962737B248B0928009CC1AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1962737D248B0928009CC1AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1962737F248B0928009CC1AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1962737F248B0928009CC1AF /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		19627382248B0928009CC1AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		19627384248B092B009CC1AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19627387248B092B009CC1AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,6 +60,7 @@
 		19627399248B092B009CC1AF /* iNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1962739D248B092B009CC1AF /* iNoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iNoteUITests.swift; sourceTree = "<group>"; };
 		1962739F248B092B009CC1AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		196273AD249119CB009CC1AF /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCABF50F0C3BDC661A5B97C /* Pods-iNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iNote.release.xcconfig"; path = "Target Support Files/Pods-iNote/Pods-iNote.release.xcconfig"; sourceTree = "<group>"; };
 		B178627304404F4680A51931 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -96,6 +104,32 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		19516F1C2491326100B3053B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		19516F1D2491326B00B3053B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19627381248B0928009CC1AF /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		19516F1E2491327300B3053B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1962737F248B0928009CC1AF /* WelcomeViewController.swift */,
+				19516F1F2491341600B3053B /* SignUpViewController.swift */,
+				19516F212491342E00B3053B /* LogInViewController.swift */,
+				19516F812492707E00B3053B /* NoteViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		1962736F248B0928009CC1AF = {
 			isa = PBXGroup;
 			children = (
@@ -122,13 +156,15 @@
 		1962737A248B0928009CC1AF /* iNote */ = {
 			isa = PBXGroup;
 			children = (
+				19516F1C2491326100B3053B /* Model */,
+				19516F1D2491326B00B3053B /* View */,
+				19516F1E2491327300B3053B /* Controller */,
 				1962737B248B0928009CC1AF /* AppDelegate.swift */,
 				1962737D248B0928009CC1AF /* SceneDelegate.swift */,
-				1962737F248B0928009CC1AF /* ViewController.swift */,
-				19627381248B0928009CC1AF /* Main.storyboard */,
 				19627384248B092B009CC1AF /* Assets.xcassets */,
 				19627386248B092B009CC1AF /* LaunchScreen.storyboard */,
 				19627389248B092B009CC1AF /* Info.plist */,
+				196273AD249119CB009CC1AF /* Constraints.swift */,
 			);
 			path = iNote;
 			sourceTree = "<group>";
@@ -238,7 +274,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1150;
-				ORGANIZATIONNAME = "Arthur Ataide";
+				ORGANIZATIONNAME = "Arthur Ataide and Jose Marmolejos";
 				TargetAttributes = {
 					19627377248B0928009CC1AF = {
 						CreatedOnToolsVersion = 11.5;
@@ -367,9 +403,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19627380248B0928009CC1AF /* ViewController.swift in Sources */,
+				19516F822492707E00B3053B /* NoteViewController.swift in Sources */,
+				196273AE249119CB009CC1AF /* Constraints.swift in Sources */,
+				19627380248B0928009CC1AF /* WelcomeViewController.swift in Sources */,
+				19516F222491342E00B3053B /* LogInViewController.swift in Sources */,
 				1962737C248B0928009CC1AF /* AppDelegate.swift in Sources */,
 				1962737E248B0928009CC1AF /* SceneDelegate.swift in Sources */,
+				19516F202491341600B3053B /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,7 +593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lambtoncollege.iNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -572,7 +612,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lambtoncollege.iNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

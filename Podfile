@@ -11,7 +11,8 @@ target 'iNote' do
   pod 'Amplify/Tools'
   pod 'AmplifyPlugins/AWSAPIPlugin'
   pod 'AmplifyPlugins/AWSDataStorePlugin'
-
+  
+  pod 'CLTypingLabel'
 
 
 end
