@@ -275,7 +275,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="BIy-6f-7tT"/>
                                 </constraints>
-                                <state key="normal" title="Sign up with Google">
+                                <state key="normal" title="Sign up with google">
                                     <color key="titleColor" name="DarkBlue"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
