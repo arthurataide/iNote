@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import Amplify
+import AmplifyPlugins
 
 class SignUpViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +35,42 @@ class SignUpViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    @IBAction func signUpTapped(_ sender: UIButton) {
+        signUp(username: usernameTextField.text!,
+               password: passwordTextField.text!,
+               email: emailTextField.text!,
+               givenName: firstNameTextField.text!,
+               familyName: lastNameTextField.text!)
+    }
+    @IBAction func signUpGoogleTapped(_ sender: UIButton) {
+        
+    }
+    
+    
+    func signUp(username: String, password: String, email: String, givenName:String, familyName:String) {
+        let userAttributes = [AuthUserAttribute(.email, value: email),
+                              AuthUserAttribute(.givenName, value: givenName),
+                              AuthUserAttribute(.familyName, value: familyName)]
+        
+        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
+        _ = Amplify.Auth.signUp(username: username, password: password, options: options) { result in
+            switch result {
+            case .success(let signUpResult):
+                if case let .confirmUser(deliveryDetails, _) = signUpResult.nextStep {
+                    print("Delivery details \(String(describing: deliveryDetails))")
+                } else {
+                    print("SignUp Complete")
+                }
+            case .failure(let error):
+                print("An error occured while registering a user \(error)")
+            }
+        }
     }
 
     /*

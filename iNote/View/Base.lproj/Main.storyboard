@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Welcome Background" translatesAutoresizingMaskIntoConstraints="NO" id="8I8-8w-KJ5">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Welcome background" translatesAutoresizingMaskIntoConstraints="NO" id="8I8-8w-KJ5">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iNote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDN-Yg-EGo" customClass="CLTypingLabel" customModule="CLTypingLabel">
@@ -105,21 +105,134 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Welcome Background" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-sx-eqZ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Welcome background" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-sx-eqZ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JHZ-Tg-cFS" customClass="MadokaTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="52" y="474" width="310" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="mIX-8I-xOS" userLabel="height = 55"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" textContentType="password"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="DarkBlue"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEb-ve-0Va" customClass="AZSocialButton" customModule="EasySocialButton">
+                                <rect key="frame" x="52" y="755" width="310" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="lzc-O1-6K7"/>
+                                </constraints>
+                                <state key="normal" title="Sign in with google">
+                                    <color key="titleColor" name="DarkBlue"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="animateInteraction" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="highlightOnTouch" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useCornerRadius" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.20000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="google"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signInGoogleTapped:" destination="eBO-g0-18U" eventType="touchUpInside" id="Igg-Kz-5eC"/>
+                                    <action selector="signUpGoogleTapped:" destination="Wb1-9b-6dc" eventType="touchUpInside" id="Gqd-TV-rpH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzf-bT-ptM">
+                                <rect key="frame" x="52" y="650" width="310" height="47"/>
+                                <color key="backgroundColor" name="DarkBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="S70-Fo-1A8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" title="Sign in">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signInTapped:" destination="eBO-g0-18U" eventType="touchUpInside" id="4ux-BR-a2Y"/>
+                                    <action selector="signUpTapped:" destination="Wb1-9b-6dc" eventType="touchUpInside" id="35x-QO-dGi"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LN-bw-nnn">
+                                <rect key="frame" x="196.5" y="719" width="21" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qdK-HC-Ln0" customClass="MadokaTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="52" y="396" width="310" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="LL1-Pe-lg3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" textContentType="name"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="DarkBlue"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="cEb-ve-0Va" firstAttribute="top" secondItem="6LN-bw-nnn" secondAttribute="bottom" constant="18" id="2mc-Rp-BEC"/>
                             <constraint firstItem="xaj-sx-eqZ" firstAttribute="leading" secondItem="sb1-oj-Mcc" secondAttribute="leading" id="7Mb-tM-yK6"/>
+                            <constraint firstItem="qdK-HC-Ln0" firstAttribute="centerX" secondItem="xaj-sx-eqZ" secondAttribute="centerX" id="F44-yx-v2L"/>
+                            <constraint firstItem="sb1-oj-Mcc" firstAttribute="bottom" secondItem="cEb-ve-0Va" secondAttribute="bottom" constant="60" id="H8q-q0-cSk"/>
                             <constraint firstItem="xaj-sx-eqZ" firstAttribute="top" secondItem="t9u-fd-vKu" secondAttribute="top" id="Icu-l2-yYo"/>
+                            <constraint firstItem="jzf-bT-ptM" firstAttribute="trailing" secondItem="cEb-ve-0Va" secondAttribute="trailing" id="Ivu-Ra-3MB"/>
+                            <constraint firstItem="qdK-HC-Ln0" firstAttribute="trailing" secondItem="JHZ-Tg-cFS" secondAttribute="trailing" id="NI1-Ez-S9g"/>
+                            <constraint firstItem="qdK-HC-Ln0" firstAttribute="top" secondItem="sb1-oj-Mcc" secondAttribute="top" constant="308" id="NeO-8h-Cle"/>
                             <constraint firstAttribute="bottom" secondItem="xaj-sx-eqZ" secondAttribute="bottom" id="OJu-er-FzD"/>
+                            <constraint firstItem="qdK-HC-Ln0" firstAttribute="leading" secondItem="sb1-oj-Mcc" secondAttribute="leading" constant="52" id="Os4-jc-U2B"/>
                             <constraint firstItem="xaj-sx-eqZ" firstAttribute="trailing" secondItem="sb1-oj-Mcc" secondAttribute="trailing" id="PLp-TP-LcE"/>
+                            <constraint firstItem="qdK-HC-Ln0" firstAttribute="leading" secondItem="JHZ-Tg-cFS" secondAttribute="leading" id="RsR-BH-iOp"/>
+                            <constraint firstItem="6LN-bw-nnn" firstAttribute="centerX" secondItem="t9u-fd-vKu" secondAttribute="centerX" id="Vl7-52-0kb"/>
+                            <constraint firstItem="JHZ-Tg-cFS" firstAttribute="trailing" secondItem="jzf-bT-ptM" secondAttribute="trailing" id="aib-Au-1s4"/>
+                            <constraint firstItem="JHZ-Tg-cFS" firstAttribute="leading" secondItem="jzf-bT-ptM" secondAttribute="leading" id="gNb-mT-e04"/>
+                            <constraint firstItem="6LN-bw-nnn" firstAttribute="top" secondItem="jzf-bT-ptM" secondAttribute="bottom" constant="22" id="jUt-AD-BoV"/>
+                            <constraint firstItem="jzf-bT-ptM" firstAttribute="leading" secondItem="cEb-ve-0Va" secondAttribute="leading" id="jfK-gj-0OA"/>
+                            <constraint firstItem="JHZ-Tg-cFS" firstAttribute="top" secondItem="qdK-HC-Ln0" secondAttribute="bottom" constant="23" id="sIw-OG-HtJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sb1-oj-Mcc"/>
                     </view>
                     <navigationItem key="navigationItem" id="6iJ-TU-yHD"/>
                     <connections>
+                        <outlet property="passwordTextField" destination="JHZ-Tg-cFS" id="0f9-AH-LqL"/>
+                        <outlet property="usernameTextField" destination="qdK-HC-Ln0" id="cVR-3C-UgC"/>
                         <segue destination="iYI-H8-8Vd" kind="show" identifier="loginToNote" id="Z1J-H1-Lsq"/>
                     </connections>
                 </viewController>
@@ -135,16 +248,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Welcome Background" translatesAutoresizingMaskIntoConstraints="NO" id="BD7-4z-oax">
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Welcome background" translatesAutoresizingMaskIntoConstraints="NO" id="BD7-4z-oax">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FirstName" textAlignment="natural" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ygs-Eq-KN2" customClass="MadokaTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ygs-Eq-KN2" customClass="MadokaTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="52" y="302" width="310" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="Fj5-pW-POe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" textContentType="nickname"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -157,13 +270,13 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IF2-vc-1Ej" userLabel="LastName" customClass="MadokaTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IF2-vc-1Ej" userLabel="LastName" customClass="MadokaTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="52" y="359" width="310" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="TDo-8I-G9A" userLabel="height = 55"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" textContentType="family-name"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" textContentType="given-name"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -176,13 +289,13 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="843-tl-yzK" customClass="MadokaTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="843-tl-yzK" customClass="MadokaTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="52" y="416" width="310" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="NYH-lo-MEv" userLabel="height = 55"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="continue" textContentType="tel"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" textContentType="family-name"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -269,6 +382,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signUpTapped:" destination="Wb1-9b-6dc" eventType="touchUpInside" id="LVk-cF-T1V"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYu-8W-r5O" customClass="AZSocialButton" customModule="EasySocialButton">
                                 <rect key="frame" x="52" y="767" width="310" height="47"/>
@@ -296,6 +412,9 @@
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signUpGoogleTapped:" destination="Wb1-9b-6dc" eventType="touchUpInside" id="ztw-N0-mcH"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTt-FZ-iqx">
                                 <rect key="frame" x="196.5" y="734" width="21" height="18"/>
@@ -341,7 +460,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="bdi-6Q-tvX"/>
                     <connections>
-                        <outlet property="emailTextField" destination="J4l-ue-w1t" id="6O4-fZ-zIu"/>
+                        <outlet property="confirmPasswordTextField" destination="rsW-hV-C0e" id="7mW-lZ-3Lf"/>
+                        <outlet property="emailTextField" destination="J4l-ue-w1t" id="TKi-xV-4CR"/>
+                        <outlet property="firstNameTextField" destination="IF2-vc-1Ej" id="NzV-Vp-hMs"/>
+                        <outlet property="lastNameTextField" destination="843-tl-yzK" id="Gqr-iT-ECw"/>
+                        <outlet property="passwordTextField" destination="vSa-q5-8a9" id="tg0-n8-hsI"/>
+                        <outlet property="usernameTextField" destination="Ygs-Eq-KN2" id="Opl-EO-Cv6"/>
                         <segue destination="iYI-H8-8Vd" kind="show" identifier="signupToNote" id="UXl-bW-aFi"/>
                     </connections>
                 </viewController>
@@ -392,7 +516,7 @@
         <segue reference="UXl-bW-aFi"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Welcome Background" width="3945" height="5909"/>
+        <image name="Welcome background" width="3945" height="5909"/>
         <image name="google" width="128" height="128"/>
         <namedColor name="DarkBlue">
             <color red="0.066666666666666666" green="0.29411764705882354" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

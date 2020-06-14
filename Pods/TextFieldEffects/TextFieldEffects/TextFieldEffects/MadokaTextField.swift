@@ -39,7 +39,7 @@ import UIKit
      
      This property determines the size of the placeholder label relative to the font size of the text field.
      */
-    @IBInspectable dynamic open var placeholderFontScale: CGFloat = 1.0 {
+    @IBInspectable dynamic open var placeholderFontScale: CGFloat = 0.65 {
         didSet {
             updatePlaceholder()
         }
@@ -109,18 +109,16 @@ import UIKit
     private func updateBorder() {
         let rect = rectForBorder(bounds)
         let path = UIBezierPath()
-
         path.move(to: CGPoint(x: rect.origin.x + borderThickness, y: rect.height - borderThickness))
         path.addLine(to: CGPoint(x: rect.width - borderThickness, y: rect.height - borderThickness))
         path.addLine(to: CGPoint(x: rect.width - borderThickness, y: rect.origin.y + borderThickness))
         path.addLine(to: CGPoint(x: rect.origin.x + borderThickness, y: rect.origin.y + borderThickness))
         path.close()
         borderLayer.path = path.cgPath
-        borderLayer.lineCap = .round
+        borderLayer.lineCap = .square
         borderLayer.lineWidth = borderThickness
         borderLayer.fillColor = nil
         borderLayer.strokeColor = borderColor?.cgColor
-        borderLayer.lineJoin = .round
         borderLayer.strokeEnd = percentageForBottomBorder()
     }
     

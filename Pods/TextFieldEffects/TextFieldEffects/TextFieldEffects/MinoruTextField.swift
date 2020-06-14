@@ -86,7 +86,6 @@ import UIKit
             self.borderLayer.shadowColor = self.textColor?.cgColor
             self.borderLayer.shadowOpacity = 0.5
             self.borderLayer.shadowRadius = 1
-            
         
         }, completion: { _ in
             self.animationCompletionHandler?(.textEntry)
@@ -103,7 +102,6 @@ import UIKit
                 self.borderLayer.shadowColor = nil
                 self.borderLayer.shadowOpacity = 0
                 self.borderLayer.shadowRadius = 0
-                
             }, completion: { _ in
         
                 self.animationCompletionHandler?(.textDisplay)

@@ -1,10 +1,18 @@
-type Task @model {
-  id: ID!
-  title: String!
-  description: String
-  status: String
-}
+
 type Note @model {
-  id: ID!
-  content: String!
+  noteId: ID!
+  title: String!
+  note: String!
+  category: String!
+  noteDate: String!
+  noteTime: String!
+  location: String!
+  user: String!
+}
+
+type Media @model {
+  mediaId: ID!
+  noteId: String!
+  type: String!
+  media: String!
 }

@@ -375,7 +375,7 @@ public class MaskedTextFieldDelegate : NSObject, UITextFieldDelegate {
     
     ///Прозодит с конца строки и устанавливает курсор перед первым "_"
     private func setValidCursorPositionAfterFocusReceived() {
-        let enterablePositions = getEmptyPosition(mask)
+        var enterablePositions = getEmptyPosition(mask)
         var previousEmptyPosition = enterablePositions[0];
         for index in enterablePositions.reversed() {
             if myTextField.text?.getCharAtIndex(index) != "_" {

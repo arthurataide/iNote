@@ -7,6 +7,9 @@ PODS:
     - AppSyncRealTimeClient (~> 1.1.0)
     - AWSPluginsCore (= 1.0.0)
     - ReachabilitySwift (~> 5.0.0)
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.0.0):
+    - AWSMobileClient (~> 2.13.4)
+    - AWSPluginsCore (= 1.0.0)
   - AmplifyPlugins/AWSDataStorePlugin (1.0.0):
     - AWSPluginsCore (= 1.0.0)
     - SQLite.swift (~> 0.12.0)
@@ -40,6 +43,7 @@ DEPENDENCIES:
   - Amplify
   - Amplify/Tools
   - AmplifyPlugins/AWSAPIPlugin
+  - AmplifyPlugins/AWSCognitoAuthPlugin
   - AmplifyPlugins/AWSDataStorePlugin
   - CLTypingLabel
   - EasySocialButton
@@ -83,6 +87,6 @@ SPEC CHECKSUMS:
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: e365d5c94605dd5a004eae5690e699d74d3cfb68
+PODFILE CHECKSUM: 4a5bb1a97481006f0dbb4197217f772e6f639800
 
 COCOAPODS: 1.9.3
