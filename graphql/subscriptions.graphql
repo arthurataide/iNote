@@ -1,0 +1,91 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateNote {
+  onCreateNote {
+    noteId
+    title
+    note
+    category
+    noteDate
+    noteTime
+    location
+    user
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateNote {
+  onUpdateNote {
+    noteId
+    title
+    note
+    category
+    noteDate
+    noteTime
+    location
+    user
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteNote {
+  onDeleteNote {
+    noteId
+    title
+    note
+    category
+    noteDate
+    noteTime
+    location
+    user
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateMedia {
+  onCreateMedia {
+    mediaId
+    noteId
+    type
+    media
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMedia {
+  onUpdateMedia {
+    mediaId
+    noteId
+    type
+    media
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMedia {
+  onDeleteMedia {
+    mediaId
+    noteId
+    type
+    media
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
