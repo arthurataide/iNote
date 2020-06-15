@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8627999EF1D5E93E13DAFF580DA8CDCF"
-               BuildableName = "GTMAppAuth.framework"
-               BlueprintName = "GTMAppAuth"
+               BlueprintIdentifier = "B98689129A9EEE0F6030FD181FED6BE2"
+               BuildableName = "EasySocialButton.framework"
+               BlueprintName = "EasySocialButton"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

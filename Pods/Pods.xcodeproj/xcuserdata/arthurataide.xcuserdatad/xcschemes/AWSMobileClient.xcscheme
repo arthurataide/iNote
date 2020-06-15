@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D676E21115185671D7258A56944ABE98"
-               BuildableName = "GTMSessionFetcher.framework"
-               BlueprintName = "GTMSessionFetcher"
+               BlueprintIdentifier = "6428ED7DAC8003D918A4F549769F079D"
+               BuildableName = "AWSMobileClient.framework"
+               BlueprintName = "AWSMobileClient"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

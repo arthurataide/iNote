@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iNote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDN-Yg-EGo" customClass="CLTypingLabel" customModule="CLTypingLabel">
-                                <rect key="frame" x="132" y="188" width="150" height="0.0"/>
+                                <rect key="frame" x="132" y="188" width="150" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="YRy-LS-8vr"/>
                                 </constraints>
@@ -484,10 +484,29 @@
                         <viewLayoutGuide key="safeArea" id="NOP-Ea-l0I"/>
                     </view>
                     <navigationItem key="navigationItem" id="Qae-f4-eyo"/>
+                    <connections>
+                        <segue destination="KhU-l2-blD" kind="show" identifier="newNoteSegue" id="aMa-f0-4nb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZm-tZ-HbY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2500" y="-23"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="c5a-Jq-3hS">
+            <objects>
+                <viewController id="KhU-l2-blD" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8mF-l6-GrF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="gbA-EH-ynK"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NMP-5k-WHg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Tn-fe-MAn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3499" y="-33"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xe7-PI-asf">
