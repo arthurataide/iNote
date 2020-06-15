@@ -54,7 +54,24 @@ class LogInViewController: UIViewController {
     }
     
     @IBAction func signInGoogleTapped(_ sender: Any) {
-        
+        _ = Amplify.Auth.signInWithWebUI(for: .google, presentationAnchor: self.view.window!) { result in
+            switch result {
+            case .success(_):
+                print("Sign in succeeded")
+            case .failure(let error):
+                print("Sign in failed \(error)")
+            }
+        }
+//        func signInWithWebUI() {
+//            _ = Amplify.Auth.signInWithWebUI(presentationAnchor: self.view.window!) { result in
+//                switch result {
+//                case .success(_):
+//                    print("Sign in succeeded")
+//                case .failure(let error):
+//                    print("Sign in failed \(error)")
+//                }
+//            }
+//        }
     }
     
     func fetchCurrentAuthSession() {

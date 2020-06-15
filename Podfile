@@ -13,6 +13,7 @@ target 'iNote' do
   pod 'AmplifyPlugins/AWSAPIPlugin'
   pod 'AmplifyPlugins/AWSDataStorePlugin'
   pod 'AmplifyPlugins/AWSCognitoAuthPlugin'
+  pod 'GoogleSignIn'
   
   pod 'CLTypingLabel'
   pod 'maskedTextField'
