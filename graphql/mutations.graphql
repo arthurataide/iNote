@@ -1,0 +1,109 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateNote(
+  $input: CreateNoteInput!
+  $condition: ModelNoteConditionInput
+) {
+  createNote(input: $input, condition: $condition) {
+    noteId
+    title
+    note
+    category
+    noteDate
+    noteTime
+    location
+    user
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateNote(
+  $input: UpdateNoteInput!
+  $condition: ModelNoteConditionInput
+) {
+  updateNote(input: $input, condition: $condition) {
+    noteId
+    title
+    note
+    category
+    noteDate
+    noteTime
+    location
+    user
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteNote(
+  $input: DeleteNoteInput!
+  $condition: ModelNoteConditionInput
+) {
+  deleteNote(input: $input, condition: $condition) {
+    noteId
+    title
+    note
+    category
+    noteDate
+    noteTime
+    location
+    user
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateMedia(
+  $input: CreateMediaInput!
+  $condition: ModelMediaConditionInput
+) {
+  createMedia(input: $input, condition: $condition) {
+    mediaId
+    noteId
+    type
+    media
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMedia(
+  $input: UpdateMediaInput!
+  $condition: ModelMediaConditionInput
+) {
+  updateMedia(input: $input, condition: $condition) {
+    mediaId
+    noteId
+    type
+    media
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMedia(
+  $input: DeleteMediaInput!
+  $condition: ModelMediaConditionInput
+) {
+  deleteMedia(input: $input, condition: $condition) {
+    mediaId
+    noteId
+    type
+    media
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
