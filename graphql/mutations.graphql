@@ -1,10 +1,61 @@
 # this is an auto generated file. This will be overwritten
+mutation CreateMyType(
+  $input: CreateMyTypeInput!
+  $condition: ModelMyTypeConditionInput
+) {
+  createMyType(input: $input, condition: $condition) {
+    id
+    title
+    content
+    price
+    rating
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMyType(
+  $input: UpdateMyTypeInput!
+  $condition: ModelMyTypeConditionInput
+) {
+  updateMyType(input: $input, condition: $condition) {
+    id
+    title
+    content
+    price
+    rating
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMyType(
+  $input: DeleteMyTypeInput!
+  $condition: ModelMyTypeConditionInput
+) {
+  deleteMyType(input: $input, condition: $condition) {
+    id
+    title
+    content
+    price
+    rating
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateNote(
   $input: CreateNoteInput!
   $condition: ModelNoteConditionInput
 ) {
   createNote(input: $input, condition: $condition) {
-    noteId
+    id
     title
     note
     category
@@ -24,7 +75,7 @@ mutation UpdateNote(
   $condition: ModelNoteConditionInput
 ) {
   updateNote(input: $input, condition: $condition) {
-    noteId
+    id
     title
     note
     category
@@ -44,7 +95,7 @@ mutation DeleteNote(
   $condition: ModelNoteConditionInput
 ) {
   deleteNote(input: $input, condition: $condition) {
-    noteId
+    id
     title
     note
     category
@@ -64,7 +115,7 @@ mutation CreateMedia(
   $condition: ModelMediaConditionInput
 ) {
   createMedia(input: $input, condition: $condition) {
-    mediaId
+    id
     noteId
     type
     media
@@ -80,7 +131,7 @@ mutation UpdateMedia(
   $condition: ModelMediaConditionInput
 ) {
   updateMedia(input: $input, condition: $condition) {
-    mediaId
+    id
     noteId
     type
     media
@@ -96,7 +147,7 @@ mutation DeleteMedia(
   $condition: ModelMediaConditionInput
 ) {
   deleteMedia(input: $input, condition: $condition) {
-    mediaId
+    id
     noteId
     type
     media

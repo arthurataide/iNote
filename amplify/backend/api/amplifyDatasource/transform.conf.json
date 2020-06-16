@@ -6,5 +6,31 @@
             "ConflictDetection": "VERSION"
         }
     },
-    "ElasticsearchWarning": true
+    "ElasticsearchWarning": true,
+    "StackMapping": {
+        "MediaTable": "Media",
+        "MediaIAMRole": "Media",
+        "MediaDataSource": "Media",
+        "SyncMediaResolver": "Media",
+        "GetMediaResolver": "Media",
+        "ListMediaResolver": "Media",
+        "CreateMediaResolver": "Media",
+        "UpdateMediaResolver": "Media",
+        "DeleteMediaResolver": "Media",
+        "GetAttMediaTableStreamArn": "Media",
+        "GetAttMediaDataSourceName": "Media",
+        "GetAttMediaTableName": "Media",
+        "NoteTable": "Note 2",
+        "NoteIAMRole": "Note 2",
+        "NoteDataSource": "Note 2",
+        "SyncNoteResolver": "Note 2",
+        "GetNoteResolver": "Note 2",
+        "ListNoteResolver": "Note 2",
+        "CreateNoteResolver": "Note 2",
+        "UpdateNoteResolver": "Note 2",
+        "DeleteNoteResolver": "Note 2",
+        "GetAttNoteTableStreamArn": "Note 2",
+        "GetAttNoteDataSourceName": "Note 2",
+        "GetAttNoteTableName": "Note 2"
+    }
 }

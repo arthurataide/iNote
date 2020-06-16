@@ -49,7 +49,7 @@
     "userPoolGroupList": [],
     "dependsOn": [],
     "hostedUI": true,
-    "hostedUIDomainName": "inote7a9fa457-7a9fa457",
+    "hostedUIDomainName": "inote4fa5c4e0-4fa5c4e0",
     "authProvidersUserPool": [],
     "hostedUIProviderMeta": "[]",
     "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"myapp://\"],\"LogoutURLs\":[\"myapp://\"]}"

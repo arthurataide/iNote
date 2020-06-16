@@ -1,4 +1,68 @@
 # this is an auto generated file. This will be overwritten
+query SyncMyTypes(
+  $filter: ModelMyTypeFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncMyTypes(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      title
+      content
+      price
+      rating
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetMyType($id: ID!) {
+  getMyType(id: $id) {
+    id
+    title
+    content
+    price
+    rating
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListMyTypes(
+  $filter: ModelMyTypeFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMyTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      content
+      price
+      rating
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
 query SyncNotes(
   $filter: ModelNoteFilterInput
   $limit: Int
@@ -12,7 +76,7 @@ query SyncNotes(
     lastSync: $lastSync
   ) {
     items {
-      noteId
+      id
       title
       note
       category
@@ -32,7 +96,7 @@ query SyncNotes(
 }
 query GetNote($id: ID!) {
   getNote(id: $id) {
-    noteId
+    id
     title
     note
     category
@@ -54,7 +118,7 @@ query ListNotes(
 ) {
   listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      noteId
+      id
       title
       note
       category
@@ -85,7 +149,7 @@ query SyncMedia(
     lastSync: $lastSync
   ) {
     items {
-      mediaId
+      id
       noteId
       type
       media
@@ -101,7 +165,7 @@ query SyncMedia(
 }
 query GetMedia($id: ID!) {
   getMedia(id: $id) {
-    mediaId
+    id
     noteId
     type
     media
@@ -119,7 +183,7 @@ query ListMedias(
 ) {
   listMedias(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      mediaId
+      id
       noteId
       type
       media

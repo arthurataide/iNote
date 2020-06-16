@@ -1,6 +1,7 @@
 
+ 
 type Note @model {
-  noteId: ID!
+  id: ID!
   title: String!
   note: String!
   category: String!
@@ -11,7 +12,7 @@ type Note @model {
 }
 
 type Media @model {
-  mediaId: ID!
+  id: ID!
   noteId: String!
   type: String!
   media: String!

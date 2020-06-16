@@ -4,7 +4,6 @@ import Foundation
 
 public struct Note: Model {
   public let id: String
-  public var noteId: String
   public var title: String
   public var note: String
   public var category: String
@@ -14,7 +13,6 @@ public struct Note: Model {
   public var user: String
   
   public init(id: String = UUID().uuidString,
-      noteId: String,
       title: String,
       note: String,
       category: String,
@@ -23,7 +21,6 @@ public struct Note: Model {
       location: String,
       user: String) {
       self.id = id
-      self.noteId = noteId
       self.title = title
       self.note = note
       self.category = category

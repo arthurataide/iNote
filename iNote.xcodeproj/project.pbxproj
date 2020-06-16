@@ -25,6 +25,10 @@
 		42E70509E5F3A7F2B29F4462 /* Pods_iNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */; };
 		4BA7CA4CD7A7488D9038E57A /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB71CAE9F674ADF9F9FF8DA /* Media.swift */; };
 		5025951F7BAF42A0814C66DB /* Note+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262DA11D8B740FB9BEA28DA /* Note+Schema.swift */; };
+		696C0AA51BFA48BC9D35A822 /* MyType+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05492BF36F9A4B81901ACDB9 /* MyType+Schema.swift */; };
+		6E1BCDB724988B0200D8B540 /* schema.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 6E1BCDB624988B0200D8B540 /* schema.graphql */; };
+		6ECA19992497E2A3001CD919 /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA19982497E2A3001CD919 /* CreateNoteViewController.swift */; };
+		A18B5B56A0E64936AB53B7E8 /* MyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42CB71A9BBA428CBA6B0474 /* MyType.swift */; };
 		A6D07C6761B74129890DAF8C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E0E0F144DFC047EEAAF2597F /* amplifyconfiguration.json */; };
 		AA3FB838ADE9448DB11F15E0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51090C2AA82740D6A4896D38 /* Note.swift */; };
 /* End PBXBuildFile section */
@@ -47,8 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05492BF36F9A4B81901ACDB9 /* MyType+Schema.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "MyType+Schema.swift"; path = "amplify/generated/models/MyType+Schema.swift"; sourceTree = "<group>"; };
 		0EB71CAE9F674ADF9F9FF8DA /* Media.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = Media.swift; path = amplify/generated/models/Media.swift; sourceTree = "<group>"; };
-		156EA09EB29843FAB2EDA7AD /* schema.graphql */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text; name = schema.graphql; path = amplify/backend/api/amplifyDatasource/schema.graphql; sourceTree = "<group>"; };
 		19516F1F2491341600B3053B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		19516F212491342E00B3053B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		19516F812492707E00B3053B /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
@@ -72,8 +76,11 @@
 		3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCABF50F0C3BDC661A5B97C /* Pods-iNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iNote.release.xcconfig"; path = "Target Support Files/Pods-iNote/Pods-iNote.release.xcconfig"; sourceTree = "<group>"; };
 		51090C2AA82740D6A4896D38 /* Note.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = Note.swift; path = amplify/generated/models/Note.swift; sourceTree = "<group>"; };
+		6E1BCDB624988B0200D8B540 /* schema.graphql */ = {isa = PBXFileReference; lastKnownFileType = file; name = schema.graphql; path = amplify/backend/api/inote/schema.graphql; sourceTree = SOURCE_ROOT; };
+		6ECA19982497E2A3001CD919 /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		B178627304404F4680A51931 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
 		B2C158117953D47AE254195E /* Pods-iNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iNote.debug.xcconfig"; path = "Target Support Files/Pods-iNote/Pods-iNote.debug.xcconfig"; sourceTree = "<group>"; };
+		C42CB71A9BBA428CBA6B0474 /* MyType.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MyType.swift; path = amplify/generated/models/MyType.swift; sourceTree = "<group>"; };
 		DE93863E6BA84D3DACE8AAAB /* amplifytools.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; path = amplifytools.xcconfig; sourceTree = "<group>"; };
 		E0E0F144DFC047EEAAF2597F /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		F262DA11D8B740FB9BEA28DA /* Note+Schema.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "Note+Schema.swift"; path = "amplify/generated/models/Note+Schema.swift"; sourceTree = "<group>"; };
@@ -137,6 +144,7 @@
 				19516F1F2491341600B3053B /* SignUpViewController.swift */,
 				19516F212491342E00B3053B /* LogInViewController.swift */,
 				19516F812492707E00B3053B /* NoteViewController.swift */,
+				6ECA19982497E2A3001CD919 /* CreateNoteViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,6 +214,8 @@
 				20A9A505C5FF458EA03574D0 /* Media+Schema.swift */,
 				51090C2AA82740D6A4896D38 /* Note.swift */,
 				F262DA11D8B740FB9BEA28DA /* Note+Schema.swift */,
+				C42CB71A9BBA428CBA6B0474 /* MyType.swift */,
+				05492BF36F9A4B81901ACDB9 /* MyType+Schema.swift */,
 			);
 			name = AmplifyModels;
 			path = .;
@@ -214,10 +224,10 @@
 		A54B316FB323480FB1595F9C /* AmplifyConfig */ = {
 			isa = PBXGroup;
 			children = (
+				6E1BCDB624988B0200D8B540 /* schema.graphql */,
 				DE93863E6BA84D3DACE8AAAB /* amplifytools.xcconfig */,
 				E0E0F144DFC047EEAAF2597F /* amplifyconfiguration.json */,
 				B178627304404F4680A51931 /* awsconfiguration.json */,
-				156EA09EB29843FAB2EDA7AD /* schema.graphql */,
 			);
 			name = AmplifyConfig;
 			path = .;
@@ -343,6 +353,7 @@
 				19627385248B092B009CC1AF /* Assets.xcassets in Resources */,
 				19627383248B0928009CC1AF /* Main.storyboard in Resources */,
 				A6D07C6761B74129890DAF8C /* amplifyconfiguration.json in Resources */,
+				6E1BCDB724988B0200D8B540 /* schema.graphql in Resources */,
 				399A55A533D84A9AB0034938 /* awsconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ECA19992497E2A3001CD919 /* CreateNoteViewController.swift in Sources */,
 				19516F822492707E00B3053B /* NoteViewController.swift in Sources */,
 				196273AE249119CB009CC1AF /* Constraints.swift in Sources */,
 				19627380248B0928009CC1AF /* WelcomeViewController.swift in Sources */,
@@ -457,6 +469,8 @@
 				0223319A93C84394ADFF24D9 /* Media+Schema.swift in Sources */,
 				AA3FB838ADE9448DB11F15E0 /* Note.swift in Sources */,
 				5025951F7BAF42A0814C66DB /* Note+Schema.swift in Sources */,
+				A18B5B56A0E64936AB53B7E8 /* MyType.swift in Sources */,
+				696C0AA51BFA48BC9D35A822 /* MyType+Schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,7 +645,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3T666946WX;
+				DEVELOPMENT_TEAM = PA73AX2N8H;
 				INFOPLIST_FILE = iNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -650,7 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3T666946WX;
+				DEVELOPMENT_TEAM = PA73AX2N8H;
 				INFOPLIST_FILE = iNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

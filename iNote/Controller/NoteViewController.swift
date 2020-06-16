@@ -21,6 +21,10 @@ class NoteViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        performSegue(withIdentifier: "newNoteSegue", sender: self)
+    }
+    
     @objc func logOut(){
         _ = Amplify.Auth.signOut() { result in
             switch result {

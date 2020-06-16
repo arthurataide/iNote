@@ -1,6 +1,14 @@
 {
+    "auth": {
+        "inote4703704d": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false
+        }
+    },
     "api": {
-        "amplifyDatasource": {
+        "inote": {
             "service": "AppSync",
             "providerPlugin": "awscloudformation",
             "output": {
@@ -15,14 +23,6 @@
                     }
                 }
             }
-        }
-    },
-    "auth": {
-        "inoted29e25a1": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [],
-            "customAuth": false
         }
     }
 }

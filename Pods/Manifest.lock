@@ -48,7 +48,6 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
-  - maskedTextField (0.1.2)
   - ReachabilitySwift (5.0.0)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
@@ -65,7 +64,6 @@ DEPENDENCIES:
   - CLTypingLabel
   - EasySocialButton
   - GoogleSignIn
-  - maskedTextField
   - TextFieldEffects
 
 SPEC REPOS:
@@ -85,7 +83,6 @@ SPEC REPOS:
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
-    - maskedTextField
     - ReachabilitySwift
     - SQLite.swift
     - Starscream
@@ -107,12 +104,11 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
-  maskedTextField: bb19d4693b5156ca4e6776acb61aa21c1a7f01a7
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: 5afa4bebebb207427b7ba495de491640587d149c
+PODFILE CHECKSUM: 00cd799894dbaba5688a286c0bbff0781f777fb0
 
 COCOAPODS: 1.9.3

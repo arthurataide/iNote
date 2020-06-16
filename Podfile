@@ -16,6 +16,5 @@ target 'iNote' do
   pod 'GoogleSignIn'
   
   pod 'CLTypingLabel'
-  pod 'maskedTextField'
   pod 'EasySocialButton'
 end

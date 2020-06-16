@@ -6,7 +6,6 @@ extension Note {
   // MARK: - CodingKeys 
    public enum CodingKeys: String, ModelKey {
     case id
-    case noteId
     case title
     case note
     case category
@@ -26,7 +25,6 @@ extension Note {
     
     model.fields(
       .id(),
-      .field(note.noteId, is: .required, ofType: .string),
       .field(note.title, is: .required, ofType: .string),
       .field(note.note, is: .required, ofType: .string),
       .field(note.category, is: .required, ofType: .string),

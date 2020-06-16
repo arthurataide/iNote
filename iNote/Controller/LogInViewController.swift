@@ -20,6 +20,8 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameTextField.text = "jsmr"
+        passwordTextField.text = "123456"
         // Do any additional setup after loading the view.
     }
     

@@ -1,7 +1,49 @@
 # this is an auto generated file. This will be overwritten
+subscription OnCreateMyType {
+  onCreateMyType {
+    id
+    title
+    content
+    price
+    rating
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMyType {
+  onUpdateMyType {
+    id
+    title
+    content
+    price
+    rating
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMyType {
+  onDeleteMyType {
+    id
+    title
+    content
+    price
+    rating
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateNote {
   onCreateNote {
-    noteId
+    id
     title
     note
     category
@@ -18,7 +60,7 @@ subscription OnCreateNote {
 }
 subscription OnUpdateNote {
   onUpdateNote {
-    noteId
+    id
     title
     note
     category
@@ -35,7 +77,7 @@ subscription OnUpdateNote {
 }
 subscription OnDeleteNote {
   onDeleteNote {
-    noteId
+    id
     title
     note
     category
@@ -52,7 +94,7 @@ subscription OnDeleteNote {
 }
 subscription OnCreateMedia {
   onCreateMedia {
-    mediaId
+    id
     noteId
     type
     media
@@ -65,7 +107,7 @@ subscription OnCreateMedia {
 }
 subscription OnUpdateMedia {
   onUpdateMedia {
-    mediaId
+    id
     noteId
     type
     media
@@ -78,7 +120,7 @@ subscription OnUpdateMedia {
 }
 subscription OnDeleteMedia {
   onDeleteMedia {
-    mediaId
+    id
     noteId
     type
     media
