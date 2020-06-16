@@ -11,6 +11,7 @@ import SwiftUI
 import Amplify
 import AmplifyPlugins
 import Combine
+import CoreLocation
 
 class CreateNoteViewController: UIViewController {
     let notePlaceholder = "Type your note"
@@ -19,6 +20,9 @@ class CreateNoteViewController: UIViewController {
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var tabBar: UITabBar!
     @State var noteSubscription: AnyCancellable?
+    let locationManager = CLLocationManager()
+    var locationString:String?
+    var username:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,17 @@ class CreateNoteViewController: UIViewController {
         
         tabBar.delegate = self
         
+        //Setting up Navigation Bar
         setNavigationItems()
+        
+        //Getting username
+        username = UserDefaults.standard.string(forKey: "username")
+        print("User: ")
+        print(UserDefaults.standard.string(forKey: "username") ?? "")
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
         
         // Do any additional setup after loading the view.
     }
@@ -47,9 +61,25 @@ class CreateNoteViewController: UIViewController {
     
     @objc func saveNote() {
         print("Save & Back")
-        //self.navigationController?.popViewController(animated: true)
         saveOnAWS()
         
+    }
+    
+    func getDateTime(_ type:String)->String{
+        //Getting current date and time
+        let formatter = DateFormatter()
+        let now = Date()
+        
+        if type == "DATE"{
+            formatter.dateFormat = "yyyy-MM-dd"
+        }else{
+            formatter.dateFormat = "HH:mm:ss"
+        }
+        
+        let dateString = formatter.string(from:now)
+        print(dateString)
+        
+        return dateString
     }
     
     func saveOnAWS() {
@@ -66,10 +96,10 @@ class CreateNoteViewController: UIViewController {
                             title: title,
                             note: note,
                             category: "No Category",
-                            noteDate: "No Date",
-                            noteTime: "No Time",
-                            location: "No Location",
-                            user: "No User")
+                            noteDate: getDateTime("DATE"),
+                            noteTime: getDateTime("TIME"),
+                            location: locationString ?? "",
+                            user: username ?? "")
 
             Amplify.DataStore.save(note) { (result) in
                         switch(result) {
@@ -81,8 +111,10 @@ class CreateNoteViewController: UIViewController {
                         }
 
                      }
-
-           }
+            self.navigationController?.popViewController(animated: true)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
 
     }
     
@@ -131,5 +163,26 @@ extension CreateNoteViewController:UITextViewDelegate{
 extension CreateNoteViewController:UITabBarDelegate{
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         print("SELECT: \(item)")
+    }
+}
+
+extension CreateNoteViewController: CLLocationManagerDelegate {
+    
+    @IBAction func locationPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            locationString = "\(lat),\(lon)"
+            print("Location: \(locationString!)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }

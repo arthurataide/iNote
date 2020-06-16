@@ -33,7 +33,9 @@
         },
         "categories": {
             "auth": {
-                "inote4703704d": {}
+                "inote4703704d": {
+                    "hostedUIProviderCreds": "[]"
+                }
             }
         }
     }

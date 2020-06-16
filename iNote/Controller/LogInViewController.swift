@@ -13,15 +13,14 @@ import AmplifyPlugins
 class LogInViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    let confirmAccountMessage = "Amplify.AuthSignInStep.confirmSignUp"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameTextField.text = "jsmr"
-        passwordTextField.text = "123456"
+        passwordTextField.text = "12345678"
+        print("User: ")
+        print(UserDefaults.standard.string(forKey: "username") ?? "")
         // Do any additional setup after loading the view.
     }
     
@@ -31,6 +30,12 @@ class LogInViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    func saveUser(username:String) {
+        print("saveUser: ")
+        print(username)
+        UserDefaults.standard.set(username, forKey: "username")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -98,6 +103,7 @@ class LogInViewController: UIViewController {
             case .success(let success):
                 print("Sign in succeeded \(success)")
                 if (success.isSignedIn){
+                    self.saveUser(username: username)
                     DispatchQueue.main.async {
                         self.goToNote()
                     }

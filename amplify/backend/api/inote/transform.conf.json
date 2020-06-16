@@ -34,7 +34,10 @@
         "DeleteNoteResolver": "Note",
         "GetAttNoteTableStreamArn": "Note",
         "GetAttNoteDataSourceName": "Note",
-        "GetAttNoteTableName": "Note"
+        "GetAttNoteTableName": "Note",
+        "SyncMediaResolver": "Media",
+        "SyncMyTypeResolver": "MyType",
+        "SyncNoteResolver": "Note"
     },
     "ResolverConfig": {
         "project": {
