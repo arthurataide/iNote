@@ -648,6 +648,7 @@
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="NMP-5k-WHg">
                         <nil key="title"/>
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PTn-TJ-zTX">
+                            <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" name="DarkBlue"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -678,30 +679,33 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJG-CH-yov">
                                 <rect key="frame" x="47" y="340" width="320" height="216"/>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfB-xc-vfJ">
-                                <rect key="frame" x="13" y="229" width="104" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfB-xc-vfJ">
+                                <rect key="frame" x="13" y="255" width="104" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsO-U8-hA6">
-                                <rect key="frame" x="338" y="227" width="63" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsO-U8-hA6">
+                                <rect key="frame" x="338" y="253" width="63" height="30"/>
                                 <state key="normal" title="Add New"/>
                                 <connections>
                                     <action selector="addNewTapped:" destination="ruX-lU-jGw" eventType="touchUpInside" id="Cdb-me-GAH"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VtJ-Io-wtG">
-                                <rect key="frame" x="13" y="261" width="392" height="3"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VtJ-Io-wtG">
+                                <rect key="frame" x="13" y="287" width="388" height="3"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="EEI-nl-Cio"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeN-Nm-ola">
-                                <rect key="frame" x="175" y="596" width="64" height="64"/>
+                                <rect key="frame" x="189.5" y="607" width="35" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="XiS-9v-idD"/>
-                                    <constraint firstAttribute="width" constant="64" id="xaa-hU-m5p"/>
+                                    <constraint firstAttribute="height" constant="36" id="ECj-ma-S3G"/>
+                                    <constraint firstAttribute="width" constant="35" id="Wo6-71-wqj"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="plusIcon"/>
+                                <state key="normal" title="Button" image="add_cat"/>
                                 <connections>
                                     <action selector="addTapped:" destination="ruX-lU-jGw" eventType="touchUpInside" id="HQ7-3x-hu7"/>
                                 </connections>
@@ -709,12 +713,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="eeN-Nm-ola" firstAttribute="centerX" secondItem="yuO-5L-Ogn" secondAttribute="centerX" id="4RR-eV-F6S"/>
                             <constraint firstItem="VtJ-Io-wtG" firstAttribute="top" secondItem="gsO-U8-hA6" secondAttribute="bottom" constant="4" id="4k9-PO-uUH"/>
                             <constraint firstItem="PJG-CH-yov" firstAttribute="centerY" secondItem="yuO-5L-Ogn" secondAttribute="centerY" id="6Ru-Su-DCy"/>
-                            <constraint firstItem="eeN-Nm-ola" firstAttribute="top" secondItem="PJG-CH-yov" secondAttribute="bottom" constant="40" id="7HI-Ma-ACS"/>
+                            <constraint firstItem="eeN-Nm-ola" firstAttribute="top" secondItem="PJG-CH-yov" secondAttribute="bottom" constant="51" id="75j-pF-4Ny"/>
                             <constraint firstItem="VtJ-Io-wtG" firstAttribute="top" secondItem="nfB-xc-vfJ" secondAttribute="bottom" constant="8" id="DOc-U1-74b"/>
+                            <constraint firstItem="eeN-Nm-ola" firstAttribute="centerX" secondItem="yuO-5L-Ogn" secondAttribute="centerX" id="PIf-Di-3g6"/>
                             <constraint firstItem="nfB-xc-vfJ" firstAttribute="leading" secondItem="E4W-CX-uaH" secondAttribute="leading" constant="13" id="R7Y-C4-5Gu"/>
+                            <constraint firstAttribute="trailing" secondItem="VtJ-Io-wtG" secondAttribute="trailing" constant="13" id="VIu-vR-mNl"/>
                             <constraint firstItem="PJG-CH-yov" firstAttribute="centerX" secondItem="yuO-5L-Ogn" secondAttribute="centerX" id="dhm-Cw-R8N"/>
                             <constraint firstItem="E4W-CX-uaH" firstAttribute="trailing" secondItem="gsO-U8-hA6" secondAttribute="trailing" constant="13" id="eO8-Y2-sJ6"/>
                             <constraint firstItem="VtJ-Io-wtG" firstAttribute="centerX" secondItem="yuO-5L-Ogn" secondAttribute="centerX" id="fQG-nh-109"/>
@@ -787,6 +792,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Welcome background" width="3945" height="5909"/>
+        <image name="add_cat" width="32" height="32"/>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
         <image name="folder" catalog="system" width="128" height="95"/>
         <image name="google" width="128" height="128"/>

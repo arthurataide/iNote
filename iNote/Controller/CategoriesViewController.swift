@@ -10,7 +10,7 @@ import UIKit
 
 class CategoriesViewController: UIViewController {
     @IBOutlet weak var categoriesPicker: UIPickerView!
-    var categories = ["Gym","School","Recipe","Home"]
+    var categories = ["No Category", "Gym","School","Recipe","Home"]
     var index = 0
     
     override func viewDidLoad() {
@@ -20,11 +20,15 @@ class CategoriesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func addNewTapped(_ sender: UIButton) {
-        
+        newCategory()
     }
     
     @IBAction func addTapped(_ sender: UIButton) {
-        AppDelegate.shared().category = categories[index]
+        if categories[index] == "No Category"{
+            AppDelegate.shared().category = ""
+        }else{
+            AppDelegate.shared().category = categories[index]
+        }
         print(AppDelegate.shared().category)
         dismiss(animated: true, completion: nil)
     }
@@ -49,6 +53,27 @@ extension CategoriesViewController:UIPickerViewDataSource, UIPickerViewDelegate{
         index = row
         print(index)
         
+    }
+    
+    func newCategory() {
+        let alertController = UIAlertController(title: "Category", message: "", preferredStyle: UIAlertController.Style.alert)
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "New category"
+        }
+        let saveAction = UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: { alert -> Void in
+            let firstTextField = alertController.textFields![0] as UITextField
+            
+            if let cat = firstTextField.text{
+                //self.confirmAccount(code: code)
+            }
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
+            (action : UIAlertAction!) -> Void in })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }

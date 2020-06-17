@@ -18,6 +18,8 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         mainTabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
         // Do any additional setup after loading the view.
         //navigationItem.hidesBackButton = true
         
@@ -25,29 +27,40 @@ class TabBarViewController: UITabBarController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.hidesBackButton = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
+        
     }
+    
+
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
         print (item.tag)
         switch item.tag {
             case 1:
-                navigationItem.hidesBackButton = true
-                navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
+                showSignOut()
                 //break
             case 2:
-                navigationItem.hidesBackButton = false
-                //navigationItem.rightBarButtonItem = nil
-                //break
+                showSave()
             case 3:
-                navigationItem.hidesBackButton = true
-                navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
+                showSignOut()
                 //break
             default :
                 print("Something went wrong !!")
         }
+    }
+    
+    func showSave() {
+        navigationItem.hidesBackButton = true
+        let backButton = UIBarButtonItem()
+        backButton.title = "Save"
+        backButton.style = .plain
+        backButton.action = #selector(CreateNoteViewController.saveNote)
+        navigationItem.rightBarButtonItem = backButton
+    }
+    
+    func showSignOut() {
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
     }
     
     @objc func logOut(){

@@ -31,13 +31,11 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         noteTextField.text = notePlaceholder
         noteTextField.textColor = UIColor.lightGray
         noteTextField.delegate = self
-
+        
         titleTextField.becomeFirstResponder()
         
         tabBar.delegate = self
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
-        
-        
         
         //Cleaning shared variable
         AppDelegate.shared().category = ""
@@ -55,11 +53,12 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         locationManager.requestLocation()
         
         // Do any additional setup after loading the view.
-
+        
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        print("viewDidAppear: \(AppDelegate.shared().category)")
         var title:NSAttributedString?
         
         if (AppDelegate.shared().category == ""){
@@ -68,9 +67,6 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
             title = NSAttributedString(string: AppDelegate.shared().category)
         }
         categoryButton.setAttributedTitle(title, for: .normal)
-        
-        setNavigationItems()
-        print("SOMERTHING !!!!!!!!!")
     }
     
     
@@ -83,14 +79,12 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
     }
     
     @objc func saveNote() {
-        print("Save & Back")
+        print("Save")
         saveOnAWS()
-        
     }
     
     @objc func deleteNote() {
         print("Delete")
-        
     }
     
     func getDateTime(_ type:String)->String{
@@ -114,48 +108,78 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         guard var title = titleTextField.text, let note = noteTextField.text else {
             return
         }
-
-        if (title != "" || note != ""){
-
+        
+        var category = ""
+        category = (AppDelegate.shared().category == "" ?  "No Category": AppDelegate.shared().category)
+        
+        if (title != "" || (note != "" && note != "Type your note")) {
+            
             if (title == ""){
                 title = "Untitled"
             }
             let note = Note(
-                            title: title,
-                            note: note,
-                            category: "No Category",
-                            noteDate: getDateTime("DATE"),
-                            noteTime: getDateTime("TIME"),
-                            location: locationString ?? "",
-                            user: username ?? "")
-
+                title: title,
+                note: note,
+                category: category,
+                noteDate: getDateTime("DATE"),
+                noteTime: getDateTime("TIME"),
+                location: locationString ?? "",
+                user: username ?? "")
+            
             Amplify.DataStore.save(note) { (result) in
-                        switch(result) {
-                        case .success(let savedNote):
-                            print("Saved item: \(savedNote)")
-                            self.publish()
-                        case .failure(let error):
-                            print("Could not save item to datastore: \(error)")
-                        }
-
-                     }
-            self.navigationController?.popViewController(animated: true)
-        }else{
-            self.navigationController?.popViewController(animated: true)
+                switch(result) {
+                case .success(let savedNote):
+                    print("Saved item: \(savedNote)")
+                    DispatchQueue.main.async {
+                        self.clearFields()
+                        self.showToast(message: "The note has been creted.", font: .systemFont(ofSize: 12.0))
+                    }
+                    self.publish()
+                case .failure(let error):
+                    print("Could not save item to datastore: \(error)")
+                }
+                
+            }
         }
-
+        
     }
     
     func publish()  {
         print("Pushing")
         self.noteSubscription
-        = Amplify.DataStore.publisher(for: Note.self)
-            .sink(receiveCompletion: { completion in
-                print("Subscription has been completed: \(completion)")
-            }, receiveValue: { mutationEvent in
-                print("Subscription got this value: \(mutationEvent)")
-            })
+            = Amplify.DataStore.publisher(for: Note.self)
+                .sink(receiveCompletion: { completion in
+                    print("Subscription has been completed: \(completion)")
+                }, receiveValue: { mutationEvent in
+                    print("Subscription got this value: \(mutationEvent)")
+                })
         
+    }
+    
+    func clearFields(){
+        titleTextField.text = ""
+        noteTextField.text = ""
+        categoryButton.setAttributedTitle(NSAttributedString(string: "Category"), for: .normal)
+        
+    }
+    
+    func showToast(message : String, font: UIFont) {
+
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-300, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 8.0, delay: 0.1, options: .curveEaseOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
     
     func setNavigationItems() {
@@ -167,11 +191,11 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         backButton.action = #selector(saveNote)
         navigationItem.rightBarButtonItem = backButton
         
-//        deleteButton.image = UIImage(systemName: "trash")
-//        deleteButton.style = .plain
-//        deleteButton.action = #selector(deleteNote)
-//        navigationItem.rightBarButtonItem = deleteButton
-//
+        //        deleteButton.image = UIImage(systemName: "trash")
+        //        deleteButton.style = .plain
+        //        deleteButton.action = #selector(deleteNote)
+        //        navigationItem.rightBarButtonItem = deleteButton
+        //
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Images", style: .plain, target: self, action: #selector(showImages))
     }
     
