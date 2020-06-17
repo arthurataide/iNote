@@ -37,11 +37,13 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         tabBar.delegate = self
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         
+        
+        
         //Cleaning shared variable
         AppDelegate.shared().category = ""
         
         //Setting up Navigation Bar
-        setNavigationItems()
+        
         
         //Getting username
         username = UserDefaults.standard.string(forKey: "username")
@@ -66,6 +68,9 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
             title = NSAttributedString(string: AppDelegate.shared().category)
         }
         categoryButton.setAttributedTitle(title, for: .normal)
+        
+        setNavigationItems()
+        print("SOMERTHING !!!!!!!!!")
     }
     
     
@@ -155,18 +160,18 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
     
     func setNavigationItems() {
         let backButton = UIBarButtonItem()
-        let deleteButton = UIBarButtonItem()
+        //let deleteButton = UIBarButtonItem()
         //backButton.image = UIImage(named: "back")
         backButton.title = "Save & Back"
         backButton.style = .plain
         backButton.action = #selector(saveNote)
-        navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = backButton
         
-        deleteButton.image = UIImage(systemName: "trash")
-        deleteButton.style = .plain
-        deleteButton.action = #selector(deleteNote)
-        navigationItem.rightBarButtonItem = deleteButton
-        
+//        deleteButton.image = UIImage(systemName: "trash")
+//        deleteButton.style = .plain
+//        deleteButton.action = #selector(deleteNote)
+//        navigationItem.rightBarButtonItem = deleteButton
+//
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Images", style: .plain, target: self, action: #selector(showImages))
     }
     
