@@ -14,8 +14,10 @@ import Combine
 class NoteViewController: UIViewController {
     //@State var todoSubscription: AnyCancellable?
     var username:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
         
         // Do any additional setup after loading the view.
