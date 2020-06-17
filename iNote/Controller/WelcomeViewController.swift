@@ -30,7 +30,5 @@ class WelcomeViewController: UIViewController {
         titleLabel.charInterval = 0.7
         
     }
-
-
 }
 

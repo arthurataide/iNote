@@ -13,7 +13,8 @@ ${BUILT_PRODUCTS_DIR}/CLTypingLabel/CLTypingLabel.framework
 ${BUILT_PRODUCTS_DIR}/EasySocialButton/EasySocialButton.framework
 ${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework
 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework
-${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework
+${BUILT_PRODUCTS_DIR}/KeyboardLayoutGuide/KeyboardLayoutGuide.framework
+${BUILT_PRODUCTS_DIR}/LifecycleHooks/LifecycleHooks.framework
 ${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
 ${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework
 ${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework

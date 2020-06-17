@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Amplify
+import AmplifyPlugins
+import Combine
 
 class TabBarViewController: UITabBarController {
 
@@ -17,17 +20,22 @@ class TabBarViewController: UITabBarController {
         mainTabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         // Do any additional setup after loading the view.
         navigationItem.hidesBackButton = true
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func logOut(){
+        _ = Amplify.Auth.signOut() { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    print("Successfully signed out")
+                    self.navigationController?.popViewController(animated: true)
+                }
+            case .failure(let error):
+                print("Sign out failed with error \(error)")
+            }
+        }
     }
-    */
 
 }

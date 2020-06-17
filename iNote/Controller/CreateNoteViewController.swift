@@ -12,8 +12,10 @@ import Amplify
 import AmplifyPlugins
 import Combine
 import CoreLocation
+import KeyboardLayoutGuide
 
-class CreateNoteViewController: UIViewController {
+
+class CreateNoteViewController: UIViewController, KeyboardConstraining{
     let notePlaceholder = "Type your note"
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextView!
@@ -33,6 +35,7 @@ class CreateNoteViewController: UIViewController {
         titleTextField.becomeFirstResponder()
         
         tabBar.delegate = self
+        tabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         
         //Setting up Navigation Bar
         setNavigationItems()
@@ -47,7 +50,9 @@ class CreateNoteViewController: UIViewController {
         locationManager.requestLocation()
         
         // Do any additional setup after loading the view.
+
     }
+    
     
     
     
@@ -186,3 +191,5 @@ extension CreateNoteViewController: CLLocationManagerDelegate {
         print(error)
     }
 }
+
+

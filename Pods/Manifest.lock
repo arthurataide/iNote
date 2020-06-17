@@ -48,7 +48,9 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
-  - IQKeyboardManager (6.5.5)
+  - KeyboardLayoutGuide (0.7.2):
+    - LifecycleHooks (~> 0.6)
+  - LifecycleHooks (0.6.2)
   - ReachabilitySwift (5.0.0)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
@@ -65,7 +67,7 @@ DEPENDENCIES:
   - CLTypingLabel
   - EasySocialButton
   - GoogleSignIn
-  - IQKeyboardManager
+  - KeyboardLayoutGuide
   - TextFieldEffects
 
 SPEC REPOS:
@@ -85,7 +87,8 @@ SPEC REPOS:
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
-    - IQKeyboardManager
+    - KeyboardLayoutGuide
+    - LifecycleHooks
     - ReachabilitySwift
     - SQLite.swift
     - Starscream
@@ -107,12 +110,13 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
-  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  KeyboardLayoutGuide: 3bb8d93ef1d61e6f0b3b80668fba5bbcfee829a6
+  LifecycleHooks: 246984e8ef036a8c717298166845bb999b245f5b
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: 9bf8d6fdf77a38ae9a0e109db17332abc929a2bc
+PODFILE CHECKSUM: edb0de5eca2d50eac20ecfaa282738f8601cee0b
 
 COCOAPODS: 1.9.3

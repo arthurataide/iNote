@@ -17,5 +17,6 @@ target 'iNote' do
   
   pod 'CLTypingLabel'
   pod 'EasySocialButton'
-  pod 'IQKeyboardManager'
+  pod "KeyboardLayoutGuide"
+  
 end
