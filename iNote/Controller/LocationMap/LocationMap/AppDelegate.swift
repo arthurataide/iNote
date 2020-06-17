@@ -1,39 +1,20 @@
 //
 //  AppDelegate.swift
-//  iNote
+//  LocationMap
 //
-//  Created by Arthur Ataide on 2020-06-05.
-//  Copyright © 2020 Arthur Ataide and Jose Marmolejos. All rights reserved.
+//  Created by Jose Smith Marmolejos on 2020-06-16.
+//  Copyright © 2020 Jose Smith Marmolejos. All rights reserved.
 //
 
 import UIKit
-import Amplify
-import AmplifyPlugins
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var category:String = ""
-    
-    static func shared() -> AppDelegate {
-        return UIApplication.shared.delegate as! AppDelegate
-    }
-    
+
+
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
-        let apiPlugin = AWSAPIPlugin(modelRegistration: AmplifyModels())
-        let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels())
-        do {
-           try Amplify.add(plugin:apiPlugin)
-           try Amplify.add(plugin:dataStorePlugin)
-           try Amplify.add(plugin: AWSCognitoAuthPlugin())
-           try Amplify.configure()
-           print("Initialized Amplify");
-        } catch {
-           print("Could not initialize Amplify: \(error)")
-        }
-        
         return true
     }
 

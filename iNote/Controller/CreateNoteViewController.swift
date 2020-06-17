@@ -34,6 +34,9 @@ class CreateNoteViewController: UIViewController {
         
         tabBar.delegate = self
         
+        //Cleaning shared variable
+        AppDelegate.shared().category = ""
+        
         //Setting up Navigation Bar
         setNavigationItems()
         
@@ -50,6 +53,16 @@ class CreateNoteViewController: UIViewController {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        var title:NSAttributedString?
+        
+        if (AppDelegate.shared().category == ""){
+            title = NSAttributedString(string: "Category")
+        }else{
+            title = NSAttributedString(string: AppDelegate.shared().category)
+        }
+        categoryButton.setAttributedTitle(title, for: .normal)
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -62,6 +75,11 @@ class CreateNoteViewController: UIViewController {
     @objc func saveNote() {
         print("Save & Back")
         saveOnAWS()
+        
+    }
+    
+    @objc func deleteNote() {
+        print("Delete")
         
     }
     
@@ -132,12 +150,17 @@ class CreateNoteViewController: UIViewController {
     
     func setNavigationItems() {
         let backButton = UIBarButtonItem()
+        let deleteButton = UIBarButtonItem()
         //backButton.image = UIImage(named: "back")
         backButton.title = "Save & Back"
         backButton.style = .plain
         backButton.action = #selector(saveNote)
-
         navigationItem.leftBarButtonItem = backButton
+        
+        deleteButton.image = UIImage(systemName: "trash")
+        deleteButton.style = .plain
+        deleteButton.action = #selector(deleteNote)
+        navigationItem.rightBarButtonItem = deleteButton
         
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Images", style: .plain, target: self, action: #selector(showImages))
     }

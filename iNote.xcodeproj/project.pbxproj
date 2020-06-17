@@ -28,6 +28,7 @@
 		696C0AA51BFA48BC9D35A822 /* MyType+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05492BF36F9A4B81901ACDB9 /* MyType+Schema.swift */; };
 		6E1BCDB724988B0200D8B540 /* schema.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 6E1BCDB624988B0200D8B540 /* schema.graphql */; };
 		6ECA19992497E2A3001CD919 /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA19982497E2A3001CD919 /* CreateNoteViewController.swift */; };
+		6ECBAE0D24992DBA00F3EE7E /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECBAE0C24992DBA00F3EE7E /* CategoriesViewController.swift */; };
 		A18B5B56A0E64936AB53B7E8 /* MyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42CB71A9BBA428CBA6B0474 /* MyType.swift */; };
 		A6D07C6761B74129890DAF8C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E0E0F144DFC047EEAAF2597F /* amplifyconfiguration.json */; };
 		AA3FB838ADE9448DB11F15E0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51090C2AA82740D6A4896D38 /* Note.swift */; };
@@ -76,8 +77,9 @@
 		3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCABF50F0C3BDC661A5B97C /* Pods-iNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iNote.release.xcconfig"; path = "Target Support Files/Pods-iNote/Pods-iNote.release.xcconfig"; sourceTree = "<group>"; };
 		51090C2AA82740D6A4896D38 /* Note.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = Note.swift; path = amplify/generated/models/Note.swift; sourceTree = "<group>"; };
-		6E1BCDB624988B0200D8B540 /* schema.graphql */ = {isa = PBXFileReference; lastKnownFileType = file; name = schema.graphql; path = amplify/backend/api/inote/schema.graphql; sourceTree = SOURCE_ROOT; };
+		6E1BCDB624988B0200D8B540 /* schema.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; name = schema.graphql; path = amplify/backend/api/inote/schema.graphql; sourceTree = SOURCE_ROOT; };
 		6ECA19982497E2A3001CD919 /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
+		6ECBAE0C24992DBA00F3EE7E /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		B178627304404F4680A51931 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
 		B2C158117953D47AE254195E /* Pods-iNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iNote.debug.xcconfig"; path = "Target Support Files/Pods-iNote/Pods-iNote.debug.xcconfig"; sourceTree = "<group>"; };
 		C42CB71A9BBA428CBA6B0474 /* MyType.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MyType.swift; path = amplify/generated/models/MyType.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				19516F212491342E00B3053B /* LogInViewController.swift */,
 				19516F812492707E00B3053B /* NoteViewController.swift */,
 				6ECA19982497E2A3001CD919 /* CreateNoteViewController.swift */,
+				6ECBAE0C24992DBA00F3EE7E /* CategoriesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				AA3FB838ADE9448DB11F15E0 /* Note.swift in Sources */,
 				5025951F7BAF42A0814C66DB /* Note+Schema.swift in Sources */,
 				A18B5B56A0E64936AB53B7E8 /* MyType.swift in Sources */,
+				6ECBAE0D24992DBA00F3EE7E /* CategoriesViewController.swift in Sources */,
 				696C0AA51BFA48BC9D35A822 /* MyType+Schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
