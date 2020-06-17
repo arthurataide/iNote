@@ -520,7 +520,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NOP-Ea-l0I"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Notes" image="list.bullet" catalog="system" id="v8u-k8-zZ6">
+                    <tabBarItem key="tabBarItem" tag="1" title="Notes" image="list.bullet" catalog="system" id="v8u-k8-zZ6">
                         <color key="badgeColor" name="DarkBlue"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="Qae-f4-eyo"/>
@@ -569,7 +569,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vel-2a-BjN"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="3bB-dj-817">
+                    <tabBarItem key="tabBarItem" tag="3" title="Search" image="magnifyingglass" catalog="system" id="3bB-dj-817">
                         <color key="badgeColor" name="DarkBlue"/>
                     </tabBarItem>
                 </viewController>
@@ -644,8 +644,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gbA-EH-ynK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="plusIcon" selectedImage="plusIcon" id="3Vm-im-tcz"/>
-                    <navigationItem key="navigationItem" id="NMP-5k-WHg"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="" image="plusIcon" selectedImage="plusIcon" id="3Vm-im-tcz"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="NMP-5k-WHg">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PTn-TJ-zTX">
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" name="DarkBlue"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Save">
+                                <color key="titleColor" name="DarkBlue"/>
+                            </state>
+                        </button>
+                    </navigationItem>
                     <connections>
                         <outlet property="categoryButton" destination="zfG-57-NE1" id="EHt-0X-TdA"/>
                         <outlet property="noteTextField" destination="k0g-xR-Cf2" id="wwZ-E6-NEu"/>
@@ -762,9 +772,9 @@
                     </tabBar>
                     <connections>
                         <outlet property="mainTabBar" destination="0aX-DB-mgd" id="kDh-ne-MS8"/>
-                        <segue destination="iYI-H8-8Vd" kind="relationship" relationship="viewControllers" id="O7g-3J-JNS"/>
-                        <segue destination="KhU-l2-blD" kind="relationship" relationship="viewControllers" id="w7X-Se-756"/>
-                        <segue destination="xo1-DM-b6p" kind="relationship" relationship="viewControllers" id="DHC-JV-qCL"/>
+                        <segue destination="iYI-H8-8Vd" kind="relationship" relationship="viewControllers" destinationCreationSelector="createSelector" id="O7g-3J-JNS"/>
+                        <segue destination="KhU-l2-blD" kind="relationship" relationship="viewControllers" destinationCreationSelector="noteSelector" id="w7X-Se-756"/>
+                        <segue destination="xo1-DM-b6p" kind="relationship" relationship="viewControllers" destinationCreationSelector="searchSelector" id="DHC-JV-qCL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XfN-cf-wXh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

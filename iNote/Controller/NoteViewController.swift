@@ -22,13 +22,16 @@ class NoteViewController: UIViewController {
         super.viewDidLoad()
         
         
-        title = "Notes"
+        //title = "Notes"
         // Do any additional setup after loading the view.
+        navigationItem.hidesBackButton = true
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         performSegue(withIdentifier: "newNoteSegue", sender: self)
     }
+    
     
     
     
