@@ -40,9 +40,6 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         //Cleaning shared variable
         AppDelegate.shared().category = ""
         
-        //Setting up Navigation Bar
-        
-        
         //Getting username
         username = UserDefaults.standard.string(forKey: "username")
         print("User: ")
@@ -52,6 +49,9 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
+    
+        
+
         // Do any additional setup after loading the view.
         
     }

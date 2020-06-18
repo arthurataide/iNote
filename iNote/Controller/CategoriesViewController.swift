@@ -16,8 +16,17 @@ class CategoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         categoriesPicker.delegate = self
-
-        // Do any additional setup after loading the view.
+        getStoredCategories()
+        categoriesPicker.reloadAllComponents()
+        
+        for i in 0 ... categories.count - 1{
+            if categories[i] == AppDelegate.shared().category{
+                index = i
+                break
+            }
+        }
+        
+        categoriesPicker.selectRow(index, inComponent: 0, animated: true)
     }
     @IBAction func addNewTapped(_ sender: UIButton) {
         newCategory()
@@ -64,7 +73,10 @@ extension CategoriesViewController:UIPickerViewDataSource, UIPickerViewDelegate{
             let firstTextField = alertController.textFields![0] as UITextField
             
             if let cat = firstTextField.text{
-                //self.confirmAccount(code: code)
+                print(cat)
+                self.storeCategory(cat)
+                self.getStoredCategories()
+                self.categoriesPicker.reloadAllComponents()
             }
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
@@ -74,6 +86,21 @@ extension CategoriesViewController:UIPickerViewDataSource, UIPickerViewDelegate{
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func storeCategory(_ category:String){
+        UserDefaults.standard.set(category, forKey: "CAT_\(category.trimmingCharacters(in: .whitespacesAndNewlines))")
+    }
+    
+    func getStoredCategories(){
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            if key.contains("CAT_"){
+                let category = value as! String
+                if !categories.contains(category){
+                    categories.append(category)
+                }
+            }
+        }
     }
     
 }
