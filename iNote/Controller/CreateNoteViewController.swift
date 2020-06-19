@@ -15,7 +15,7 @@ import CoreLocation
 import KeyboardLayoutGuide
 
 
-class CreateNoteViewController: UIViewController, KeyboardConstraining{
+class CreateNoteViewController: UIViewController, KeyboardConstraining, UINavigationControllerDelegate{
     let notePlaceholder = "Type your note"
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextView!
@@ -49,9 +49,6 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-    
-        
-
         // Do any additional setup after loading the view.
         
     }
@@ -68,6 +65,8 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         }
         categoryButton.setAttributedTitle(title, for: .normal)
     }
+    
+    
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -199,7 +198,13 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining{
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Images", style: .plain, target: self, action: #selector(showImages))
     }
     
-    
+    func getPhoto() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.allowsEditing = true
+        vc.delegate = self
+        present(vc, animated: true)
+    }
 }
 
 extension CreateNoteViewController:UITextViewDelegate{
@@ -219,7 +224,16 @@ extension CreateNoteViewController:UITextViewDelegate{
 }
 extension CreateNoteViewController:UITabBarDelegate{
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print("SELECT: \(item)")
+        print("SELECT: \(item.tag)")
+        
+        if (item.tag == 1){
+            getPhoto()
+        }else if(item.tag == 2){
+            
+        }else if(item.tag == 3){
+            
+        }
+        
     }
 }
 
@@ -241,6 +255,30 @@ extension CreateNoteViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+}
+
+extension CreateNoteViewController:UIImagePickerControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        guard let image = info[.editedImage] as? UIImage else {
+            print("No image found")
+            return
+        }
+        
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        let path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: imageView.frame.width, height: imageView.frame.height))
+        noteTextField.textContainer.exclusionPaths = [path]
+        noteTextField.addSubview(imageView)
+
+        // print out the image size as a test
+        print(noteTextField.textContainer)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }
 

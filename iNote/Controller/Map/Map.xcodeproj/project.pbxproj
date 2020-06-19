@@ -15,6 +15,7 @@
 		6E834DDA249AAD4900F08FCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E834DD8249AAD4900F08FCA /* LaunchScreen.storyboard */; };
 		6E834DE5249AAD4A00F08FCA /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E834DE4249AAD4A00F08FCA /* MapTests.swift */; };
 		6E834DF0249AAD4A00F08FCA /* MapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E834DEF249AAD4A00F08FCA /* MapUITests.swift */; };
+		6E834DFE249C2E4500F08FCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E834DFD249C2E4500F08FCA /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		6E834DEB249AAD4A00F08FCA /* MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E834DEF249AAD4A00F08FCA /* MapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUITests.swift; sourceTree = "<group>"; };
 		6E834DF1249AAD4A00F08FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E834DFD249C2E4500F08FCA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				6E834DD6249AAD4900F08FCA /* Assets.xcassets */,
 				6E834DD8249AAD4900F08FCA /* LaunchScreen.storyboard */,
 				6E834DDB249AAD4900F08FCA /* Info.plist */,
+				6E834DFD249C2E4500F08FCA /* MainViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				6E834DD2249AAD4600F08FCA /* ViewController.swift in Sources */,
 				6E834DCE249AAD4600F08FCA /* AppDelegate.swift in Sources */,
 				6E834DD0249AAD4600F08FCA /* SceneDelegate.swift in Sources */,
+				6E834DFE249C2E4500F08FCA /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
