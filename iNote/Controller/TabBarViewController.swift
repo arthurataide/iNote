@@ -14,23 +14,19 @@ import Combine
 class TabBarViewController: UITabBarController {
 
     @IBOutlet weak var mainTabBar: UITabBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         mainTabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
-        // Do any additional setup after loading the view.
-        //navigationItem.hidesBackButton = true
-        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
     }
-    
-
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
@@ -50,16 +46,36 @@ class TabBarViewController: UITabBarController {
     }
     
     func showSave() {
+        mainTabBar.isHidden = true
         navigationItem.hidesBackButton = true
+        
+        
+        let saveButton = UIBarButtonItem()
+        saveButton.title = "Save"
+        saveButton.style = .plain
+        saveButton.action = #selector(CreateNoteViewController.saveNote)
+        navigationItem.rightBarButtonItem = saveButton
+        
         let backButton = UIBarButtonItem()
-        backButton.title = "Save"
+        backButton.title = "Back"
         backButton.style = .plain
-        backButton.action = #selector(CreateNoteViewController.saveNote)
-        navigationItem.rightBarButtonItem = backButton
+        backButton.action = #selector(goToMain)
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func goToMain(){
+        
+        self.selectedIndex = 0
+        mainTabBar.isHidden = false
+        showSignOut()
+    
     }
     
     func showSignOut() {
+        mainTabBar.isHidden = false
+        
         navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
     }
     
