@@ -107,3 +107,17 @@ extension NoteViewController {
         dataSource.apply(currentSnapshot, animatingDifferences: false)
     }
 }
+
+// MARK: - UICollectionViewDelegate -
+
+//extension NoteViewController: UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if let note = dataSource.itemIdentifier(for: indexPath),
+//            let tutorialDetailController = storyboard?.instantiateViewController(identifier: TutorialDetailViewController.identifier, creator: { coder in return TutorialDetailViewController(coder: coder, tutorial: tutorial)
+//            })   {
+//            show(tutorialDetailController, sender:nil)
+//        }
+//
+//    }
+//}
+

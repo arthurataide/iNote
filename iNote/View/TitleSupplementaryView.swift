@@ -25,6 +25,7 @@ final class TitleSupplementaryView: UICollectionReusableView {
     private func configure() {
         addSubview(textLabel)
         textLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        textLabel.textColor = UIColor.init(named: "DarkBlue")
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let inset: CGFloat = 10
