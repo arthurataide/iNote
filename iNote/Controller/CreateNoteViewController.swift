@@ -13,18 +13,45 @@ import AmplifyPlugins
 import Combine
 import CoreLocation
 import KeyboardLayoutGuide
+import MobileCoreServices
+import AVFoundation
+import MediaPlayer
 
+struct ImageData {
+    var image:UIImage
+    var imageString:String
+}
 
 class CreateNoteViewController: UIViewController, KeyboardConstraining, UINavigationControllerDelegate{
     let notePlaceholder = "Type your note"
+    let reuseIdentifier = "CellIdentifer"
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextView!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var tabBar: UITabBar!
     @State var noteSubscription: AnyCancellable?
+
+    var recordButton: UIButton!
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
+    
     let locationManager = CLLocationManager()
     var locationString:String?
     var username:String?
+    var images = [String]()
+    
+    var imageData = [ImageData]()
+    
+    
+    fileprivate var colView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(CustomCell.self, forCellWithReuseIdentifier: "CellIdentifer")
+        return cv
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +76,80 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
+        view.addSubview(colView)
+        colView.backgroundColor = .white
+        colView.topAnchor.constraint(equalTo: noteTextField.bottomAnchor, constant: 0).isActive = true
+        colView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        colView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        colView.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
+        colView.heightAnchor.constraint(equalTo: colView.widthAnchor, multiplier: 0.5).isActive = true
+        
+        colView.delegate = self
+        colView.dataSource = self
+        
+//        collectionView.register(CustomCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+        //collectionView.reloadData()
+        //Setting up CollectionView
+
+        
         // Do any additional setup after loading the view.
+        
+//        recordingSession = AVAudioSession.sharedInstance()
+//
+//        do {
+//            try recordingSession.setCategory(.playAndRecord, mode: .default)
+//            try recordingSession.setActive(true)
+//            recordingSession.requestRecordPermission() { [unowned self] allowed in
+//                DispatchQueue.main.async {
+//                    if allowed {
+//                        self.loadRecordingUI()
+//                    } else {
+//                        // failed to record!
+//                    }
+//                }
+//            }
+//        } catch {
+//            print("Error ")
+//        }
         
     }
     
+    func loadRecordingUI() {
+        recordButton = UIButton(frame: CGRect(x: 64, y: 64, width: 128, height: 64))
+        recordButton.setTitle("Tap to Record", for: .normal)
+        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
+        view.addSubview(recordButton)
+    }
+    
+    func startRecording() {
+        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+
+        do {
+            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder.delegate = self
+            audioRecorder.record()
+
+            recordButton.setTitle("Tap to Stop", for: .normal)
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         print("viewDidAppear: \(AppDelegate.shared().category)")
@@ -66,7 +163,25 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
         categoryButton.setAttributedTitle(title, for: .normal)
     }
     
+    func finishRecording(success: Bool) {
+        audioRecorder.stop()
+        audioRecorder = nil
+
+        if success {
+            recordButton.setTitle("Tap to Re-record", for: .normal)
+        } else {
+            recordButton.setTitle("Tap to Record", for: .normal)
+            // recording failed :(
+        }
+    }
     
+    @objc func recordTapped() {
+        if audioRecorder == nil {
+            startRecording()
+        } else {
+            finishRecording(success: true)
+        }
+    }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -103,6 +218,7 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
         return dateString
     }
     
+
     func saveOnAWS() {
         guard var title = titleTextField.text, let note = noteTextField.text else {
             return
@@ -129,11 +245,11 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
                 switch(result) {
                 case .success(let savedNote):
                     print("Saved item: \(savedNote)")
+                    self.saveMedia(savedNote.id)
                     DispatchQueue.main.async {
                         self.clearFields()
                         self.showToast(message: "The note has been creted.", font: .systemFont(ofSize: 12.0))
                     }
-                    self.publish()
                 case .failure(let error):
                     print("Could not save item to datastore: \(error)")
                 }
@@ -141,6 +257,23 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
             }
         }
         
+    }
+    
+    func saveMedia(_ noteId:String){
+        for img in imageData{
+            let media = Media( noteId: noteId, type: "IMAGE", media: img.imageString)
+            
+            Amplify.DataStore.save(media) { (result) in
+                switch(result) {
+                case .success(let savedMedia):
+                    print("Saved item: \(savedMedia)")
+                    self.publish()
+                case .failure(let error):
+                    print("Could not save item to datastore: \(error)")
+                }
+                
+            }
+        }
     }
     
     func publish()  {
@@ -159,7 +292,8 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
         titleTextField.text = ""
         noteTextField.text = ""
         categoryButton.setAttributedTitle(NSAttributedString(string: "Category"), for: .normal)
-        
+        imageData = [ImageData]()
+        colView.reloadData()
     }
     
     func showToast(message : String, font: UIFont) {
@@ -205,6 +339,28 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
         vc.delegate = self
         present(vc, animated: true)
     }
+    
+    @objc func deleteImage(sender: UISwipeGestureRecognizer){
+        print("Delete")
+        let cell = sender.view as! UICollectionViewCell
+        let indexPath = colView.indexPath(for: cell)
+        let myreact = cell.frame
+        
+        if let indexP = indexPath{
+            
+            UIView.animate(withDuration: 0.8, delay:0.0, options: .curveEaseInOut, animations: {
+                cell.frame = CGRect(x: myreact.origin.x, y: myreact.origin.y-100, width: myreact.size.width, height: myreact.size.height)
+                cell.alpha = 0.0
+            },completion: { (finished: Bool) in
+                print(indexP.row)
+                self.imageData.remove(at: indexP.row)
+                cell.frame = myreact
+                self.colView.reloadData()
+                
+            })
+            
+        }
+    }
 }
 
 extension CreateNoteViewController:UITextViewDelegate{
@@ -224,7 +380,6 @@ extension CreateNoteViewController:UITextViewDelegate{
 }
 extension CreateNoteViewController:UITabBarDelegate{
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print("SELECT: \(item.tag)")
         
         if (item.tag == 1){
             getPhoto()
@@ -267,14 +422,8 @@ extension CreateNoteViewController:UIImagePickerControllerDelegate{
             return
         }
         
-        let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        let path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: imageView.frame.width, height: imageView.frame.height))
-        noteTextField.textContainer.exclusionPaths = [path]
-        noteTextField.addSubview(imageView)
-
-        // print out the image size as a test
-        print(noteTextField.textContainer)
+        imageData.append(ImageData(image: image, imageString: Common.convertImageToBase64(image)))
+        colView.reloadData()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -283,3 +432,97 @@ extension CreateNoteViewController:UIImagePickerControllerDelegate{
 }
 
 
+extension CreateNoteViewController:AVAudioRecorderDelegate{
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
+        }
+    }
+}
+
+extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("KLK: \(indexPath.row)")
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CustomCell
+        
+        let UpSwipe = UISwipeGestureRecognizer(target: self, action: #selector(deleteImage(sender:)))
+        UpSwipe.direction = UISwipeGestureRecognizer.Direction.up
+        cell.addGestureRecognizer(UpSwipe)
+        
+        //cell.clipsToBounds = true
+        cell.data = imageData[indexPath.row]
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width / 2.5, height: collectionView.frame.height / 2)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("KLK")
+        return imageData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+//        let myreact = cell.frame
+//        cell.frame = CGRect(x: cell.frame.origin.x+320, y: cell.frame.origin.y, width: cell.frame.size.width, height: cell.frame.size.height)
+//
+//        let value = Double(indexPath.row)*0.1
+//        UIView.animate(withDuration: 0.8, delay:value, options: .curveEaseInOut, animations: {
+//
+//            cell.frame = CGRect(x: myreact.origin.x+100, y: myreact.origin.y, width: myreact.size.width, height: myreact.size.height)
+//
+//        }) { (finish) in
+//
+//            UIView.animate(withDuration: 0.8, animations: {
+//                cell.frame = myreact
+//            })
+//        }
+    }
+}
+
+
+class CustomCell:UICollectionViewCell{
+    
+    
+    
+    var data:ImageData?{
+        didSet{
+            guard let data = data else {
+                return
+            }
+            
+            imageView.image = data.image
+        }
+    }
+    
+    fileprivate let imageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = #imageLiteral(resourceName: "add_cat")
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 12
+        return iv
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        contentView.addSubview(imageView)
+        imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+}

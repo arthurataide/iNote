@@ -617,9 +617,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="k0g-xR-Cf2">
-                                <rect key="frame" x="10" y="155" width="394" height="526"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="k0g-xR-Cf2">
+                                <rect key="frame" x="10" y="155" width="394" height="420"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="420" id="8Eg-PS-O8H"/>
+                                </constraints>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -632,7 +635,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zfG-57-NE1">
                                 <rect key="frame" x="10" y="98" width="148" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="148" id="X5l-Ts-YeE"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="148" id="uqy-RZ-pXs"/>
                                 </constraints>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="folder" catalog="system">
@@ -649,7 +652,7 @@
                                 </connections>
                             </button>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAV-Zu-2MV">
-                                <rect key="frame" x="0.0" y="681" width="414" height="132"/>
+                                <rect key="frame" x="0.0" y="764" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <tabBarItem tag="1" image="camera.fill" catalog="system" id="90c-cn-aLF"/>
@@ -660,21 +663,19 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="VAV-Zu-2MV" firstAttribute="top" secondItem="k0g-xR-Cf2" secondAttribute="bottom" id="4Gp-mA-Oip"/>
-                            <constraint firstItem="fHA-0Y-jyx" firstAttribute="top" secondItem="zfG-57-NE1" secondAttribute="bottom" constant="8" id="7RQ-C9-aXd"/>
-                            <constraint firstItem="k0g-xR-Cf2" firstAttribute="top" secondItem="fHA-0Y-jyx" secondAttribute="bottom" constant="1" id="947-n6-4wW"/>
-                            <constraint firstItem="VAV-Zu-2MV" firstAttribute="top" secondItem="k0g-xR-Cf2" secondAttribute="bottom" id="Dm9-yX-gmw"/>
-                            <constraint firstItem="gbA-EH-ynK" firstAttribute="trailing" secondItem="k0g-xR-Cf2" secondAttribute="trailing" constant="10" id="LIo-Oq-VzZ"/>
-                            <constraint firstItem="VAV-Zu-2MV" firstAttribute="leading" secondItem="gbA-EH-ynK" secondAttribute="leading" id="U08-C4-q5w"/>
-                            <constraint firstItem="gbA-EH-ynK" firstAttribute="trailing" secondItem="fHA-0Y-jyx" secondAttribute="trailing" constant="10" id="YYZ-DE-WIG"/>
-                            <constraint firstItem="k0g-xR-Cf2" firstAttribute="leading" secondItem="gbA-EH-ynK" secondAttribute="leading" constant="10" id="YvI-Ld-Msi"/>
-                            <constraint firstItem="fHA-0Y-jyx" firstAttribute="top" secondItem="zfG-57-NE1" secondAttribute="bottom" constant="8" id="ZWM-lP-qJe"/>
-                            <constraint firstItem="zfG-57-NE1" firstAttribute="leading" secondItem="gbA-EH-ynK" secondAttribute="leading" constant="10" id="f8m-ba-t0X"/>
-                            <constraint firstItem="fHA-0Y-jyx" firstAttribute="leading" secondItem="gbA-EH-ynK" secondAttribute="leading" constant="10" id="gaB-b5-yM3"/>
-                            <constraint firstItem="k0g-xR-Cf2" firstAttribute="top" secondItem="fHA-0Y-jyx" secondAttribute="bottom" constant="1" id="o31-Yj-qL9"/>
-                            <constraint firstItem="VAV-Zu-2MV" firstAttribute="trailing" secondItem="gbA-EH-ynK" secondAttribute="trailing" id="s5p-Jp-74c"/>
-                            <constraint firstItem="zfG-57-NE1" firstAttribute="top" secondItem="gbA-EH-ynK" secondAttribute="top" constant="10" id="xdF-ON-99c"/>
-                            <constraint firstItem="VAV-Zu-2MV" firstAttribute="bottom" secondItem="gbA-EH-ynK" secondAttribute="bottom" id="ya4-hk-8Ze"/>
+                            <constraint firstItem="zfG-57-NE1" firstAttribute="leading" secondItem="gbA-EH-ynK" secondAttribute="leading" constant="10" id="030-CV-zXY"/>
+                            <constraint firstItem="VAV-Zu-2MV" firstAttribute="trailing" secondItem="gbA-EH-ynK" secondAttribute="trailing" id="4Hm-bU-n0h"/>
+                            <constraint firstItem="fHA-0Y-jyx" firstAttribute="leading" secondItem="gbA-EH-ynK" secondAttribute="leading" constant="10" id="8Ww-Oc-0dY"/>
+                            <constraint firstItem="VAV-Zu-2MV" firstAttribute="bottom" secondItem="gbA-EH-ynK" secondAttribute="bottom" id="DdH-se-ZEV"/>
+                            <constraint firstItem="k0g-xR-Cf2" firstAttribute="top" secondItem="fHA-0Y-jyx" secondAttribute="bottom" constant="1" id="Edu-AF-kMo"/>
+                            <constraint firstItem="fHA-0Y-jyx" firstAttribute="top" secondItem="zfG-57-NE1" secondAttribute="bottom" constant="8" id="Efy-hK-cF7"/>
+                            <constraint firstItem="k0g-xR-Cf2" firstAttribute="top" secondItem="fHA-0Y-jyx" secondAttribute="bottom" constant="1" id="FLv-FP-2mB"/>
+                            <constraint firstItem="k0g-xR-Cf2" firstAttribute="leading" secondItem="gbA-EH-ynK" secondAttribute="leading" constant="10" id="FSH-Dj-vZk"/>
+                            <constraint firstItem="gbA-EH-ynK" firstAttribute="trailing" secondItem="k0g-xR-Cf2" secondAttribute="trailing" constant="10" id="NNZ-Yo-fRY"/>
+                            <constraint firstItem="VAV-Zu-2MV" firstAttribute="leading" secondItem="gbA-EH-ynK" secondAttribute="leading" id="XsI-7x-uqi"/>
+                            <constraint firstItem="fHA-0Y-jyx" firstAttribute="top" secondItem="zfG-57-NE1" secondAttribute="bottom" constant="8" id="ZMX-RN-0Gv"/>
+                            <constraint firstItem="zfG-57-NE1" firstAttribute="top" secondItem="gbA-EH-ynK" secondAttribute="top" constant="10" id="tjg-mV-SLB"/>
+                            <constraint firstItem="gbA-EH-ynK" firstAttribute="trailing" secondItem="fHA-0Y-jyx" secondAttribute="trailing" constant="10" id="z7Q-QA-dOy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gbA-EH-ynK"/>
                     </view>
@@ -822,7 +823,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UXl-bW-aFi"/>
+        <segue reference="Z1J-H1-Lsq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Welcome background" width="3945" height="5909"/>
