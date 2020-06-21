@@ -108,16 +108,29 @@ extension NoteViewController {
     }
 }
 
-// MARK: - UICollectionViewDelegate -
+//MARK: - UICollectionViewDelegate -
 
-//extension NoteViewController: UICollectionViewDelegate {
+extension NoteViewController: UICollectionViewDelegate {
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        if let note = dataSource.itemIdentifier(for: indexPath),
-//            let tutorialDetailController = storyboard?.instantiateViewController(identifier: TutorialDetailViewController.identifier, creator: { coder in return TutorialDetailViewController(coder: coder, tutorial: tutorial)
+//            let createNoteViewController = storyboard?.instantiateViewController(identifier: CreateNoteViewController.identifier, creator: { coder in return CreateNoteViewController(coder: coder, note: note)
 //            })   {
-//            show(tutorialDetailController, sender:nil)
+//            show(createNoteViewController, sender: nil)
 //        }
 //
 //    }
-//}
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "EditNoteViewController",
+        let noteCell = sender as? NoteCell,
+        let createNoteViewController = segue.destination as? CreateNoteViewController,
+        let indexPath = collectionView.indexPath(for: noteCell),
+        let note = dataSource.itemIdentifier(for: indexPath) else {
+            fatalError()
+        }
+        createNoteViewController.note = note
+    }
+}
+
+
 

@@ -26,6 +26,7 @@
 		196642E5249F8B8C00C8FFAB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642E4249F8B8C00C8FFAB /* Data.swift */; };
 		196642E7249F99BE00C8FFAB /* NotesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642E6249F99BE00C8FFAB /* NotesCollection.swift */; };
 		196642E9249FAF2900C8FFAB /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642E8249FAF2900C8FFAB /* TitleSupplementaryView.swift */; };
+		196642EB24A01FB800C8FFAB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642EA24A01FB800C8FFAB /* MapViewController.swift */; };
 		33029F63CCB9489AAD5C2BE2 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A48F8018F4324835A6948 /* AmplifyModels.swift */; };
 		399A55A533D84A9AB0034938 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B178627304404F4680A51931 /* awsconfiguration.json */; };
 		42E70509E5F3A7F2B29F4462 /* Pods_iNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */; };
@@ -85,6 +86,7 @@
 		196642E4249F8B8C00C8FFAB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = SOURCE_ROOT; };
 		196642E6249F99BE00C8FFAB /* NotesCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCollection.swift; sourceTree = SOURCE_ROOT; };
 		196642E8249FAF2900C8FFAB /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
+		196642EA24A01FB800C8FFAB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1E1A48F8018F4324835A6948 /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
 		20A9A505C5FF458EA03574D0 /* Media+Schema.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "Media+Schema.swift"; path = "amplify/generated/models/Media+Schema.swift"; sourceTree = "<group>"; };
 		3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,7 @@
 				1956ADD024997FC50065B48B /* TabBarViewController.swift */,
 				1956ADD2249983290065B48B /* SearchViewController.swift */,
 				6E9E197C249FC1F400D337B5 /* Common.swift */,
+				196642EA24A01FB800C8FFAB /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				6ECA19992497E2A3001CD919 /* CreateNoteViewController.swift in Sources */,
 				19516F822492707E00B3053B /* NoteViewController.swift in Sources */,
 				196642E7249F99BE00C8FFAB /* NotesCollection.swift in Sources */,
+				196642EB24A01FB800C8FFAB /* MapViewController.swift in Sources */,
 				1956ADD3249983290065B48B /* SearchViewController.swift in Sources */,
 				19627380248B0928009CC1AF /* WelcomeViewController.swift in Sources */,
 				19516F222491342E00B3053B /* LogInViewController.swift in Sources */,

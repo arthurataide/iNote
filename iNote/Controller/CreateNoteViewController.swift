@@ -12,7 +12,6 @@ import Amplify
 import AmplifyPlugins
 import Combine
 import CoreLocation
-import KeyboardLayoutGuide
 import MobileCoreServices
 import AVFoundation
 import MediaPlayer
@@ -22,9 +21,9 @@ struct ImageData {
     var imageString:String
 }
 
-class CreateNoteViewController: UIViewController, KeyboardConstraining, UINavigationControllerDelegate{
-    let notePlaceholder = "Type your note"
-    let reuseIdentifier = "CellIdentifer"
+final class CreateNoteViewController: UIViewController, UINavigationControllerDelegate{
+    static let identifier = String(describing: CreateNoteViewController.self)
+    var note: Note?
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextView!
@@ -32,17 +31,19 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
     @IBOutlet weak var tabBar: UITabBar!
     @State var noteSubscription: AnyCancellable?
 
+    let notePlaceholder = "Type your note"
+    let reuseIdentifier = "CellIdentifer"
     var recordButton: UIButton!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     
     let locationManager = CLLocationManager()
+    var mapLocation = CLLocation()
     var locationString:String?
     var username:String?
     var images = [String]()
     
     var imageData = [ImageData]()
-    
     
     fileprivate var colView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -63,7 +64,8 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
         
         tabBar.delegate = self
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
-        
+        //data that comes from the UICollectionView
+        //print(note)
         //Cleaning shared variable
         AppDelegate.shared().category = ""
         
@@ -117,6 +119,15 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMapView"{
+            if let MVC = segue.destination as? MapViewController{
+                MVC.location = mapLocation
+            }
+            
+        }
+    }
+    
     func loadRecordingUI() {
         recordButton = UIButton(frame: CGRect(x: 64, y: 64, width: 128, height: 64))
         recordButton.setTitle("Tap to Record", for: .normal)
@@ -162,6 +173,7 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
         }
         categoryButton.setAttributedTitle(title, for: .normal)
     }
+    
     
     func finishRecording(success: Bool) {
         audioRecorder.stop()
@@ -248,7 +260,7 @@ class CreateNoteViewController: UIViewController, KeyboardConstraining, UINaviga
                     self.saveMedia(savedNote.id)
                     DispatchQueue.main.async {
                         self.clearFields()
-                        self.showToast(message: "The note has been creted.", font: .systemFont(ofSize: 12.0))
+                        self.showToast(message: "The note has been created.", font: .systemFont(ofSize: 12.0))
                     }
                 case .failure(let error):
                     print("Could not save item to datastore: \(error)")
@@ -384,9 +396,10 @@ extension CreateNoteViewController:UITabBarDelegate{
         if (item.tag == 1){
             getPhoto()
         }else if(item.tag == 2){
-            
+            print(item.tag)
         }else if(item.tag == 3){
-            
+            print(item.tag)
+            performSegue(withIdentifier: "ShowMapView", sender: nil)
         }
         
     }
@@ -403,6 +416,7 @@ extension CreateNoteViewController: CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
+            mapLocation = location
             locationString = "\(lat),\(lon)"
             print("Location: \(locationString!)")
         }
@@ -486,10 +500,7 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
 }
 
 
-class CustomCell:UICollectionViewCell{
-    
-    
-    
+class CustomCell: UICollectionViewCell{
     var data:ImageData?{
         didSet{
             guard let data = data else {
