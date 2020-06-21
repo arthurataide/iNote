@@ -21,6 +21,11 @@
 		19627388248B092B009CC1AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19627386248B092B009CC1AF /* LaunchScreen.storyboard */; };
 		19627393248B092B009CC1AF /* iNoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19627392248B092B009CC1AF /* iNoteTests.swift */; };
 		1962739E248B092B009CC1AF /* iNoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1962739D248B092B009CC1AF /* iNoteUITests.swift */; };
+		196642E1249F080E00C8FFAB /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642E0249F080E00C8FFAB /* NoteCell.swift */; };
+		196642E3249F099C00C8FFAB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642E2249F099C00C8FFAB /* GradientView.swift */; };
+		196642E5249F8B8C00C8FFAB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642E4249F8B8C00C8FFAB /* Data.swift */; };
+		196642E7249F99BE00C8FFAB /* NotesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642E6249F99BE00C8FFAB /* NotesCollection.swift */; };
+		196642E9249FAF2900C8FFAB /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196642E8249FAF2900C8FFAB /* TitleSupplementaryView.swift */; };
 		33029F63CCB9489AAD5C2BE2 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A48F8018F4324835A6948 /* AmplifyModels.swift */; };
 		399A55A533D84A9AB0034938 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B178627304404F4680A51931 /* awsconfiguration.json */; };
 		42E70509E5F3A7F2B29F4462 /* Pods_iNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */; };
@@ -74,6 +79,11 @@
 		19627399248B092B009CC1AF /* iNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1962739D248B092B009CC1AF /* iNoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iNoteUITests.swift; sourceTree = "<group>"; };
 		1962739F248B092B009CC1AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		196642E0249F080E00C8FFAB /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		196642E2249F099C00C8FFAB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		196642E4249F8B8C00C8FFAB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = SOURCE_ROOT; };
+		196642E6249F99BE00C8FFAB /* NotesCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCollection.swift; sourceTree = SOURCE_ROOT; };
+		196642E8249FAF2900C8FFAB /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
 		1E1A48F8018F4324835A6948 /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
 		20A9A505C5FF458EA03574D0 /* Media+Schema.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "Media+Schema.swift"; path = "amplify/generated/models/Media+Schema.swift"; sourceTree = "<group>"; };
 		3E582B21FE9BB4D475971B61 /* Pods_iNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +138,8 @@
 		19516F1C2491326100B3053B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				196642E4249F8B8C00C8FFAB /* Data.swift */,
+				196642E6249F99BE00C8FFAB /* NotesCollection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,6 +149,9 @@
 			children = (
 				19627381248B0928009CC1AF /* Main.storyboard */,
 				19627386248B092B009CC1AF /* LaunchScreen.storyboard */,
+				196642E0249F080E00C8FFAB /* NoteCell.swift */,
+				196642E2249F099C00C8FFAB /* GradientView.swift */,
+				196642E8249FAF2900C8FFAB /* TitleSupplementaryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -470,21 +485,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				196642E3249F099C00C8FFAB /* GradientView.swift in Sources */,
+				196642E9249FAF2900C8FFAB /* TitleSupplementaryView.swift in Sources */,
 				6E834DBE2499B77D00F08FCA /* CategoriesViewController.swift in Sources */,
 				1956ADD124997FC50065B48B /* TabBarViewController.swift in Sources */,
 				6ECA19992497E2A3001CD919 /* CreateNoteViewController.swift in Sources */,
 				19516F822492707E00B3053B /* NoteViewController.swift in Sources */,
+				196642E7249F99BE00C8FFAB /* NotesCollection.swift in Sources */,
 				1956ADD3249983290065B48B /* SearchViewController.swift in Sources */,
 				19627380248B0928009CC1AF /* WelcomeViewController.swift in Sources */,
 				19516F222491342E00B3053B /* LogInViewController.swift in Sources */,
 				1962737C248B0928009CC1AF /* AppDelegate.swift in Sources */,
 				1962737E248B0928009CC1AF /* SceneDelegate.swift in Sources */,
 				19516F202491341600B3053B /* SignUpViewController.swift in Sources */,
+				196642E5249F8B8C00C8FFAB /* Data.swift in Sources */,
 				33029F63CCB9489AAD5C2BE2 /* AmplifyModels.swift in Sources */,
 				4BA7CA4CD7A7488D9038E57A /* Media.swift in Sources */,
 				0223319A93C84394ADFF24D9 /* Media+Schema.swift in Sources */,
 				AA3FB838ADE9448DB11F15E0 /* Note.swift in Sources */,
 				5025951F7BAF42A0814C66DB /* Note+Schema.swift in Sources */,
+				196642E1249F080E00C8FFAB /* NoteCell.swift in Sources */,
 				A18B5B56A0E64936AB53B7E8 /* MyType.swift in Sources */,
 				696C0AA51BFA48BC9D35A822 /* MyType+Schema.swift in Sources */,
 			);

@@ -2,7 +2,7 @@
 import Amplify
 import Foundation
 
-public struct Note: Model {
+public struct Note: Model, Hashable {
   public let id: String
   public var title: String
   public var note: String
@@ -29,4 +29,7 @@ public struct Note: Model {
       self.location = location
       self.user = user
   }
+    public func hash(into hasher: inout Hasher){
+        hasher.combine(id)
+    }
 }
