@@ -2,7 +2,7 @@
 import Amplify
 import Foundation
 
-public struct Media: Model {
+public struct Media: Model, Hashable {
   public let id: String
   public var noteId: String
   public var type: String
@@ -17,4 +17,8 @@ public struct Media: Model {
       self.type = type
       self.media = media
   }
+    
+    public func hash(into hasher: inout Hasher){
+        hasher.combine(id)
+    }
 }

@@ -15,7 +15,7 @@ class NoteViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<NotesCollection, Note>!
-    private let notesCollections = Data.shared.notes
+    private var notesCollections = Data.shared.notes
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +29,17 @@ class NoteViewController: UIViewController {
         collectionView.collectionViewLayout = configureCollectionViewLayout()
         configureDataSource()
         configureSnapshot()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Data.shared.getNotes()
+        notesCollections = Data.shared.notes
+        for c in Data.shared.data{
+            print("Reloading \(c.title)")
+        }
+        configureDataSource()
+        configureSnapshot()
+        collectionView.reloadData()
     }
     
 }
@@ -53,7 +64,7 @@ extension NoteViewController {
             
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
-
+            
             section.boundarySupplementaryItems = [sectionHeader]
             
             return section
@@ -66,29 +77,41 @@ extension NoteViewController {
 // MARK: - Diffable Data Source -
 
 extension NoteViewController {
-    typealias TutorialDataSource = UICollectionViewDiffableDataSource<NotesCollection, Note>
-
+    typealias noteDataSource = UICollectionViewDiffableDataSource<NotesCollection, Note>
+    
     func configureDataSource() {
-        dataSource = TutorialDataSource(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, notes: Note) -> UICollectionViewCell? in
-
+        dataSource = noteDataSource(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, notes: Note) -> UICollectionViewCell? in
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCell.reuseIdentifier, for: indexPath) as? NoteCell else {
                 return nil
             }
-
+            
+            var img = #imageLiteral(resourceName: "Welcome background")
             cell.titleLabel.text = notes.title
-            cell.imageView.image = #imageLiteral(resourceName: "Welcome background")
-
+            
+            print("ColView: \(notes.title)")
+            
+            for m in Data.shared.medias {
+                if m.noteId == notes.id && m.type == "IMAGE"{
+                    img = Common.convertBase64ToImage(m.media)
+                    break
+                }
+            }
+            
+            
+            cell.imageView.image = img
+            
             return cell
-
+            
         }
-
+        
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
-
+            
             if let self = self, let titleSupplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TitleSupplementaryView.reuseIdentifier, for: indexPath) as? TitleSupplementaryView {
-
+                
                 let notesCollection = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
                 titleSupplementaryView.textLabel.text = notesCollection.title
-
+                
                 return titleSupplementaryView
             } else {
                 return nil
@@ -98,12 +121,12 @@ extension NoteViewController {
     
     func configureSnapshot() {
         var currentSnapshot = NSDiffableDataSourceSnapshot<NotesCollection, Note>()
-
+        
         notesCollections.forEach { collection in
             currentSnapshot.appendSections([collection])
             currentSnapshot.appendItems(collection.notes)
         }
-
+        
         dataSource.apply(currentSnapshot, animatingDifferences: false)
     }
 }
@@ -111,22 +134,22 @@ extension NoteViewController {
 //MARK: - UICollectionViewDelegate -
 
 extension NoteViewController: UICollectionViewDelegate {
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if let note = dataSource.itemIdentifier(for: indexPath),
-//            let createNoteViewController = storyboard?.instantiateViewController(identifier: CreateNoteViewController.identifier, creator: { coder in return CreateNoteViewController(coder: coder, note: note)
-//            })   {
-//            show(createNoteViewController, sender: nil)
-//        }
-//
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //        if let note = dataSource.itemIdentifier(for: indexPath),
+    //            let createNoteViewController = storyboard?.instantiateViewController(identifier: CreateNoteViewController.identifier, creator: { coder in return CreateNoteViewController(coder: coder, note: note)
+    //            })   {
+    //            show(createNoteViewController, sender: nil)
+    //        }
+    //
+    //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "EditNoteViewController",
-        let noteCell = sender as? NoteCell,
-        let createNoteViewController = segue.destination as? CreateNoteViewController,
-        let indexPath = collectionView.indexPath(for: noteCell),
-        let note = dataSource.itemIdentifier(for: indexPath) else {
-            fatalError()
+            let noteCell = sender as? NoteCell,
+            let createNoteViewController = segue.destination as? CreateNoteViewController,
+            let indexPath = collectionView.indexPath(for: noteCell),
+            let note = dataSource.itemIdentifier(for: indexPath) else {
+                fatalError()
         }
         createNoteViewController.note = note
     }

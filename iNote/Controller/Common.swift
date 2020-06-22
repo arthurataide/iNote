@@ -14,9 +14,9 @@ class Common{
              return strBase64
       }
       
-//     static func convertBase64ToImage(_ str: String) -> UIImage {
-//              let dataDecoded : Data = Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
-//              let decodedimage = UIImage(data: dataDecoded)
-//              return decodedimage!
-//      }
+     static func convertBase64ToImage(_ str: String) -> UIImage {
+        let dataDecoded : Foundation.Data = Foundation.Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
+              let decodedimage = UIImage(data: dataDecoded)
+              return decodedimage!
+      }
 }

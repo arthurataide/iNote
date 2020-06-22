@@ -19,6 +19,8 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         usernameTextField.text = "jsmr"
         passwordTextField.text = "12345678"
+        UserDefaults.standard.set(usernameTextField.text, forKey: "username")
+        
         print("User: ")
         print(UserDefaults.standard.string(forKey: "username") ?? "")
         // Do any additional setup after loading the view.

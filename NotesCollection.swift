@@ -11,6 +11,7 @@ import Foundation
 struct NotesCollection: Hashable {
   var title: String
   var notes: [Note]
+  var media: [Media]
   let identifier = UUID().uuidString
     
     func hash(into hash: inout Hasher) {

@@ -7,26 +7,30 @@
 //
 
 import UIKit
+import Amplify
+import AmplifyPlugins
 
 class Data {
     
     private var category: [String] = []
-    
     static let shared = Data()
-    
     var notes: [NotesCollection] = []
     
-    private var data: [Note] = [
-        Note.init(id: "1", title: "The first Note test", note: "Today I'm testing this data", category: "School", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
-        Note.init(id: "2", title: "The Second Note test", note: "Today I'm testing this data", category: "School", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
-        Note.init(id: "3", title: "The Third Note test", note: "Today I'm testing this data", category: "IOS", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
-        Note.init(id: "4", title: "The Fouth Note test", note: "Today I'm testing this data", category: "Android Class", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
-        Note.init(id: "5", title: "Other Note test", note: "Today I'm testing this data", category: "Android Class", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
-        Note.init(id: "6", title: "Another Note test", note: "Today I'm testing this data", category: "College", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr")
-    ]
+    var username = UserDefaults.standard.string(forKey: "username")
+    var data = [Note]()
+    var medias = [Media]()
+    
+//    private var data: [Note] = [
+//        Note.init(id: "1", title: "The first Note test", note: "Today I'm testing this data", category: "School", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
+//        Note.init(id: "2", title: "The Second Note test", note: "Today I'm testing this data", category: "School", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
+//        Note.init(id: "3", title: "The Third Note test", note: "Today I'm testing this data", category: "IOS", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
+//        Note.init(id: "4", title: "The Fouth Note test", note: "Today I'm testing this data", category: "Android Class", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
+//        Note.init(id: "5", title: "Other Note test", note: "Today I'm testing this data", category: "Android Class", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr"),
+//        Note.init(id: "6", title: "Another Note test", note: "Today I'm testing this data", category: "College", noteDate: "2020-06-18", noteTime: "11:24:16", location: "37.785834,-122.406417", user: "jsmr")
+//    ]
 
     private init() {
-        getCategories()
+        getNotes()
         for i in data {
             if let index = checkTitleEqual(title: i.category){
                 notes[index].notes.append(i)
@@ -34,6 +38,44 @@ class Data {
                 fatalError("Something went wrong when creating NotesCollection")
             }
         }
+    }
+    
+    func getNotes(){
+        Amplify.DataStore.query(Note.self,
+                                where: Note.keys.user.eq(username),
+                                completion: { result in
+                                    switch(result) {
+                                    case .success(let notes):
+                                        for note in notes{
+                                            //if note.user == username{
+                                                self.data.append(note)
+                                                print("MyNote: \(note.title)")
+                                            getMedia(note.id)
+                                            //}
+                                            getCategories()
+                                        }
+                                        
+                                    case .failure(let error):
+                                        print("Could not query DataStore: \(error)")
+                                    }
+        })
+    }
+    
+    func getMedia(_ noteId:String) {
+        Amplify.DataStore.query(Media.self,
+                                where: Media.keys.noteId.eq(noteId),
+                                completion: { result in
+                                    switch(result) {
+                                    case .success(let medias):
+                                        for media in medias{
+                                            print(media)
+                                            self.medias.append(media)
+                                        }
+                                    case .failure(let error):
+                                        print("Could not query DataStore: \(error)")
+                                    }
+        })
+
     }
     
     private func checkTitleEqual(title: String) -> Int? {
@@ -55,7 +97,7 @@ class Data {
     }
     
     private func getCategories() {
-        var n: NotesCollection = NotesCollection.init(title: "", notes: [])
+        var n: NotesCollection = NotesCollection.init(title: "", notes: [], media: [])
         for d in data {
             if !categoryEqual(cat: d.category){
                 category.append(d.category)

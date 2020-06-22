@@ -29,6 +29,7 @@ public struct Note: Model, Hashable {
       self.location = location
       self.user = user
   }
+    
     public func hash(into hasher: inout Hasher){
         hasher.combine(id)
     }
