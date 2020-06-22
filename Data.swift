@@ -30,14 +30,7 @@ class Data {
 //    ]
 
     private init() {
-        getNotes()
-        for i in data {
-            if let index = checkTitleEqual(title: i.category){
-                notes[index].notes.append(i)
-            } else {
-                fatalError("Something went wrong when creating NotesCollection")
-            }
-        }
+        load()
     }
     
     func getNotes(){
@@ -104,6 +97,22 @@ class Data {
                 n.title = d.category
                 n.notes = []
                 notes.append(n)
+            }
+        }
+    }
+    
+    func load() {
+        category = [String]()
+        data = [Note]()
+        medias = [Media]()
+        notes = [NotesCollection]()
+        getNotes()
+        print("Iniit ------------------------------------------------------------")
+        for i in data {
+            if let index = checkTitleEqual(title: i.category){
+                notes[index].notes.append(i)
+            } else {
+                fatalError("Something went wrong when creating NotesCollection")
             }
         }
     }

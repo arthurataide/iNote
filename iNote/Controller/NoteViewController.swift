@@ -13,6 +13,7 @@ import Combine
 
 class NoteViewController: UIViewController {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<NotesCollection, Note>!
     private var notesCollections = Data.shared.notes
@@ -20,26 +21,30 @@ class NoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        print("View Did Load")
+        activityIndicator.startAnimating()
         setupView()
     }
+    
     private func setupView(){
         self.title = "Notes Library"
-        print(notesCollections)
+
         collectionView.register(TitleSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TitleSupplementaryView.reuseIdentifier)
         collectionView.collectionViewLayout = configureCollectionViewLayout()
-        configureDataSource()
-        configureSnapshot()
+        //configureDataSource()
+        //configureSnapshot(animate: false)
     }
-    
     override func viewDidAppear(_ animated: Bool) {
-        Data.shared.getNotes()
+        Data.shared.load()
         notesCollections = Data.shared.notes
         for c in Data.shared.data{
             print("Reloading \(c.title)")
         }
         configureDataSource()
-        configureSnapshot()
+        configureSnapshot(animate: true)
         collectionView.reloadData()
+        activityIndicator.stopAnimating()
+        activityIndicator.hidesWhenStopped = true
     }
     
 }
@@ -100,7 +105,8 @@ extension NoteViewController {
             
             
             cell.imageView.image = img
-            
+            cell.layer.cornerRadius = 15
+            cell.clipsToBounds = true
             return cell
             
         }
@@ -119,15 +125,15 @@ extension NoteViewController {
         }
     }
     
-    func configureSnapshot() {
+    func configureSnapshot(animate: Bool) {
         var currentSnapshot = NSDiffableDataSourceSnapshot<NotesCollection, Note>()
         
         notesCollections.forEach { collection in
             currentSnapshot.appendSections([collection])
             currentSnapshot.appendItems(collection.notes)
         }
-        
-        dataSource.apply(currentSnapshot, animatingDifferences: false)
+        print(dataSource)
+        dataSource.apply(currentSnapshot, animatingDifferences: animate)
     }
 }
 

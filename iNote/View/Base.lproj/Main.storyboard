@@ -503,7 +503,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="230" height="192"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1CJ-kg-mPG">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1CJ-kg-mPG">
                                                     <rect key="frame" x="0.0" y="0.0" width="230" height="192"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s74-Hq-7FT" customClass="GradientView" customModule="iNote" customModuleProvider="target">
@@ -540,6 +540,11 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="TZY-r0-CyE">
+                                <rect key="frame" x="189" y="430" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" name="DarkBlue"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -555,6 +560,7 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="Qae-f4-eyo"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="TZY-r0-CyE" id="pmY-ax-sUS"/>
                         <outlet property="collectionView" destination="FBN-vS-feo" id="MY4-7M-hcw"/>
                     </connections>
                 </viewController>
@@ -653,7 +659,7 @@
                                 </connections>
                             </button>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAV-Zu-2MV">
-                                <rect key="frame" x="0.0" y="681" width="414" height="132"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <tabBarItem tag="1" image="camera.fill" catalog="system" id="90c-cn-aLF"/>
@@ -683,15 +689,6 @@
                     <tabBarItem key="tabBarItem" tag="2" title="" image="plusIcon" selectedImage="plusIcon" id="3Vm-im-tcz"/>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="NMP-5k-WHg">
                         <nil key="title"/>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PTn-TJ-zTX">
-                            <rect key="frame" x="0.0" y="0.0" width="352" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" name="DarkBlue"/>
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Save">
-                                <color key="titleColor" name="DarkBlue"/>
-                            </state>
-                        </button>
                     </navigationItem>
                     <connections>
                         <outlet property="categoryButton" destination="zfG-57-NE1" id="EHt-0X-TdA"/>
@@ -878,7 +875,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="UXl-bW-aFi"/>
-        <segue reference="w7X-Se-756"/>
+        <segue reference="NFt-MB-VhG"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Welcome background" width="3945" height="5909"/>
