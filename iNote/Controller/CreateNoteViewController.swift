@@ -125,7 +125,18 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
                 MVC.location = mapLocation
             }
             
+        }else if segue.identifier == "goToCategories"{
+            if let categoriesVC = segue.destination as? CategoriesViewController{
+                categoriesVC.delegate = self
+            }
+            
         }
+        
+    }
+    
+    
+    @IBAction func categoryTapped(_ sender: UIButton) {
+       
     }
     
     func loadRecordingUI() {
@@ -163,15 +174,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("viewDidAppear: \(AppDelegate.shared().category)")
-        var title:NSAttributedString?
         
-        if (AppDelegate.shared().category == ""){
-            title = NSAttributedString(string: "Category")
-        }else{
-            title = NSAttributedString(string: AppDelegate.shared().category)
-        }
-        categoryButton.setAttributedTitle(title, for: .normal)
     }
     
     
@@ -498,6 +501,19 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
 //        }
     }
 }
+extension CreateNoteViewController:CategoryDelegate{
+    func CategorySelected(_ category: String) {
+        print("viewDidAppear: \(category)")
+        var title:NSAttributedString?
+        
+        if (category == ""){
+            title = NSAttributedString(string: "Category")
+        }else{
+            title = NSAttributedString(string: category)
+        }
+        categoryButton.setAttributedTitle(title, for: .normal)
+    }
+}
 
 
 class CustomCell: UICollectionViewCell{
@@ -534,6 +550,6 @@ class CustomCell: UICollectionViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
+
+

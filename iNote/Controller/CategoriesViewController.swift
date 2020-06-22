@@ -12,6 +12,7 @@ class CategoriesViewController: UIViewController {
     @IBOutlet weak var categoriesPicker: UIPickerView!
     var categories = ["No Category", "Gym","School","Recipe","Home"]
     var index = 0
+    var delegate:CategoryDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +34,15 @@ class CategoriesViewController: UIViewController {
     }
     
     @IBAction func addTapped(_ sender: UIButton) {
-        if categories[index] == "No Category"{
-            AppDelegate.shared().category = ""
-        }else{
-            AppDelegate.shared().category = categories[index]
-        }
-        print(AppDelegate.shared().category)
-        dismiss(animated: true, completion: nil)
+//        if categories[index] == "No Category"{
+//            AppDelegate.shared().category = ""
+//        }else{
+//            AppDelegate.shared().category = categories[index]
+//        }
+//        print(AppDelegate.shared().category)
+//        delegate?.CategorySelected(AppDelegate.shared().category)
+//        dismiss(animated: true, completion: nil)
+        //self.navigationController?.dismiss(animated: true)
     }
     
 }
@@ -61,7 +64,13 @@ extension CategoriesViewController:UIPickerViewDataSource, UIPickerViewDelegate{
         
         index = row
         print(index)
-        
+        if categories[index] == "No Category"{
+            AppDelegate.shared().category = ""
+        }else{
+            AppDelegate.shared().category = categories[index]
+        }
+        print(AppDelegate.shared().category)
+        delegate?.CategorySelected(AppDelegate.shared().category)
     }
     
     func newCategory() {
@@ -103,4 +112,8 @@ extension CategoriesViewController:UIPickerViewDataSource, UIPickerViewDelegate{
         }
     }
     
+}
+
+protocol CategoryDelegate {
+    func CategorySelected(_ category:String)
 }

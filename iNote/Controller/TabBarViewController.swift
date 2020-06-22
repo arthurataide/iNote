@@ -15,17 +15,32 @@ class TabBarViewController: UITabBarController {
 
     @IBOutlet weak var mainTabBar: UITabBar!
     
+    let saveButton = UIBarButtonItem()
+    let backButton = UIBarButtonItem()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         mainTabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
+        print("viewDidLoad: TAP")
+        
+        
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear: TAP")
         
+        saveButton.title = "Save"
+        saveButton.style = .plain
+        saveButton.action = #selector(CreateNoteViewController.saveNote)
+        
+        backButton.title = "Back"
+        backButton.style = .plain
+        backButton.action = #selector(goToMain)
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -34,12 +49,10 @@ class TabBarViewController: UITabBarController {
         switch item.tag {
             case 1:
                 showSignOut()
-                //break
             case 2:
                 showSave()
             case 3:
                 showSignOut()
-                //break
             default :
                 print("Something went wrong !!")
         }
@@ -48,27 +61,15 @@ class TabBarViewController: UITabBarController {
     func showSave() {
         mainTabBar.isHidden = true
         navigationItem.hidesBackButton = true
-        
-        
-        let saveButton = UIBarButtonItem()
-        saveButton.title = "Save"
-        saveButton.style = .plain
-        saveButton.action = #selector(CreateNoteViewController.saveNote)
         navigationItem.rightBarButtonItem = saveButton
-        
-        let backButton = UIBarButtonItem()
-        backButton.title = "Back"
-        backButton.style = .plain
-        backButton.action = #selector(goToMain)
         navigationItem.leftBarButtonItem = backButton
     }
     
     @objc func goToMain(){
-        
+        print("goToMain")
         self.selectedIndex = 0
         mainTabBar.isHidden = false
         showSignOut()
-    
     }
     
     func showSignOut() {
@@ -92,6 +93,4 @@ class TabBarViewController: UITabBarController {
                }
            }
        }
-    
-
 }

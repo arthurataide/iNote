@@ -11,7 +11,7 @@ import Amplify
 import AmplifyPlugins
 import Combine
 
-class NoteViewController: UIViewController {
+@objc class NoteViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -19,12 +19,13 @@ class NoteViewController: UIViewController {
     private var notesCollections = Data.shared.notes
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         navigationItem.hidesBackButton = true
         print("View Did Load")
         activityIndicator.startAnimating()
         setupView()
     }
+
     
     private func setupView(){
         self.title = "Notes Library"
@@ -37,9 +38,10 @@ class NoteViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         Data.shared.load()
         notesCollections = Data.shared.notes
-        for c in Data.shared.data{
-            print("Reloading \(c.title)")
-        }
+        print("Reloading \(notesCollections)")
+//        for c in Data.shared.data{
+//            print("Reloading \(c.title)")
+//        }
         configureDataSource()
         configureSnapshot(animate: true)
         collectionView.reloadData()
