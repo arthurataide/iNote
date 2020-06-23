@@ -17,13 +17,14 @@ import AVFoundation
 import MediaPlayer
 
 struct ImageData {
+    var mediaId:String
     var image:UIImage
     var imageString:String
 }
 
 final class CreateNoteViewController: UIViewController, UINavigationControllerDelegate{
     static let identifier = String(describing: CreateNoteViewController.self)
-    var note: Note?
+    var editNote: Note?
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextView!
@@ -42,8 +43,8 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     var locationString:String?
     var username:String?
     var images = [String]()
-    
-    var imageData = [ImageData]()
+    var editingNote = false
+    var imagesData = [ImageData]()
     
     fileprivate var colView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -56,9 +57,14 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        noteTextField.text = notePlaceholder
-        noteTextField.textColor = UIColor.lightGray
-        noteTextField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(clearFields(_:)), name: NSNotification.Name(rawValue: "clearFields"), object: nil)
+        
+        if !editingNote{
+            noteTextField.text = notePlaceholder
+            noteTextField.textColor = UIColor.lightGray
+            noteTextField.delegate = self
+        }
         
         titleTextField.becomeFirstResponder()
         
@@ -66,9 +72,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         //data that comes from the UICollectionView
         //print(note)
-        //Cleaning shared variable
-        AppDelegate.shared().category = ""
-        
+   
         //Getting username
         username = UserDefaults.standard.string(forKey: "username")
         print("User: ")
@@ -88,6 +92,24 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         
         colView.delegate = self
         colView.dataSource = self
+        
+        if editingNote{
+            if let note = editNote{
+                titleTextField.text = note.title
+                noteTextField.text = note.note
+                AppDelegate.shared().category = note.category
+                setCategory(category: note.category)
+            }
+            
+            let saveButton = UIBarButtonItem()
+            saveButton.title = "Save"
+            saveButton.style = .plain
+            saveButton.action = #selector(saveNote)
+            navigationItem.rightBarButtonItem = saveButton
+        }else{
+            //Cleaning shared variable
+            AppDelegate.shared().category = ""
+        }
         
 //        collectionView.register(CustomCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 //
@@ -209,7 +231,12 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     
     @objc func saveNote() {
         print("Save")
-        saveOnAWS()
+        
+        if editingNote{
+            editOnAWS()
+        }else{
+            saveOnAWS()
+        }
     }
     
     @objc func deleteNote() {
@@ -233,6 +260,62 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         return dateString
     }
     
+    func setCategory(category:String){
+        var title:NSAttributedString?
+        
+        if (category == ""){
+            title = NSAttributedString(string: "Category")
+        }else{
+            title = NSAttributedString(string: category)
+        }
+        categoryButton.setAttributedTitle(title, for: .normal)
+    }
+    
+    func editOnAWS(){
+        
+        
+        //Update note
+        Amplify.DataStore.query(Note.self,
+                                where: Note.keys.id.eq(editNote?.id),
+                                completion: { result in
+                                    switch(result) {
+                                    case .success(let notes):
+                                        guard notes.count == 1, var updatedNote = notes.first else {
+                                            print("The note was not found")
+                                            return
+                                        }
+                                        
+                                        guard var title = titleTextField.text, let note = noteTextField.text else {
+                                            return
+                                        }
+                                        
+                                        if (title == ""){
+                                            title = "Untitled"
+                                        }
+                                        
+                                        updatedNote.title = title
+                                        updatedNote.note = note
+                                        updatedNote.category = AppDelegate.shared().category
+                                        
+                                        Amplify.DataStore.save(updatedNote,
+                                                               completion: { result in
+                                                                switch(result) {
+                                                                case .success(let savedNote):
+                                                                    print("Updated item: \(savedNote.title)")
+                                                                    
+                                                                    DispatchQueue.main.async {
+                                                                        self.showToast(message: "The note has been updated.", font: .systemFont(ofSize: 12.0))
+                                                                    }
+                                                                    
+                                                                case .failure(let error):
+                                                                    print("Could not update data in Datastore: \(error)")
+                                                                }
+                                        })
+                                    case .failure(let error):
+                                        print("Could not query DataStore: \(error)")
+                                    }
+        })
+    }
 
     func saveOnAWS() {
         guard var title = titleTextField.text, let note = noteTextField.text else {
@@ -275,7 +358,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     func saveMedia(_ noteId:String){
-        for img in imageData{
+        for img in imagesData{
             let media = Media( noteId: noteId, type: "IMAGE", media: img.imageString)
             
             Amplify.DataStore.save(media) { (result) in
@@ -303,11 +386,19 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         
     }
     
+   @objc func clearFields(_ notification:Notification){
+        titleTextField.text = ""
+        noteTextField.text = ""
+        categoryButton.setAttributedTitle(NSAttributedString(string: "Category"), for: .normal)
+        imagesData = [ImageData]()
+        colView.reloadData()
+    }
+    
     func clearFields(){
         titleTextField.text = ""
         noteTextField.text = ""
         categoryButton.setAttributedTitle(NSAttributedString(string: "Category"), for: .normal)
-        imageData = [ImageData]()
+        imagesData = [ImageData]()
         colView.reloadData()
     }
     
@@ -368,7 +459,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
                 cell.alpha = 0.0
             },completion: { (finished: Bool) in
                 print(indexP.row)
-                self.imageData.remove(at: indexP.row)
+                self.imagesData.remove(at: indexP.row)
                 cell.frame = myreact
                 self.colView.reloadData()
                 
@@ -439,7 +530,7 @@ extension CreateNoteViewController:UIImagePickerControllerDelegate{
             return
         }
         
-        imageData.append(ImageData(image: image, imageString: Common.convertImageToBase64(image)))
+        imagesData.append(ImageData(mediaId:"", image: image, imageString: Common.convertImageToBase64(image)))
         colView.reloadData()
     }
     
@@ -469,7 +560,7 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
         cell.addGestureRecognizer(UpSwipe)
         
         //cell.clipsToBounds = true
-        cell.data = imageData[indexPath.row]
+        cell.data = imagesData[indexPath.row]
         
         return cell
     }
@@ -480,7 +571,7 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("KLK")
-        return imageData.count
+        return imagesData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -504,14 +595,7 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
 extension CreateNoteViewController:CategoryDelegate{
     func CategorySelected(_ category: String) {
         print("viewDidAppear: \(category)")
-        var title:NSAttributedString?
-        
-        if (category == ""){
-            title = NSAttributedString(string: "Category")
-        }else{
-            title = NSAttributedString(string: category)
-        }
-        categoryButton.setAttributedTitle(title, for: .normal)
+        setCategory(category: category)
     }
 }
 

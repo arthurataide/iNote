@@ -157,9 +157,22 @@ extension NoteViewController: UICollectionViewDelegate {
             let createNoteViewController = segue.destination as? CreateNoteViewController,
             let indexPath = collectionView.indexPath(for: noteCell),
             let note = dataSource.itemIdentifier(for: indexPath) else {
-                fatalError()
+                return
         }
-        createNoteViewController.note = note
+        var imagesData = [ImageData]()
+        for m in Data.shared.medias {
+            if m.noteId == note.id && m.type == "IMAGE"{
+                imagesData.append(
+                    ImageData(mediaId:m.id,
+                              image: Common.convertBase64ToImage(m.media),
+                              imageString:m.media)
+                )
+            }
+        }
+        
+        createNoteViewController.editNote = note
+        createNoteViewController.imagesData = imagesData
+        createNoteViewController.editingNote = true
     }
 }
 

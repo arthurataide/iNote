@@ -26,9 +26,6 @@ class TabBarViewController: UITabBarController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
         print("viewDidLoad: TAP")
         
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,10 +60,14 @@ class TabBarViewController: UITabBarController {
         navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.leftBarButtonItem = backButton
+        
     }
     
     @objc func goToMain(){
         print("goToMain")
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clearFields"), object: nil)
+        
         self.selectedIndex = 0
         mainTabBar.isHidden = false
         showSignOut()
