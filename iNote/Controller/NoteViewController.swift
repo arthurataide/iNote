@@ -26,6 +26,7 @@ final class NoteViewController: UIViewController {
         setupView()
         
     }
+
     
     private func setupView(){
         collectionView.register(TitleSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TitleSupplementaryView.reuseIdentifier)
@@ -39,9 +40,10 @@ final class NoteViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         Data.shared.load()
         notesCollections = Data.shared.notes
-        for c in Data.shared.data{
-            print("Reloading \(c.title)")
-        }
+        print("Reloading \(notesCollections)")
+//        for c in Data.shared.data{
+//            print("Reloading \(c.title)")
+//        }
         configureDataSource()
         configureSnapshot(animate: true)
         activityIndicator.stopAnimating()
@@ -176,9 +178,22 @@ extension NoteViewController: UICollectionViewDelegate {
             let createNoteViewController = segue.destination as? CreateNoteViewController,
             let indexPath = collectionView.indexPath(for: noteCell),
             let note = dataSource.itemIdentifier(for: indexPath) else {
-                fatalError()
+                return
         }
-        createNoteViewController.note = note
+        var imagesData = [ImageData]()
+        for m in Data.shared.medias {
+            if m.noteId == note.id && m.type == "IMAGE"{
+                imagesData.append(
+                    ImageData(mediaId:m.id,
+                              image: Common.convertBase64ToImage(m.media),
+                              imageString:m.media)
+                )
+            }
+        }
+        
+        createNoteViewController.editNote = note
+        createNoteViewController.imagesData = imagesData
+        createNoteViewController.editingNote = true
     }
 }
 

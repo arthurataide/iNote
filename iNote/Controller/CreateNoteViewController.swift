@@ -17,13 +17,14 @@ import AVFoundation
 import MediaPlayer
 
 struct ImageData {
+    var mediaId:String
     var image:UIImage
     var imageString:String
 }
 
 final class CreateNoteViewController: UIViewController, UINavigationControllerDelegate{
     static let identifier = String(describing: CreateNoteViewController.self)
-    var note: Note?
+    var editNote: Note?
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextView!
@@ -33,17 +34,19 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
 
     let notePlaceholder = "Type your note"
     let reuseIdentifier = "CellIdentifer"
-    var recordButton: UIButton!
+    var recordButton:UIButton!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
+    var audioPlayer: AVAudioPlayer?
     
     let locationManager = CLLocationManager()
     var mapLocation = CLLocation()
     var locationString:String?
     var username:String?
     var images = [String]()
-    
-    var imageData = [ImageData]()
+    var editingNote = false
+    var imagesData = [ImageData]()
+    var deletedMedia = [String]()
     
     fileprivate var colView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -56,9 +59,14 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        noteTextField.text = notePlaceholder
-        noteTextField.textColor = UIColor.lightGray
-        noteTextField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(clearFields(_:)), name: NSNotification.Name(rawValue: "clearFields"), object: nil)
+        
+        if !editingNote{
+            noteTextField.text = notePlaceholder
+            noteTextField.textColor = UIColor.lightGray
+            noteTextField.delegate = self
+        }
         
         titleTextField.becomeFirstResponder()
         
@@ -66,9 +74,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         //data that comes from the UICollectionView
         //print(note)
-        //Cleaning shared variable
-        AppDelegate.shared().category = ""
-        
+   
         //Getting username
         username = UserDefaults.standard.string(forKey: "username")
         print("User: ")
@@ -89,6 +95,24 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         colView.delegate = self
         colView.dataSource = self
         
+        if editingNote{
+            if let note = editNote{
+                titleTextField.text = note.title
+                noteTextField.text = note.note
+                AppDelegate.shared().category = note.category
+                setCategory(category: note.category)
+            }
+            
+            let saveButton = UIBarButtonItem()
+            saveButton.title = "Save"
+            saveButton.style = .plain
+            saveButton.action = #selector(saveNote)
+            navigationItem.rightBarButtonItem = saveButton
+        }else{
+            //Cleaning shared variable
+            AppDelegate.shared().category = ""
+        }
+        
 //        collectionView.register(CustomCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 //
 //        collectionView.delegate = self
@@ -99,46 +123,77 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         
         // Do any additional setup after loading the view.
         
-//        recordingSession = AVAudioSession.sharedInstance()
-//
-//        do {
-//            try recordingSession.setCategory(.playAndRecord, mode: .default)
-//            try recordingSession.setActive(true)
-//            recordingSession.requestRecordPermission() { [unowned self] allowed in
-//                DispatchQueue.main.async {
-//                    if allowed {
-//                        self.loadRecordingUI()
-//                    } else {
-//                        // failed to record!
-//                    }
-//                }
-//            }
-//        } catch {
-//            print("Error ")
-//        }
+        
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowMapView"{
             if let MVC = segue.destination as? MapViewController{
-                MVC.location = mapLocation
+                if let note = editNote{
+                    if (note.location.contains(",")){
+                        let lat = Double(note.location.split(separator: ",")[0])
+                        let lon = Double(note.location.split(separator: ",")[1])
+                        
+                        let noteLocation = CLLocation(latitude: lat!, longitude: lon!)
+                        print("Note Location: \(noteLocation)")
+                        MVC.location = noteLocation
+                    }
+                }
+            }
+            
+        }else if segue.identifier == "goToCategories"{
+            if let categoriesVC = segue.destination as? CategoriesViewController{
+                categoriesVC.delegate = self
             }
             
         }
+        
+    }
+    
+    
+    @IBAction func categoryTapped(_ sender: UIButton) {
+       
     }
     
     func loadRecordingUI() {
-        recordButton = UIButton(frame: CGRect(x: 64, y: 64, width: 128, height: 64))
-        recordButton.setTitle("Tap to Record", for: .normal)
-        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
-        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
-        view.addSubview(recordButton)
+        
+        let message = "Do you want to record an audio?"
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Yes"), style: .default, handler: { alert -> Void in
+//            self.recordButton = UIButton(frame: CGRect(x: self.view.frame.width / 2, y: self.view.frame.height / 2, width: 128, height: 64))
+//            self.recordButton.setTitle("Tap to Record", for: .normal)
+//            self.recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+//            self.recordButton.addTarget(self, action: #selector(self.recordTapped), for: .touchUpInside)
+            
+            //self.recordButton.widthAnchor.constraint(equalToConstant: 128).isActive = true
+            //self.recordButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
+//            self.recordButton.centerXAnchor.constraint(equalTo: self.noteTextField.centerXAnchor).isActive = true
+//            self.recordButton.centerYAnchor.constraint(equalTo: self.noteTextField.centerYAnchor).isActive = true
+            
+            //self.view.addSubview(self.recordButton)
+            self.recordTapped()
+            self.showRecordingAlert()
+        }))
+            
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showRecordingAlert(){
+        let message = "Recording"
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Stop", comment: "Stop"), style: .default, handler: { alert -> Void in
+                    self.recordTapped()
+                }))
+                    
+                //alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default))
+                self.present(alert, animated: true, completion: nil)
     }
     
     func startRecording() {
         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
-
+        print("Path: \(audioFilename)")
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
@@ -151,7 +206,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
             audioRecorder.delegate = self
             audioRecorder.record()
 
-            recordButton.setTitle("Tap to Stop", for: .normal)
+            //recordButton.setTitle("Tap to Stop", for: .normal)
         } catch {
             finishRecording(success: false)
         }
@@ -163,15 +218,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("viewDidAppear: \(AppDelegate.shared().category)")
-        var title:NSAttributedString?
         
-        if (AppDelegate.shared().category == ""){
-            title = NSAttributedString(string: "Category")
-        }else{
-            title = NSAttributedString(string: AppDelegate.shared().category)
-        }
-        categoryButton.setAttributedTitle(title, for: .normal)
     }
     
     
@@ -180,14 +227,17 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         audioRecorder = nil
 
         if success {
-            recordButton.setTitle("Tap to Re-record", for: .normal)
+            print("Record Success")
+            //recordButton.setTitle("Tap to Re-record", for: .normal)
         } else {
-            recordButton.setTitle("Tap to Record", for: .normal)
+            print("Record failed")
+            //recordButton.setTitle("Tap to Record", for: .normal)
             // recording failed :(
         }
     }
     
     @objc func recordTapped() {
+
         if audioRecorder == nil {
             startRecording()
         } else {
@@ -206,7 +256,12 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     
     @objc func saveNote() {
         print("Save")
-        saveOnAWS()
+        
+        if editingNote{
+            editOnAWS()
+        }else{
+            saveOnAWS()
+        }
     }
     
     @objc func deleteNote() {
@@ -230,6 +285,91 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         return dateString
     }
     
+    func setCategory(category:String){
+        var title:NSAttributedString?
+        
+        if (category == ""){
+            title = NSAttributedString(string: "Category")
+        }else{
+            title = NSAttributedString(string: category)
+        }
+        categoryButton.setAttributedTitle(title, for: .normal)
+    }
+    
+    func editOnAWS(){
+        //Delete media
+        for dm in deletedMedia{
+            Amplify.DataStore.query(Media.self,
+                                    where: Media.keys.id.eq(dm),
+                                    completion: { result in
+                                        switch(result) {
+                                        case .success(let media):
+                                            guard media.count == 1, let toDeleteMedia = media.first else {
+                                                return
+                                            }
+                                            Amplify.DataStore.delete(toDeleteMedia,
+                                                                     completion: { result in
+                                                                        switch(result) {
+                                                                        case .success:
+                                                                            self.publish()
+                                                                            print("Deleted item: \(toDeleteMedia.id)")
+                                                                        case .failure(let error):
+                                                                            print("Could not update data in Datastore: \(error)")
+                                                                        }
+                                            })
+                                        case .failure(let error):
+                                            print("Could not query DataStore: \(error)")
+                                        }
+            })
+        }
+        
+        //Add media
+        if editNote != nil{
+            saveMedia(editNote!.id)
+        }
+        
+        //Update note
+        Amplify.DataStore.query(Note.self,
+                                where: Note.keys.id.eq(editNote?.id),
+                                completion: { result in
+                                    switch(result) {
+                                    case .success(let notes):
+                                        guard notes.count == 1, var updatedNote = notes.first else {
+                                            print("The note was not found")
+                                            return
+                                        }
+                                        
+                                        guard var title = titleTextField.text, let note = noteTextField.text else {
+                                            return
+                                        }
+                                        
+                                        if (title == ""){
+                                            title = "Untitled"
+                                        }
+                                        
+                                        updatedNote.title = title
+                                        updatedNote.note = note
+                                        updatedNote.category = AppDelegate.shared().category
+                                        
+                                        Amplify.DataStore.save(updatedNote,
+                                                               completion: { result in
+                                                                switch(result) {
+                                                                case .success(let savedNote):
+                                                                    print("Updated item: \(savedNote.title)")
+                                                                    self.publish()
+                                                                    DispatchQueue.main.async {
+                                                                        self.showToast(message: "The note has been updated.", font: .systemFont(ofSize: 12.0))
+                                                                    }
+                                                                    
+                                                                case .failure(let error):
+                                                                    print("Could not update data in Datastore: \(error)")
+                                                                }
+                                        })
+                                    case .failure(let error):
+                                        print("Could not query DataStore: \(error)")
+                                    }
+        })
+    }
 
     func saveOnAWS() {
         guard var title = titleTextField.text, let note = noteTextField.text else {
@@ -272,20 +412,26 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     func saveMedia(_ noteId:String){
-        for img in imageData{
-            let media = Media( noteId: noteId, type: "IMAGE", media: img.imageString)
-            
-            Amplify.DataStore.save(media) { (result) in
-                switch(result) {
-                case .success(let savedMedia):
-                    print("Saved item: \(savedMedia)")
-                    self.publish()
-                case .failure(let error):
-                    print("Could not save item to datastore: \(error)")
-                }
+        
+        //Adding images
+        for img in imagesData{
+            if img.mediaId == ""{
+                let media = Media( noteId: noteId, type: "IMAGE", media: img.imageString)
                 
+                Amplify.DataStore.save(media) { (result) in
+                    switch(result) {
+                    case .success(let savedMedia):
+                        print("Saved item: \(savedMedia)")
+                        self.publish()
+                    case .failure(let error):
+                        print("Could not save item to datastore: \(error)")
+                    }
+                    
+                }
             }
         }
+        
+        //Adding Audio
     }
     
     func publish()  {
@@ -300,11 +446,19 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         
     }
     
+   @objc func clearFields(_ notification:Notification){
+        titleTextField.text = ""
+        noteTextField.text = ""
+        categoryButton.setAttributedTitle(NSAttributedString(string: "Category"), for: .normal)
+        imagesData = [ImageData]()
+        colView.reloadData()
+    }
+    
     func clearFields(){
         titleTextField.text = ""
         noteTextField.text = ""
         categoryButton.setAttributedTitle(NSAttributedString(string: "Category"), for: .normal)
-        imageData = [ImageData]()
+        imagesData = [ImageData]()
         colView.reloadData()
     }
     
@@ -327,6 +481,46 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         })
     }
     
+    func playAudio(){
+        //let url = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        //let path = Bundle.main.path(forResource: "recording", ofType:"m4a")!
+        //let url = URL(fileURLWithPath: path)
+        //print(url)
+        do {
+            preparePlayer()
+            audioPlayer!.play()
+            print("Playing")
+        } catch {
+            print("Error")
+            // couldn't load file :(
+        }
+    }
+    
+    func preparePlayer() {
+        var error: NSError?
+        recordingSession = AVAudioSession.sharedInstance()
+        do {
+            try recordingSession.setCategory(.playback, mode: .default)
+            audioPlayer = try AVAudioPlayer(contentsOf: getAudioPath() as URL)
+        } catch let error1 as NSError {
+            error = error1
+            audioPlayer = nil
+        }
+        
+        if let err = error {
+            print("AVAudioPlayer error: \(err.localizedDescription)")
+        } else {
+            //audioPlayer.delegate = self
+            audioPlayer!.prepareToPlay()
+            audioPlayer!.volume = 10.0
+        }
+    }
+    
+    func getAudioPath() -> URL {
+        let path = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        return path as URL
+    }
+    
     func setNavigationItems() {
         let backButton = UIBarButtonItem()
         //let deleteButton = UIBarButtonItem()
@@ -342,6 +536,27 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         //        navigationItem.rightBarButtonItem = deleteButton
         //
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Images", style: .plain, target: self, action: #selector(showImages))
+    }
+    
+    func RecordAudio(){
+        recordingSession = AVAudioSession.sharedInstance()
+
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if allowed {
+                        print("Let's record")
+                        self.loadRecordingUI()
+                    } else {
+                        // failed to record!
+                    }
+                }
+            }
+        } catch {
+            print("Error ")
+        }
     }
     
     func getPhoto() {
@@ -365,7 +580,8 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
                 cell.alpha = 0.0
             },completion: { (finished: Bool) in
                 print(indexP.row)
-                self.imageData.remove(at: indexP.row)
+                //Deleting image
+                self.deletedMedia.append(self.imagesData.remove(at: indexP.row).mediaId)
                 cell.frame = myreact
                 self.colView.reloadData()
                 
@@ -396,10 +612,14 @@ extension CreateNoteViewController:UITabBarDelegate{
         if (item.tag == 1){
             getPhoto()
         }else if(item.tag == 2){
-            print(item.tag)
+            playAudio()
+            //RecordAudio()
         }else if(item.tag == 3){
             print(item.tag)
-            performSegue(withIdentifier: "ShowMapView", sender: nil)
+            
+            if editingNote{
+                performSegue(withIdentifier: "ShowMapView", sender: nil)
+            }
         }
         
     }
@@ -436,7 +656,7 @@ extension CreateNoteViewController:UIImagePickerControllerDelegate{
             return
         }
         
-        imageData.append(ImageData(image: image, imageString: Common.convertImageToBase64(image)))
+        imagesData.append(ImageData(mediaId:"", image: image, imageString: Common.convertImageToBase64(image)))
         colView.reloadData()
     }
     
@@ -451,6 +671,8 @@ extension CreateNoteViewController:AVAudioRecorderDelegate{
         if !flag {
             finishRecording(success: false)
         }
+        
+        
     }
 }
 
@@ -466,7 +688,7 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
         cell.addGestureRecognizer(UpSwipe)
         
         //cell.clipsToBounds = true
-        cell.data = imageData[indexPath.row]
+        cell.data = imagesData[indexPath.row]
         
         return cell
     }
@@ -477,7 +699,7 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("KLK")
-        return imageData.count
+        return imagesData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -496,6 +718,12 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
 //                cell.frame = myreact
 //            })
 //        }
+    }
+}
+extension CreateNoteViewController:CategoryDelegate{
+    func CategorySelected(_ category: String) {
+        print("viewDidAppear: \(category)")
+        setCategory(category: category)
     }
 }
 
@@ -534,6 +762,6 @@ class CustomCell: UICollectionViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
+
+
