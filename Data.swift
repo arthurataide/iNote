@@ -16,7 +16,7 @@ class Data {
     static let shared = Data()
     var notes: [NotesCollection] = []
     
-    var username = UserDefaults.standard.string(forKey: "username")
+    
     var data = [Note]()
     var medias = [Media]()
     
@@ -34,6 +34,8 @@ class Data {
     }
     
     func getNotes(){
+        let username = UserDefaults.standard.string(forKey: "username")
+        print("USER: \(username)")
         Amplify.DataStore.query(Note.self,
                                 where: Note.keys.user.eq(username),
                                 completion: { result in

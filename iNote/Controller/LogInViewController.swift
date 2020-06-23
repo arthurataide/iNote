@@ -17,9 +17,9 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usernameTextField.text = "jsmr"
-        passwordTextField.text = "12345678"
-        UserDefaults.standard.set(usernameTextField.text, forKey: "username")
+//        usernameTextField.text = "jsmr"
+//        passwordTextField.text = "12345678"
+        //UserDefaults.standard.set(usernameTextField.text, forKey: "username")
         
         print("User: ")
         print(UserDefaults.standard.string(forKey: "username") ?? "")
@@ -106,6 +106,7 @@ class LogInViewController: UIViewController {
                 print("Sign in succeeded \(success)")
                 if (success.isSignedIn){
                     self.saveUser(username: username)
+                    print("User: \(username)")
                     DispatchQueue.main.async {
                         self.goToNote()
                     }

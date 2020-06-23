@@ -514,6 +514,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         noteTextField.text = ""
         categoryButton.setAttributedTitle(NSAttributedString(string: "Category"), for: .normal)
         imagesData = [ImageData]()
+        audioData = nil
         colView.reloadData()
     }
     
