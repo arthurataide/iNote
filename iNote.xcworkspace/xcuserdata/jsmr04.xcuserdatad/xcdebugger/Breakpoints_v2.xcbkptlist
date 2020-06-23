@@ -14,8 +14,8 @@
             filePath = "iNote/Controller/CreateNoteViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "saveMedia(_:)"
             landmarkType = "7">
             <Locations>
@@ -30,9 +30,9 @@
                   urlString = "file:///Users/jsmr04/Desktop/final/iNote/iNote/Controller/CreateNoteViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "278"
-                  endingLineNumber = "278"
-                  offsetFromSymbolStart = "753">
+                  startingLineNumber = "421"
+                  endingLineNumber = "421"
+                  offsetFromSymbolStart = "720">
                </Location>
                <Location
                   uuid = "6FB0F500-5A06-497F-952E-90583083F972 - 3f8e4ed1bcfe58c9"
@@ -45,9 +45,9 @@
                   urlString = "file:///Users/jsmr04/Desktop/final/iNote/iNote/Controller/CreateNoteViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "279"
-                  endingLineNumber = "279"
-                  offsetFromSymbolStart = "216">
+                  startingLineNumber = "422"
+                  endingLineNumber = "422"
+                  offsetFromSymbolStart = "264">
                </Location>
             </Locations>
          </BreakpointContent>

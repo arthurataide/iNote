@@ -34,9 +34,10 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
 
     let notePlaceholder = "Type your note"
     let reuseIdentifier = "CellIdentifer"
-    var recordButton: UIButton!
+    var recordButton:UIButton!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
+    var audioPlayer: AVAudioPlayer?
     
     let locationManager = CLLocationManager()
     var mapLocation = CLLocation()
@@ -122,23 +123,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         
         // Do any additional setup after loading the view.
         
-//        recordingSession = AVAudioSession.sharedInstance()
-//
-//        do {
-//            try recordingSession.setCategory(.playAndRecord, mode: .default)
-//            try recordingSession.setActive(true)
-//            recordingSession.requestRecordPermission() { [unowned self] allowed in
-//                DispatchQueue.main.async {
-//                    if allowed {
-//                        self.loadRecordingUI()
-//                    } else {
-//                        // failed to record!
-//                    }
-//                }
-//            }
-//        } catch {
-//            print("Error ")
-//        }
+        
         
     }
     
@@ -172,16 +157,43 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     func loadRecordingUI() {
-        recordButton = UIButton(frame: CGRect(x: 64, y: 64, width: 128, height: 64))
-        recordButton.setTitle("Tap to Record", for: .normal)
-        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
-        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
-        view.addSubview(recordButton)
+        
+        let message = "Do you want to record an audio?"
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Yes"), style: .default, handler: { alert -> Void in
+//            self.recordButton = UIButton(frame: CGRect(x: self.view.frame.width / 2, y: self.view.frame.height / 2, width: 128, height: 64))
+//            self.recordButton.setTitle("Tap to Record", for: .normal)
+//            self.recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+//            self.recordButton.addTarget(self, action: #selector(self.recordTapped), for: .touchUpInside)
+            
+            //self.recordButton.widthAnchor.constraint(equalToConstant: 128).isActive = true
+            //self.recordButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
+//            self.recordButton.centerXAnchor.constraint(equalTo: self.noteTextField.centerXAnchor).isActive = true
+//            self.recordButton.centerYAnchor.constraint(equalTo: self.noteTextField.centerYAnchor).isActive = true
+            
+            //self.view.addSubview(self.recordButton)
+            self.recordTapped()
+            self.showRecordingAlert()
+        }))
+            
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showRecordingAlert(){
+        let message = "Recording"
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Stop", comment: "Stop"), style: .default, handler: { alert -> Void in
+                    self.recordTapped()
+                }))
+                    
+                //alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default))
+                self.present(alert, animated: true, completion: nil)
     }
     
     func startRecording() {
         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
-
+        print("Path: \(audioFilename)")
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
@@ -194,7 +206,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
             audioRecorder.delegate = self
             audioRecorder.record()
 
-            recordButton.setTitle("Tap to Stop", for: .normal)
+            //recordButton.setTitle("Tap to Stop", for: .normal)
         } catch {
             finishRecording(success: false)
         }
@@ -215,14 +227,17 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         audioRecorder = nil
 
         if success {
-            recordButton.setTitle("Tap to Re-record", for: .normal)
+            print("Record Success")
+            //recordButton.setTitle("Tap to Re-record", for: .normal)
         } else {
-            recordButton.setTitle("Tap to Record", for: .normal)
+            print("Record failed")
+            //recordButton.setTitle("Tap to Record", for: .normal)
             // recording failed :(
         }
     }
     
     @objc func recordTapped() {
+
         if audioRecorder == nil {
             startRecording()
         } else {
@@ -466,6 +481,46 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         })
     }
     
+    func playAudio(){
+        //let url = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        //let path = Bundle.main.path(forResource: "recording", ofType:"m4a")!
+        //let url = URL(fileURLWithPath: path)
+        //print(url)
+        do {
+            preparePlayer()
+            audioPlayer!.play()
+            print("Playing")
+        } catch {
+            print("Error")
+            // couldn't load file :(
+        }
+    }
+    
+    func preparePlayer() {
+        var error: NSError?
+        recordingSession = AVAudioSession.sharedInstance()
+        do {
+            try recordingSession.setCategory(.playback, mode: .default)
+            audioPlayer = try AVAudioPlayer(contentsOf: getAudioPath() as URL)
+        } catch let error1 as NSError {
+            error = error1
+            audioPlayer = nil
+        }
+        
+        if let err = error {
+            print("AVAudioPlayer error: \(err.localizedDescription)")
+        } else {
+            //audioPlayer.delegate = self
+            audioPlayer!.prepareToPlay()
+            audioPlayer!.volume = 10.0
+        }
+    }
+    
+    func getAudioPath() -> URL {
+        let path = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        return path as URL
+    }
+    
     func setNavigationItems() {
         let backButton = UIBarButtonItem()
         //let deleteButton = UIBarButtonItem()
@@ -481,6 +536,27 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         //        navigationItem.rightBarButtonItem = deleteButton
         //
         //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Images", style: .plain, target: self, action: #selector(showImages))
+    }
+    
+    func RecordAudio(){
+        recordingSession = AVAudioSession.sharedInstance()
+
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if allowed {
+                        print("Let's record")
+                        self.loadRecordingUI()
+                    } else {
+                        // failed to record!
+                    }
+                }
+            }
+        } catch {
+            print("Error ")
+        }
     }
     
     func getPhoto() {
@@ -536,7 +612,8 @@ extension CreateNoteViewController:UITabBarDelegate{
         if (item.tag == 1){
             getPhoto()
         }else if(item.tag == 2){
-            print(item.tag)
+            playAudio()
+            //RecordAudio()
         }else if(item.tag == 3){
             print(item.tag)
             
@@ -594,6 +671,8 @@ extension CreateNoteViewController:AVAudioRecorderDelegate{
         if !flag {
             finishRecording(success: false)
         }
+        
+        
     }
 }
 
