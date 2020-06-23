@@ -17,15 +17,36 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+     
+        navigationItem.leftBarButtonItem = editButtonItem
         mainTabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
-        navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
-        
+        self.title = "iNotes"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        AppDelegate.shared().edit = editing
+        AppDelegate.shared().anin = animated
+        if editing {
+           NotificationCenter.default.post(name: Notification.Name(rawValue: "editMode"), object: nil)
+         //UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(deleteNote))
+         navigationItem.rightBarButtonItem =   UIBarButtonItem(image: UIImage(systemName: "trash"), landscapeImagePhone: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteNote))
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "editMode"), object: nil)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
+        }
+
+    }
+    
+    @objc func deleteNote(){
+        ///code something here
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "deleteItemCollection"), object: nil)
+        //("ALOHA")
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -73,9 +94,7 @@ class TabBarViewController: UITabBarController {
     
     func showSignOut() {
         mainTabBar.isHidden = false
-        
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = nil
+        navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
     }
     

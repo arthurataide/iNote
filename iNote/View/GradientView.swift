@@ -10,7 +10,7 @@ import UIKit
 
 class GradientView: UIView {
 
-  let startColor = UIColor(white: 1.0, alpha: 0)
+  var startColor = UIColor(white: 1.0, alpha: 0)
   let midColor = UIColor(white: 0, alpha: 0.4)
   var endColor = UIColor(white: 0, alpha: 0.8)
   let startLocation: NSNumber = 0

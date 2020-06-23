@@ -117,5 +117,26 @@ class Data {
         }
     }
     
+    func deleteAws(indexPaths: [IndexPath]) {
+        for dm in indexPaths{
+            Amplify.DataStore.query(Note.self, where: Note.keys.id.eq(dm), completion: { result in
+                switch(result) {
+                case .success(let media):
+                    guard media.count == 1, let toDeleteMedia = media.first else {return}
+                        Amplify.DataStore.delete(toDeleteMedia, completion: { result in
+                            switch(result) {
+                            case .success:
+                                self.publish()
+                                print("Deleted item: \(toDeleteMedia.id)")
+                            case .failure(let error):
+                                print("Could not update data in Datastore: \(error)")
+                            }
+                        })
+                case .failure(let error):
+                    print("Could not query DataStore: \(error)")
+                }
+            })
+        }
+    }
 }
 
