@@ -45,6 +45,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     var images = [String]()
     var editingNote = false
     var imagesData = [ImageData]()
+    var deletedMedia = [String]()
     
     fileprivate var colView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -144,7 +145,16 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowMapView"{
             if let MVC = segue.destination as? MapViewController{
-                MVC.location = mapLocation
+                if let note = editNote{
+                    if (note.location.contains(",")){
+                        let lat = Double(note.location.split(separator: ",")[0])
+                        let lon = Double(note.location.split(separator: ",")[1])
+                        
+                        let noteLocation = CLLocation(latitude: lat!, longitude: lon!)
+                        print("Note Location: \(noteLocation)")
+                        MVC.location = noteLocation
+                    }
+                }
             }
             
         }else if segue.identifier == "goToCategories"{
@@ -272,7 +282,36 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     func editOnAWS(){
+        //Delete media
+        for dm in deletedMedia{
+            Amplify.DataStore.query(Media.self,
+                                    where: Media.keys.id.eq(dm),
+                                    completion: { result in
+                                        switch(result) {
+                                        case .success(let media):
+                                            guard media.count == 1, let toDeleteMedia = media.first else {
+                                                return
+                                            }
+                                            Amplify.DataStore.delete(toDeleteMedia,
+                                                                     completion: { result in
+                                                                        switch(result) {
+                                                                        case .success:
+                                                                            self.publish()
+                                                                            print("Deleted item: \(toDeleteMedia.id)")
+                                                                        case .failure(let error):
+                                                                            print("Could not update data in Datastore: \(error)")
+                                                                        }
+                                            })
+                                        case .failure(let error):
+                                            print("Could not query DataStore: \(error)")
+                                        }
+            })
+        }
         
+        //Add media
+        if editNote != nil{
+            saveMedia(editNote!.id)
+        }
         
         //Update note
         Amplify.DataStore.query(Note.self,
@@ -302,7 +341,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
                                                                 switch(result) {
                                                                 case .success(let savedNote):
                                                                     print("Updated item: \(savedNote.title)")
-                                                                    
+                                                                    self.publish()
                                                                     DispatchQueue.main.async {
                                                                         self.showToast(message: "The note has been updated.", font: .systemFont(ofSize: 12.0))
                                                                     }
@@ -358,20 +397,26 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     func saveMedia(_ noteId:String){
+        
+        //Adding images
         for img in imagesData{
-            let media = Media( noteId: noteId, type: "IMAGE", media: img.imageString)
-            
-            Amplify.DataStore.save(media) { (result) in
-                switch(result) {
-                case .success(let savedMedia):
-                    print("Saved item: \(savedMedia)")
-                    self.publish()
-                case .failure(let error):
-                    print("Could not save item to datastore: \(error)")
-                }
+            if img.mediaId == ""{
+                let media = Media( noteId: noteId, type: "IMAGE", media: img.imageString)
                 
+                Amplify.DataStore.save(media) { (result) in
+                    switch(result) {
+                    case .success(let savedMedia):
+                        print("Saved item: \(savedMedia)")
+                        self.publish()
+                    case .failure(let error):
+                        print("Could not save item to datastore: \(error)")
+                    }
+                    
+                }
             }
         }
+        
+        //Adding Audio
     }
     
     func publish()  {
@@ -459,7 +504,8 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
                 cell.alpha = 0.0
             },completion: { (finished: Bool) in
                 print(indexP.row)
-                self.imagesData.remove(at: indexP.row)
+                //Deleting image
+                self.deletedMedia.append(self.imagesData.remove(at: indexP.row).mediaId)
                 cell.frame = myreact
                 self.colView.reloadData()
                 
@@ -493,7 +539,10 @@ extension CreateNoteViewController:UITabBarDelegate{
             print(item.tag)
         }else if(item.tag == 3){
             print(item.tag)
-            performSegue(withIdentifier: "ShowMapView", sender: nil)
+            
+            if editingNote{
+                performSegue(withIdentifier: "ShowMapView", sender: nil)
+            }
         }
         
     }
