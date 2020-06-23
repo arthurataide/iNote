@@ -19,4 +19,16 @@ class Common{
               let decodedimage = UIImage(data: dataDecoded)
               return decodedimage!
       }
+    
+    static func convertAudioToBase64(_ url:URL)->String{
+        let fileData = NSData(contentsOf: url)
+        let base64String = fileData?.base64EncodedString(options: .lineLength64Characters)
+        return base64String!
+    }
+    
+    static func convertBase64ToAudio(_ str: String) -> Foundation.Data {
+      let dataDecoded : Foundation.Data = Foundation.Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
+        
+        return dataDecoded
+    }
 }

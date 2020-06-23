@@ -47,6 +47,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     var editingNote = false
     var imagesData = [ImageData]()
     var deletedMedia = [String]()
+    var audioBase64 = ""
     
     fileprivate var colView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -192,7 +193,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     func startRecording() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        let audioFilename = getAudioPath()
         print("Path: \(audioFilename)")
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -228,6 +229,8 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
 
         if success {
             print("Record Success")
+            audioBase64 = Common.convertAudioToBase64(getAudioPath())
+            print(audioBase64)
             //recordButton.setTitle("Tap to Re-record", for: .normal)
         } else {
             print("Record failed")
@@ -517,7 +520,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     func getAudioPath() -> URL {
-        let path = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        let path = getDocumentsDirectory().appendingPathComponent("note_recording.m4a")
         return path as URL
     }
     
@@ -612,8 +615,8 @@ extension CreateNoteViewController:UITabBarDelegate{
         if (item.tag == 1){
             getPhoto()
         }else if(item.tag == 2){
-            playAudio()
-            //RecordAudio()
+            //playAudio()
+            RecordAudio()
         }else if(item.tag == 3){
             print(item.tag)
             
