@@ -14,6 +14,8 @@ import AmplifyPlugins
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var category:String = ""
+    var edit: Bool = false
+    var anin: Bool = false
     
     static func shared() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate

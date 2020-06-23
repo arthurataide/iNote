@@ -13,5 +13,16 @@ class NoteCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet weak var gradientView: GradientView!
+    override var isSelected: Bool {
+      didSet {
+        if isSelected{
+            print("Selected")
+            titleLabel.textColor = .red
+        } else  {
+            print("not selected")
+            titleLabel.textColor = .white
+        }
+      }
+    }
 }
