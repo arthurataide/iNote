@@ -17,6 +17,7 @@ class TabBarViewController: UITabBarController {
     
     let saveButton = UIBarButtonItem()
     let backButton = UIBarButtonItem()
+    let playButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,7 @@ class TabBarViewController: UITabBarController {
         navigationItem.leftBarButtonItem = editButtonItem
         mainTabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
-        self.title = "iNotes"
+        //self.title = "iNotes"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +38,10 @@ class TabBarViewController: UITabBarController {
         backButton.title = "Back"
         backButton.style = .plain
         backButton.action = #selector(goToMain)
+        
+        playButton.image = UIImage(systemName: "play.fill")
+        playButton.style = .plain
+        playButton.action = #selector(CreateNoteViewController.playAudio)
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -78,8 +83,11 @@ class TabBarViewController: UITabBarController {
     func showSave() {
         mainTabBar.isHidden = true
         navigationItem.hidesBackButton = true
-        navigationItem.rightBarButtonItem = saveButton
+        //navigationItem.rightBarButtonItem = saveButton
         navigationItem.leftBarButtonItem = backButton
+         
+        let buttons = [saveButton,playButton]
+        navigationItem.rightBarButtonItems = buttons
         
     }
     
@@ -95,6 +103,7 @@ class TabBarViewController: UITabBarController {
     
     func showSignOut() {
         mainTabBar.isHidden = false
+        navigationItem.rightBarButtonItems = nil
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
     }
