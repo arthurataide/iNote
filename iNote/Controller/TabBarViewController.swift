@@ -25,7 +25,7 @@ class TabBarViewController: UITabBarController {
         navigationItem.leftBarButtonItem = editButtonItem
         mainTabBar.unselectedItemTintColor = #colorLiteral(red: 0.1331507564, green: 0.2934899926, blue: 0.3668411672, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
-        //self.title = "iNotes"
+        self.title = "iNotes"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,10 +70,14 @@ class TabBarViewController: UITabBarController {
         print (item.tag)
         switch item.tag {
             case 1:
+                navigationItem.rightBarButtonItems = nil
+                navigationItem.leftBarButtonItem = editButtonItem
                 showSignOut()
             case 2:
                 showSave()
             case 3:
+                navigationItem.leftBarButtonItem = nil
+                navigationItem.hidesBackButton = true
                 showSignOut()
             default :
                 print("Something went wrong !!")
@@ -103,8 +107,6 @@ class TabBarViewController: UITabBarController {
     
     func showSignOut() {
         mainTabBar.isHidden = false
-        navigationItem.rightBarButtonItems = nil
-        navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(logOut))
     }
     

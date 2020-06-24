@@ -22,7 +22,7 @@ class SearchViewController: UIViewController {
         //searchTableView.register(SearchNoteTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         searchTableView.delegate = self
         searchTableView.dataSource = self
-        searchTableView.rowHeight = 140
+        searchTableView.rowHeight = 160
         //searchTableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0);
         
         notes = AppDelegate.shared().notes
@@ -96,42 +96,21 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
         cell.titleLabel.text = searchedNotes[indexPath.row].title
         cell.noteLabel.text = searchedNotes[indexPath.row].note
         cell.dateLabel.text =  "\(searchedNotes[indexPath.row].noteDate) \(searchedNotes[indexPath.row].noteTime)"
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor(named:"DarkBlue")?.cgColor
-        cell.layer.cornerRadius = 15
+        
+        //cell.layer.borderWidth = 1
+        //cell.layer.borderColor = UIColor(named:"DarkBlue")?.cgColor
+        //cell.layer.cornerRadius = 15
         //cell.layer.inset = nil
         //cell.separatorInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0);
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 10
-//    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
         index = indexPath.row
         performSegue(withIdentifier: "searchToNote", sender: self)
-//        var imagesData = [ImageData]()
-//        var audioData:AudioData?
-//
-//        for m in AppDelegate.shared().medias {
-//            if m.noteId == notes[indexPath.row].id && m.type == "IMAGE" {
-//                imagesData.append(
-//                    ImageData(mediaId:m.id,
-//                              image: Common.convertBase64ToImage(m.media),
-//                              imageString:m.media)
-//                )
-//            }else if m.noteId == note.id && m.type == "AUDIO" {
-//                audioData = AudioData(mediaId: m.id, audioString: m.media)
-//            }
-//        }
-//
-//        createNoteViewController.editNote = note
-//        createNoteViewController.imagesData = imagesData
-//        createNoteViewController.audioData = audioData
-//        createNoteViewController.editingNote = true
     }
 
 }
