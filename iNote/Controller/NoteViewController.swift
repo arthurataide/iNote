@@ -40,6 +40,11 @@ final class NoteViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         Data.shared.load()
         notesCollections = Data.shared.notes
+        
+        //Data for the searcher
+        AppDelegate.shared().notes = Data.shared.data
+        AppDelegate.shared().medias = Data.shared.medias
+        
         print("Reloading \(notesCollections)")
 //        for c in Data.shared.data{
 //            print("Reloading \(c.title)")
