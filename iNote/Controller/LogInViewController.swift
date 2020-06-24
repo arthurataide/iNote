@@ -14,15 +14,20 @@ class LogInViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var googleButton: UIButton!
+    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameTextField.text = "jsmr"
         passwordTextField.text = "12345678"
-        UserDefaults.standard.set(usernameTextField.text, forKey: "username")
+        //UserDefaults.standard.set(usernameTextField.text, forKey: "username")
         
-        print("User: ")
-        print(UserDefaults.standard.string(forKey: "username") ?? "")
+        
+//        print("User: ")
+//        print(UserDefaults.standard.string(forKey: "username") ?? "")
         // Do any additional setup after loading the view.
     }
     
@@ -32,16 +37,30 @@ class LogInViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
+        hideButtons(hide: false)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        activityIndicator.stopAnimating()
+        activityIndicator.hidesWhenStopped = true
     }
     
     func saveUser(username:String) {
-        print("saveUser: ")
-        print(username)
+        //print("saveUser: ")
+        //print(username)
         UserDefaults.standard.set(username, forKey: "username")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    func hideButtons(hide: Bool) {
+        activityIndicator.isHidden = !hide
+        signInButton.isHidden = hide
+        googleButton.isHidden = hide
+        label.isHidden = hide
     }
     
     @IBAction func signInTapped(_ sender: UIButton) {
@@ -51,14 +70,19 @@ class LogInViewController: UIViewController {
         
         if username != "" {
             if password != ""{
+                hideButtons(hide: true)
+                activityIndicator.startAnimating()
+
                 signIn(username: username, password: password)
             }else{
                 showMessage("User", "Password is required", "OK")
                 passwordTextField.becomeFirstResponder()
+                hideButtons(hide: false)
             }
         }else{
             showMessage("User", "Username is required", "OK")
             usernameTextField.becomeFirstResponder()
+            hideButtons(hide: false)
         }
     }
     
@@ -113,6 +137,7 @@ class LogInViewController: UIViewController {
                     print("Need confirmation")
                     DispatchQueue.main.async {
                         self.showConfirmMessage()
+                        self.hideButtons(hide: false)
                     }
                 }
             //self.fetchCurrentAuthSession()
@@ -139,7 +164,7 @@ class LogInViewController: UIViewController {
     func showConfirmMessage() {
         let alertController = UIAlertController(title: "Confirm Account", message: "", preferredStyle: UIAlertController.Style.alert)
         alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter code"
+            textField.placeholder = "Enter the code"
         }
         let saveAction = UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: { alert -> Void in
             let firstTextField = alertController.textFields![0] as UITextField
@@ -179,16 +204,6 @@ class LogInViewController: UIViewController {
             }
         }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+
     
 }

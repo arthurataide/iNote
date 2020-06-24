@@ -116,7 +116,7 @@
                                     <constraint firstAttribute="width" constant="310" id="wlV-cT-jwJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -212,6 +212,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="LO1-PI-BYX">
+                                <rect key="frame" x="188.5" y="700" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -220,6 +224,8 @@
                             <constraint firstItem="sb1-oj-Mcc" firstAttribute="bottom" secondItem="cEb-ve-0Va" secondAttribute="bottom" constant="60" id="H8q-q0-cSk"/>
                             <constraint firstItem="xaj-sx-eqZ" firstAttribute="top" secondItem="t9u-fd-vKu" secondAttribute="top" id="Icu-l2-yYo"/>
                             <constraint firstItem="jzf-bT-ptM" firstAttribute="trailing" secondItem="cEb-ve-0Va" secondAttribute="trailing" id="Ivu-Ra-3MB"/>
+                            <constraint firstItem="LO1-PI-BYX" firstAttribute="centerX" secondItem="t9u-fd-vKu" secondAttribute="centerX" id="Izf-rG-s2l"/>
+                            <constraint firstItem="sb1-oj-Mcc" firstAttribute="bottom" secondItem="LO1-PI-BYX" secondAttribute="bottom" constant="125" id="LHW-97-w4m"/>
                             <constraint firstItem="cEb-ve-0Va" firstAttribute="centerX" secondItem="t9u-fd-vKu" secondAttribute="centerX" id="MNS-SY-Goi"/>
                             <constraint firstAttribute="bottom" secondItem="xaj-sx-eqZ" secondAttribute="bottom" id="OJu-er-FzD"/>
                             <constraint firstItem="xaj-sx-eqZ" firstAttribute="trailing" secondItem="sb1-oj-Mcc" secondAttribute="trailing" id="PLp-TP-LcE"/>
@@ -236,7 +242,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="6iJ-TU-yHD"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="LO1-PI-BYX" id="CBP-YS-KuX"/>
+                        <outlet property="googleButton" destination="cEb-ve-0Va" id="RNX-yS-cPt"/>
+                        <outlet property="label" destination="6LN-bw-nnn" id="2V0-Ua-ph8"/>
                         <outlet property="passwordTextField" destination="JHZ-Tg-cFS" id="0f9-AH-LqL"/>
+                        <outlet property="signInButton" destination="jzf-bT-ptM" id="CeH-8S-jg1"/>
                         <outlet property="usernameTextField" destination="qdK-HC-Ln0" id="cVR-3C-UgC"/>
                         <segue destination="7H2-5q-68w" kind="show" identifier="loginToNote" id="Z1J-H1-Lsq"/>
                     </connections>
@@ -486,8 +496,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="yif-Hy-Jxe">
+                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <segments>
+                                    <segment title="A to Z"/>
+                                    <segment title="Z to A"/>
+                                    <segment title="Date/Time"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="sortSegmentControl:" destination="iYI-H8-8Vd" eventType="valueChanged" id="ozk-F9-Yu2"/>
+                                </connections>
+                            </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FBN-vS-feo">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="127" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ghv-Rt-oiq">
                                     <size key="itemSize" width="128" height="128"/>
@@ -506,8 +528,8 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1CJ-kg-mPG">
                                                     <rect key="frame" x="0.0" y="0.0" width="230" height="192"/>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s74-Hq-7FT" customClass="GradientView" customModule="iNote" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="230" height="192"/>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s74-Hq-7FT" customClass="GradientView" customModule="iNote" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="16" width="230" height="192"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATW-n2-rIo">
@@ -518,17 +540,17 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="1CJ-kg-mPG" firstAttribute="leading" secondItem="hJb-9E-4VA" secondAttribute="leading" id="24y-i6-h1u"/>
-                                                <constraint firstAttribute="trailing" secondItem="ATW-n2-rIo" secondAttribute="trailing" constant="16" id="32W-py-RDw"/>
-                                                <constraint firstAttribute="bottom" secondItem="1CJ-kg-mPG" secondAttribute="bottom" id="49d-KU-y8f"/>
-                                                <constraint firstAttribute="trailing" secondItem="s74-Hq-7FT" secondAttribute="trailing" id="6In-C7-hBp"/>
-                                                <constraint firstAttribute="bottom" secondItem="s74-Hq-7FT" secondAttribute="bottom" id="Dg2-r4-bri"/>
-                                                <constraint firstItem="s74-Hq-7FT" firstAttribute="leading" secondItem="hJb-9E-4VA" secondAttribute="leading" id="Sg6-jW-e9J"/>
-                                                <constraint firstAttribute="bottom" secondItem="ATW-n2-rIo" secondAttribute="bottom" constant="16" id="VQV-ft-oiI"/>
-                                                <constraint firstItem="s74-Hq-7FT" firstAttribute="top" secondItem="hJb-9E-4VA" secondAttribute="top" id="h3a-Tl-OcA"/>
-                                                <constraint firstAttribute="trailing" secondItem="1CJ-kg-mPG" secondAttribute="trailing" id="i6p-XS-VbJ"/>
-                                                <constraint firstItem="1CJ-kg-mPG" firstAttribute="top" secondItem="hJb-9E-4VA" secondAttribute="top" id="sSN-Ly-K3R"/>
-                                                <constraint firstItem="ATW-n2-rIo" firstAttribute="leading" secondItem="hJb-9E-4VA" secondAttribute="leading" constant="16" id="xnZ-6z-0hv"/>
+                                                <constraint firstAttribute="bottom" secondItem="ATW-n2-rIo" secondAttribute="bottom" constant="16" id="7MD-SA-uan"/>
+                                                <constraint firstItem="s74-Hq-7FT" firstAttribute="top" secondItem="1CJ-kg-mPG" secondAttribute="top" id="7xV-QC-guR"/>
+                                                <constraint firstItem="s74-Hq-7FT" firstAttribute="leading" secondItem="1CJ-kg-mPG" secondAttribute="leading" id="BWl-9l-Gsm"/>
+                                                <constraint firstItem="s74-Hq-7FT" firstAttribute="trailing" secondItem="1CJ-kg-mPG" secondAttribute="trailing" id="KsD-pn-Mlp"/>
+                                                <constraint firstItem="1CJ-kg-mPG" firstAttribute="leading" secondItem="hJb-9E-4VA" secondAttribute="leading" id="PAR-FZ-5AV"/>
+                                                <constraint firstItem="ATW-n2-rIo" firstAttribute="leading" secondItem="hJb-9E-4VA" secondAttribute="leading" constant="16" id="TAj-c6-oBg"/>
+                                                <constraint firstItem="s74-Hq-7FT" firstAttribute="centerX" secondItem="ATW-n2-rIo" secondAttribute="centerX" id="TcB-La-W46"/>
+                                                <constraint firstAttribute="trailing" secondItem="1CJ-kg-mPG" secondAttribute="trailing" id="e5C-0O-OlT"/>
+                                                <constraint firstItem="1CJ-kg-mPG" firstAttribute="bottom" secondItem="s74-Hq-7FT" secondAttribute="bottom" id="jfQ-mg-iih"/>
+                                                <constraint firstItem="s74-Hq-7FT" firstAttribute="top" secondItem="hJb-9E-4VA" secondAttribute="top" id="rgE-1R-lkf"/>
+                                                <constraint firstAttribute="bottom" secondItem="s74-Hq-7FT" secondAttribute="bottom" id="w4d-no-N0o"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="230" height="192"/>
@@ -541,17 +563,20 @@
                                 </cells>
                             </collectionView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="TZY-r0-CyE">
-                                <rect key="frame" x="187.55858469956956" y="430" width="36.999999999999091" height="36.999999999999659"/>
+                                <rect key="frame" x="0.0" y="63" width="414" height="769"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" name="DarkBlue"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="FBN-vS-feo" firstAttribute="leading" secondItem="ct8-jM-wyT" secondAttribute="leading" id="1qB-IJ-DRx"/>
-                            <constraint firstAttribute="bottom" secondItem="FBN-vS-feo" secondAttribute="bottom" id="aSh-45-fGl"/>
-                            <constraint firstItem="FBN-vS-feo" firstAttribute="top" secondItem="NOP-Ea-l0I" secondAttribute="top" id="ag0-Y1-ppl"/>
-                            <constraint firstItem="NOP-Ea-l0I" firstAttribute="trailing" secondItem="FBN-vS-feo" secondAttribute="trailing" id="dH1-Xs-j8X"/>
+                            <constraint firstItem="yif-Hy-Jxe" firstAttribute="top" secondItem="NOP-Ea-l0I" secondAttribute="top" id="0pM-ho-oKT"/>
+                            <constraint firstItem="FBN-vS-feo" firstAttribute="top" secondItem="yif-Hy-Jxe" secondAttribute="bottom" constant="8" symbolic="YES" id="JQF-ma-VX4"/>
+                            <constraint firstItem="yif-Hy-Jxe" firstAttribute="leading" secondItem="ct8-jM-wyT" secondAttribute="leading" id="Tjw-7b-13b"/>
+                            <constraint firstItem="NOP-Ea-l0I" firstAttribute="trailing" secondItem="yif-Hy-Jxe" secondAttribute="trailing" id="bUE-bB-HTc"/>
+                            <constraint firstItem="FBN-vS-feo" firstAttribute="trailing" secondItem="NOP-Ea-l0I" secondAttribute="trailing" id="iwl-Mk-IIT"/>
+                            <constraint firstItem="FBN-vS-feo" firstAttribute="leading" secondItem="NOP-Ea-l0I" secondAttribute="leading" id="mBn-tg-Aaj"/>
+                            <constraint firstAttribute="bottom" secondItem="FBN-vS-feo" secondAttribute="bottom" id="tS9-FN-uTe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NOP-Ea-l0I"/>
                     </view>
@@ -562,6 +587,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="TZY-r0-CyE" id="pmY-ax-sUS"/>
                         <outlet property="collectionView" destination="FBN-vS-feo" id="MY4-7M-hcw"/>
+                        <outlet property="sortSegmentControl" destination="yif-Hy-Jxe" id="mHg-Fo-co0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZm-tZ-HbY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -657,7 +683,7 @@
                                 </connections>
                             </button>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAV-Zu-2MV">
-                                <rect key="frame" x="0.0" y="779" width="414" height="83"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <tabBarItem tag="1" image="camera.fill" catalog="system" id="90c-cn-aLF"/>
@@ -859,7 +885,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UXl-bW-aFi"/>
+        <segue reference="Z1J-H1-Lsq"/>
         <segue reference="NFt-MB-VhG"/>
     </inferredMetricsTieBreakers>
     <resources>

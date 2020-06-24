@@ -17,10 +17,8 @@ class NoteCell: UICollectionViewCell {
     override var isSelected: Bool {
       didSet {
         if isSelected{
-            print("Selected")
             titleLabel.textColor = .red
         } else  {
-            print("not selected")
             titleLabel.textColor = .white
         }
       }

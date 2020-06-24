@@ -15,8 +15,9 @@ final class NoteViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var sortSegmentControl: UISegmentedControl!
     private var dataSource: UICollectionViewDiffableDataSource<NotesCollection, Note>!
-    private var notesCollections = Data.shared.notes
+    private var notesCollections = Data.shared.notes.sorted { $0.title < $1.title }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +26,8 @@ final class NoteViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(deleteItemCollection(_:)), name: Notification.Name(rawValue: "deleteItemCollection"), object: nil)
         setupView()
         
+        print(UserDefaults.standard.data(forKey: "username"))
     }
-
-    
     private func setupView(){
         collectionView.register(TitleSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TitleSupplementaryView.reuseIdentifier)
         collectionView.collectionViewLayout = configureCollectionViewLayout()
@@ -36,42 +36,50 @@ final class NoteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         activityIndicator.startAnimating()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        sortSegmentControl.selectedSegmentIndex = UISegmentedControl.noSegment
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         Data.shared.load()
-        notesCollections = Data.shared.notes
-        print("Reloading \(notesCollections)")
-//        for c in Data.shared.data{
-//            print("Reloading \(c.title)")
-//        }
+        notesCollections = Data.shared.notes.sorted { $0.title < $1.title }
         configureDataSource()
-        configureSnapshot(animate: true)
+        configureSnapshot()
+        //sortSnapshot(typeSort: 1)
         activityIndicator.stopAnimating()
         activityIndicator.hidesWhenStopped = true
     }
     
     @objc func editMode(_ notification: Notification){
-        print("EditMode")
+//        print("EditMode")
         let editing = AppDelegate.shared().edit
         let animated = AppDelegate.shared().anin
         super.setEditing(editing, animated: animated)
         
         collectionView.allowsMultipleSelection = true
-//        collectionView.indexPathsForVisibleItems.forEach { indexPath in
-//          guard let cell = collectionView.cellForItem(at: indexPath) as? NoteCell else { return }
-//        }
+        collectionView.indexPathsForSelectedItems?.forEach { indexPath in
+          guard let cell = collectionView.cellForItem(at: indexPath) as? NoteCell else { return }
+            if !isEditing {
+                cell.isSelected = isEditing
+            }
+        }
     }
     
     @objc func deleteItemCollection(_ notification: Notification){
-        print("deleteButton Clicked")
+//        print("deleteButton Clicked")
         guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else {return}
         
-        let tutorials = selectedIndexPaths.compactMap { dataSource.itemIdentifier(for: $0) }
-        
+        let notes = selectedIndexPaths.compactMap { dataSource.itemIdentifier(for: $0) }
         var currentSnapshot = dataSource.snapshot()
-        currentSnapshot.deleteItems(tutorials)
+        currentSnapshot.deleteItems(notes)
         
+        Data.shared.deleteAws(notes: notes)
         dataSource.apply(currentSnapshot, animatingDifferences:  true)
+    }
+    @IBAction func sortSegmentControl(_ sender: UISegmentedControl) {
+        sender.selectedSegmentTintColor = .white
+        let value = sender.selectedSegmentIndex
+        sortItens(sortId: value)
     }
 }
 
@@ -148,16 +156,38 @@ extension NoteViewController {
         }
     }
     
-    func configureSnapshot(animate: Bool) {
+    func configureSnapshot() {
         var currentSnapshot = NSDiffableDataSourceSnapshot<NotesCollection, Note>()
-        
+
         notesCollections.forEach { collection in
             currentSnapshot.appendSections([collection])
             currentSnapshot.appendItems(collection.notes)
         }
-        //print(dataSource)
-        dataSource.apply(currentSnapshot, animatingDifferences: animate)
+        
+        dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
+    
+    func sortItens(sortId: Int) {
+        //Data.shared.load()
+       // notesCollections = Data.shared.sort(sortId: sortId)
+        //Data.shared.sort(sortId: sortId)
+        notesCollections = Data.shared.sort(sortId: sortId).sorted { $0.title < $1.title }
+        print("New Note Collection: \(notesCollections)")
+//        configureDataSource()
+//        configureSnapshot()
+        
+        var currentSnapshot = dataSource.snapshot()
+        currentSnapshot.deleteAllItems()
+
+        notesCollections.forEach { collection in
+            currentSnapshot.appendSections([collection])
+            currentSnapshot.appendItems(collection.notes)
+        }
+
+        dataSource.apply(currentSnapshot, animatingDifferences: false)
+
+    }
+
 }
 
 //MARK: - UICollectionViewDelegate -

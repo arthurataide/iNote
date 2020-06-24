@@ -1,4 +1,5 @@
 PODS:
+  - ActivityIndicatorView (0.0.2)
   - Amplify (1.0.0):
     - Amplify/Default (= 1.0.0)
   - Amplify/Default (1.0.0)
@@ -48,9 +49,6 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
-  - KeyboardLayoutGuide (0.7.2):
-    - LifecycleHooks (~> 0.6)
-  - LifecycleHooks (0.6.2)
   - ReachabilitySwift (5.0.0)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
@@ -59,6 +57,7 @@ PODS:
   - TextFieldEffects (1.6.0)
 
 DEPENDENCIES:
+  - ActivityIndicatorView
   - Amplify
   - Amplify/Tools
   - AmplifyPlugins/AWSAPIPlugin
@@ -67,11 +66,11 @@ DEPENDENCIES:
   - CLTypingLabel
   - EasySocialButton
   - GoogleSignIn
-  - KeyboardLayoutGuide
   - TextFieldEffects
 
 SPEC REPOS:
   trunk:
+    - ActivityIndicatorView
     - Amplify
     - AmplifyPlugins
     - AppAuth
@@ -87,14 +86,13 @@ SPEC REPOS:
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
-    - KeyboardLayoutGuide
-    - LifecycleHooks
     - ReachabilitySwift
     - SQLite.swift
     - Starscream
     - TextFieldEffects
 
 SPEC CHECKSUMS:
+  ActivityIndicatorView: cf384a339c3f21d02ea6803259e433b7dd883b48
   Amplify: d993f9ab89645ffa58616b23f95a22e1038f46a2
   AmplifyPlugins: 6f341b2013ba8a7389097287333324c8beeb43bd
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
@@ -110,13 +108,11 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
-  KeyboardLayoutGuide: 3bb8d93ef1d61e6f0b3b80668fba5bbcfee829a6
-  LifecycleHooks: 246984e8ef036a8c717298166845bb999b245f5b
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: edb0de5eca2d50eac20ecfaa282738f8601cee0b
+PODFILE CHECKSUM: 4d5131eb54ed18f0a2dc0efd426b9817a99e9c77
 
 COCOAPODS: 1.9.3

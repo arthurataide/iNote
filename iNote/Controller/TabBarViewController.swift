@@ -105,7 +105,11 @@ class TabBarViewController: UITabBarController {
                case .success:
                    DispatchQueue.main.async {
                        print("Successfully signed out")
-                       self.navigationController?.popViewController(animated: true)
+                    UserDefaults.standard.removeObject(forKey: "username")
+                    print(UserDefaults.standard.string(forKey: "username"))
+                    self.navigationController?.popViewController(animated: true)
+                    
+                    
                    }
                case .failure(let error):
                    print("Sign out failed with error \(error)")
