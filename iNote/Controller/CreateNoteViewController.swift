@@ -53,6 +53,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     var imagesData = [ImageData]()
     var deletedMedia = [String]()
     var audioData:AudioData?
+    var indexImage:Int = 0
     
     fileprivate var colView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -151,6 +152,10 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         }else if segue.identifier == "goToCategories"{
             if let categoriesVC = segue.destination as? CategoriesViewController{
                 categoriesVC.delegate = self
+            }
+        }else if segue.identifier == "showImage"{
+            if let showImageVC = segue.destination as? ShowImageViewController{
+                showImageVC.image = imagesData[indexImage].image
             }
         }
     }
@@ -260,8 +265,8 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
         view.endEditing(true)
     }
     
-    @objc func showImages() {
-        
+     func showImage() {
+        performSegue(withIdentifier: "showImage", sender: nil)
     }
     
     @objc func saveNote() {
@@ -753,6 +758,11 @@ extension CreateNoteViewController:UICollectionViewDataSource, UICollectionViewD
         return imagesData.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        indexImage = indexPath.row
+        showImage()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
 //        let myreact = cell.frame
@@ -809,6 +819,8 @@ class CustomCell: UICollectionViewCell{
         imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

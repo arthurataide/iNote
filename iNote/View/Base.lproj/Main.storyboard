@@ -556,12 +556,12 @@
             </objects>
             <point key="canvasLocation" x="3514.4000000000001" y="571.18226600985224"/>
         </scene>
-        <!--View Controller-->
+        <!--Show Image View Controller-->
         <scene sceneID="p2c-AM-QbG">
             <objects>
-                <viewController id="asw-iT-y3y" sceneMemberID="viewController">
+                <viewController id="asw-iT-y3y" customClass="ShowImageViewController" customModule="iNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OJ0-5a-Wkg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D41-hQ-19H">
@@ -579,6 +579,7 @@
                                 </state>
                                 <connections>
                                     <action selector="backButton:" destination="OTk-28-01v" eventType="touchUpInside" id="4JJ-VR-uhA"/>
+                                    <action selector="doneTapped:" destination="asw-iT-y3y" eventType="touchUpInside" id="F0Y-fP-DqY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -595,6 +596,9 @@
                         <viewLayoutGuide key="safeArea" id="VVj-36-uQ5"/>
                     </view>
                     <navigationItem key="navigationItem" id="zwI-i4-ctG"/>
+                    <connections>
+                        <outlet property="imageView" destination="D41-hQ-19H" id="4gW-kK-TKa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rpg-Uj-yV1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -791,7 +795,7 @@
             <objects>
                 <viewController id="ruX-lU-jGw" customClass="CategoriesViewController" customModule="iNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yuO-5L-Ogn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJG-CH-yov">
@@ -922,7 +926,7 @@
             <objects>
                 <viewController id="OTk-28-01v" customClass="MapViewController" customModule="iNote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="msC-Xo-IcY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TrZ-MZ-Twu">
