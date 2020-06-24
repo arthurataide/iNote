@@ -13,7 +13,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     
     var cellIdentifier = "cell"
-    
+    var index = 0
     var notes = [Note]()
     var searchedNotes = [Note]()
     var medias = [Media]()
@@ -29,6 +29,7 @@ class SearchViewController: UIViewController {
         
         searchedNotes = notes
         
+        searchTextField.becomeFirstResponder()
         //print(notes)
         //print(searchTableView.rowHeight)
 
@@ -55,6 +56,31 @@ class SearchViewController: UIViewController {
         }
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchToNote"{
+            let createNoteViewController = segue.destination as! CreateNoteViewController
+            var imagesData = [ImageData]()
+            var audioData:AudioData?
+            
+            for m in AppDelegate.shared().medias {
+                if m.noteId == searchedNotes[index].id && m.type == "IMAGE" {
+                    imagesData.append(
+                        ImageData(mediaId:m.id,
+                                  image: Common.convertBase64ToImage(m.media),
+                                  imageString:m.media)
+                    )
+                }else if m.noteId == searchedNotes[index].id && m.type == "AUDIO" {
+                    audioData = AudioData(mediaId: m.id, audioString: m.media)
+                }
+            }
+            
+            createNoteViewController.editNote = searchedNotes[index]
+            createNoteViewController.imagesData = imagesData
+            createNoteViewController.audioData = audioData
+            createNoteViewController.editingNote = true
+        }
+    }
 }
 
 
@@ -66,15 +92,36 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as!  SearchNoteTableViewCell
         
-        //cell.layer.borderWidth = 1
         cell.titleLabel.text = searchedNotes[indexPath.row].title
         cell.noteTextView.text = searchedNotes[indexPath.row].note
         cell.dateLabel.text =  "\(searchedNotes[indexPath.row].noteDate) \(searchedNotes[indexPath.row].noteTime)"
-        //cell.imageView?.image = #imageLiteral(resourceName: "Welcome background")
-//        cell.imageView?.layer.cornerRadius = 15
-//        cell.imageView?.clipsToBounds = true
-//        cell.clipsToBounds = true
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        index = indexPath.row
+        performSegue(withIdentifier: "searchToNote", sender: self)
+//        var imagesData = [ImageData]()
+//        var audioData:AudioData?
+//
+//        for m in AppDelegate.shared().medias {
+//            if m.noteId == notes[indexPath.row].id && m.type == "IMAGE" {
+//                imagesData.append(
+//                    ImageData(mediaId:m.id,
+//                              image: Common.convertBase64ToImage(m.media),
+//                              imageString:m.media)
+//                )
+//            }else if m.noteId == note.id && m.type == "AUDIO" {
+//                audioData = AudioData(mediaId: m.id, audioString: m.media)
+//            }
+//        }
+//
+//        createNoteViewController.editNote = note
+//        createNoteViewController.imagesData = imagesData
+//        createNoteViewController.audioData = audioData
+//        createNoteViewController.editingNote = true
     }
 
 }

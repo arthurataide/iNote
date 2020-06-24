@@ -616,11 +616,12 @@
                     <connections>
                         <outlet property="searchTableView" destination="eIL-XL-g0R" id="ArX-l7-cEd"/>
                         <outlet property="searchTextField" destination="lde-4o-UDO" id="EdJ-2e-y5p"/>
+                        <segue destination="KhU-l2-blD" kind="show" identifier="searchToNote" id="U3j-4k-9yX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lxm-l8-k5B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3623.1999999999998" y="-561.57635467980299"/>
+            <point key="canvasLocation" x="3454" y="-600"/>
         </scene>
         <!--Create Note View Controller-->
         <scene sceneID="c5a-Jq-3hS">
@@ -866,7 +867,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="UXl-bW-aFi"/>
-        <segue reference="NFt-MB-VhG"/>
+        <segue reference="U3j-4k-9yX"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Welcome background" width="3945" height="5909"/>

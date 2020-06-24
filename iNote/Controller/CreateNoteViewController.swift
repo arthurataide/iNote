@@ -474,7 +474,7 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
                                                                            completion: { result in
                                                                             switch(result) {
                                                                             case .success(let savedMedia):
-                                                                                print("Updated item: \(savedMedia.id)")
+                                                                                print("Updated audio: \(savedMedia.id)")
                                                                                 self.publish()
                                                                             case .failure(let error):
                                                                                 print("Could not update data in Datastore: \(error)")
