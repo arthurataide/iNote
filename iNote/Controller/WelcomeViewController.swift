@@ -27,7 +27,7 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         titleLabel.text = "iNotes"
-        titleLabel.charInterval = 0.7
+        titleLabel.charInterval = 0.5
         
     }
 }
