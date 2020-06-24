@@ -25,17 +25,29 @@ class SearchViewController: UIViewController {
         searchTableView.rowHeight = 160
         //searchTableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0);
         
-        notes = AppDelegate.shared().notes
-        medias = AppDelegate.shared().medias
         
-        searchedNotes = notes
+        
+        
         
         searchTextField.becomeFirstResponder()
         //print(notes)
         //print(searchTableView.rowHeight)
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        print("ViewWillApear Search")
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("ViewDidAppear Search")
+        notes = AppDelegate.shared().notes
+        medias = AppDelegate.shared().medias
+        searchedNotes = notes
+        searchTableView.reloadData()
+        print(notes)
+        print(medias)
+    }
+
     
     @IBAction func searchEditingText(_ sender: UITextField) {
         
@@ -96,14 +108,14 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
         cell.titleLabel.text = searchedNotes[indexPath.row].title
         cell.noteLabel.text = searchedNotes[indexPath.row].note
         cell.dateLabel.text =  "\(searchedNotes[indexPath.row].noteDate) \(searchedNotes[indexPath.row].noteTime)"
-        
-        //cell.layer.borderWidth = 1
-        //cell.layer.borderColor = UIColor(named:"DarkBlue")?.cgColor
-        //cell.layer.cornerRadius = 15
-        //cell.layer.inset = nil
-        //cell.separatorInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0);
+    
         
         return cell
+    }
+    
+    // Set the spacing between sections
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
     }
 
     

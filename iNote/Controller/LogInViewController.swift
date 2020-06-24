@@ -90,6 +90,7 @@ class LogInViewController: UIViewController {
             switch result {
             case .success(_):
                 print("Sign in succeeded")
+                
             case .failure(let error):
                 print("Sign in failed \(error)")
             }

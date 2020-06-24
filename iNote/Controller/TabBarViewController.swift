@@ -102,6 +102,8 @@ class TabBarViewController: UITabBarController {
         
         self.selectedIndex = 0
         mainTabBar.isHidden = false
+        navigationItem.rightBarButtonItems = nil
+        navigationItem.leftBarButtonItem = editButtonItem
         showSignOut()
     }
     

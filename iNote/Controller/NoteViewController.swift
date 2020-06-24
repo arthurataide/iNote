@@ -37,22 +37,26 @@ final class NoteViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     override func viewWillDisappear(_ animated: Bool) {
+        print("viewWillDisappear")
         sortSegmentControl.selectedSegmentIndex = UISegmentedControl.noSegment
+        AppDelegate.shared().notes = Data.shared.data
+        AppDelegate.shared().medias = Data.shared.medias
+        print("viewWillDisappear")
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         Data.shared.load()
         notesCollections = Data.shared.notes.sorted { $0.title < $1.title }
-        
-        AppDelegate.shared().notes = Data.shared.data
-        AppDelegate.shared().medias = Data.shared.medias
-        
+    
         configureDataSource()
         configureSnapshot()
         //sortSnapshot(typeSort: 1)
         activityIndicator.stopAnimating()
         activityIndicator.hidesWhenStopped = true
     }
+    
+    
     
     @objc func editMode(_ notification: Notification){
 //        print("EditMode")
@@ -78,6 +82,9 @@ final class NoteViewController: UIViewController {
         currentSnapshot.deleteItems(notes)
         
         Data.shared.deleteAws(notes: notes)
+        Data.shared.load()
+        AppDelegate.shared().notes = Data.shared.data
+        AppDelegate.shared().medias = Data.shared.medias
         dataSource.apply(currentSnapshot, animatingDifferences:  true)
     }
     @IBAction func sortSegmentControl(_ sender: UISegmentedControl) {

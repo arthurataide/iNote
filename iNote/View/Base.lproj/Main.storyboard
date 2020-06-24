@@ -267,7 +267,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ygs-Eq-KN2" customClass="MadokaTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="52" y="344" width="271" height="55"/>
+                                <rect key="frame" x="52" y="201" width="271" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="Fj5-pW-POe"/>
                                 </constraints>
@@ -286,7 +286,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IF2-vc-1Ej" userLabel="LastName" customClass="MadokaTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="52" y="401" width="271" height="55"/>
+                                <rect key="frame" x="52" y="264" width="271" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="TDo-8I-G9A" userLabel="height = 55"/>
                                 </constraints>
@@ -305,7 +305,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="843-tl-yzK" customClass="MadokaTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="52" y="458" width="271" height="55"/>
+                                <rect key="frame" x="52" y="327" width="271" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="NYH-lo-MEv" userLabel="height = 55"/>
                                 </constraints>
@@ -324,7 +324,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="J4l-ue-w1t" customClass="MadokaTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="52" y="515" width="271" height="55"/>
+                                <rect key="frame" x="52" y="390" width="271" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="6DD-1D-V8n" userLabel="height = 55"/>
                                 </constraints>
@@ -343,7 +343,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vSa-q5-8a9" customClass="MadokaTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="52" y="572" width="271" height="55"/>
+                                <rect key="frame" x="52" y="453" width="271" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="GOJ-Ye-ITc" userLabel="height = 55"/>
                                 </constraints>
@@ -362,7 +362,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rsW-hV-C0e" customClass="MadokaTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="52" y="629" width="271" height="55"/>
+                                <rect key="frame" x="52" y="516" width="271" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="xnD-XX-7uM" userLabel="height = 55"/>
                                 </constraints>
@@ -381,7 +381,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hh-oA-LdA">
-                                <rect key="frame" x="52" y="714" width="271" height="47"/>
+                                <rect key="frame" x="52" y="671" width="271" height="47"/>
                                 <color key="backgroundColor" name="DarkBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="9Fh-Ea-aG6"/>
@@ -405,9 +405,9 @@
                         <color key="backgroundColor" name="VeryLightGreen"/>
                         <constraints>
                             <constraint firstItem="J4l-ue-w1t" firstAttribute="leading" secondItem="P5n-yq-v2y" secondAttribute="leading" constant="52" id="1DY-eX-ZBY"/>
-                            <constraint firstItem="IF2-vc-1Ej" firstAttribute="top" secondItem="Ygs-Eq-KN2" secondAttribute="bottom" constant="2" id="5ES-Xt-svD"/>
+                            <constraint firstItem="IF2-vc-1Ej" firstAttribute="top" secondItem="Ygs-Eq-KN2" secondAttribute="bottom" constant="8" id="5ES-Xt-svD"/>
                             <constraint firstItem="Ygs-Eq-KN2" firstAttribute="top" relation="lessThanOrEqual" secondItem="P5n-yq-v2y" secondAttribute="top" constant="258" id="7XR-hj-y5k"/>
-                            <constraint firstItem="J4l-ue-w1t" firstAttribute="top" secondItem="843-tl-yzK" secondAttribute="bottom" constant="2" id="7ia-fC-lCS"/>
+                            <constraint firstItem="J4l-ue-w1t" firstAttribute="top" secondItem="843-tl-yzK" secondAttribute="bottom" constant="8" id="7ia-fC-lCS"/>
                             <constraint firstItem="P5n-yq-v2y" firstAttribute="trailing" secondItem="843-tl-yzK" secondAttribute="trailing" constant="52" id="BpW-pW-VAw"/>
                             <constraint firstItem="rsW-hV-C0e" firstAttribute="leading" secondItem="P5n-yq-v2y" secondAttribute="leading" constant="52" id="CBo-SR-cGm"/>
                             <constraint firstItem="BD7-4z-oax" firstAttribute="top" secondItem="tMI-j2-fgS" secondAttribute="top" id="DZt-Qo-sQp"/>
@@ -417,10 +417,10 @@
                             <constraint firstItem="P5n-yq-v2y" firstAttribute="trailing" secondItem="rsW-hV-C0e" secondAttribute="trailing" constant="52" id="LVD-qh-ilm"/>
                             <constraint firstItem="P5n-yq-v2y" firstAttribute="trailing" secondItem="J4l-ue-w1t" secondAttribute="trailing" constant="52" id="OZu-YP-lkV"/>
                             <constraint firstItem="P5n-yq-v2y" firstAttribute="trailing" secondItem="3hh-oA-LdA" secondAttribute="trailing" constant="52" id="Ol6-Ch-p5w"/>
-                            <constraint firstItem="rsW-hV-C0e" firstAttribute="top" secondItem="vSa-q5-8a9" secondAttribute="bottom" constant="2" id="Ord-63-rbb"/>
+                            <constraint firstItem="rsW-hV-C0e" firstAttribute="top" secondItem="vSa-q5-8a9" secondAttribute="bottom" constant="8" id="Ord-63-rbb"/>
                             <constraint firstItem="Ygs-Eq-KN2" firstAttribute="leading" secondItem="P5n-yq-v2y" secondAttribute="leading" constant="52" id="Rs8-AO-4Ug"/>
-                            <constraint firstItem="vSa-q5-8a9" firstAttribute="top" secondItem="J4l-ue-w1t" secondAttribute="bottom" constant="2" id="VSf-Oa-OsZ"/>
-                            <constraint firstItem="843-tl-yzK" firstAttribute="top" secondItem="IF2-vc-1Ej" secondAttribute="bottom" constant="2" id="ZhN-dZ-RfP"/>
+                            <constraint firstItem="vSa-q5-8a9" firstAttribute="top" secondItem="J4l-ue-w1t" secondAttribute="bottom" constant="8" id="VSf-Oa-OsZ"/>
+                            <constraint firstItem="843-tl-yzK" firstAttribute="top" secondItem="IF2-vc-1Ej" secondAttribute="bottom" constant="8" id="ZhN-dZ-RfP"/>
                             <constraint firstItem="P5n-yq-v2y" firstAttribute="trailing" secondItem="vSa-q5-8a9" secondAttribute="trailing" constant="52" id="bHm-9t-ZjP"/>
                             <constraint firstItem="P5n-yq-v2y" firstAttribute="trailing" secondItem="Ygs-Eq-KN2" secondAttribute="trailing" constant="52" id="ihl-vf-EJf"/>
                             <constraint firstAttribute="trailing" secondItem="BD7-4z-oax" secondAttribute="trailing" id="mXi-4c-lw3"/>
@@ -428,8 +428,8 @@
                             <constraint firstItem="P5n-yq-v2y" firstAttribute="trailing" secondItem="IF2-vc-1Ej" secondAttribute="trailing" constant="52" id="pVi-Hy-gU6"/>
                             <constraint firstItem="IF2-vc-1Ej" firstAttribute="leading" secondItem="P5n-yq-v2y" secondAttribute="leading" constant="52" id="wGh-8y-IqM"/>
                             <constraint firstItem="BD7-4z-oax" firstAttribute="leading" secondItem="tMI-j2-fgS" secondAttribute="leading" id="xdP-Je-QFA"/>
-                            <constraint firstItem="P5n-yq-v2y" firstAttribute="bottom" secondItem="3hh-oA-LdA" secondAttribute="bottom" constant="17" id="y0O-HP-5rT"/>
-                            <constraint firstItem="3hh-oA-LdA" firstAttribute="top" secondItem="rsW-hV-C0e" secondAttribute="bottom" constant="30" id="yW0-1O-CoS"/>
+                            <constraint firstItem="P5n-yq-v2y" firstAttribute="bottom" secondItem="3hh-oA-LdA" secondAttribute="bottom" constant="60" id="y0O-HP-5rT"/>
+                            <constraint firstItem="3hh-oA-LdA" firstAttribute="top" secondItem="rsW-hV-C0e" secondAttribute="bottom" constant="100" id="yW0-1O-CoS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="P5n-yq-v2y"/>
                     </view>
@@ -446,7 +446,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPB-gh-5vh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1282.608695652174" y="-303.34821428571428"/>
+            <point key="canvasLocation" x="1282.4000000000001" y="-303.69458128078821"/>
         </scene>
         <!--Notes-->
         <scene sceneID="Fyc-hD-UYG">
@@ -623,16 +623,17 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eIL-XL-g0R">
                                 <rect key="frame" x="10" y="189" width="355" height="540"/>
                                 <color key="separatorColor" name="DarkBlue"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="160" id="qKO-Xy-ezM" customClass="SearchNoteTableViewCell" customModule="iNote" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="160" id="qKO-Xy-ezM" customClass="SearchNoteTableViewCell" customModule="iNote" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="355" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qKO-Xy-ezM" id="X7e-91-BOB">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="160"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="329" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FfG-tP-X6S">
-                                                    <rect key="frame" x="8" y="8" width="339" height="24"/>
+                                                    <rect key="frame" x="8" y="8" width="313" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="xcq-G0-j9E"/>
                                                     </constraints>
@@ -641,13 +642,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fss-6Z-tzj">
-                                                    <rect key="frame" x="8" y="61" width="339" height="91"/>
+                                                    <rect key="frame" x="8" y="61" width="313" height="91"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Lo-pa-Xyx">
-                                                    <rect key="frame" x="8" y="37" width="339" height="14"/>
+                                                    <rect key="frame" x="8" y="37" width="313" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="YKV-KZ-Nxz"/>
                                                     </constraints>
@@ -669,7 +670,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="Fss-6Z-tzj" secondAttribute="bottom" constant="8" id="zXY-ka-9Sw"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dateLabel" destination="4Lo-pa-Xyx" id="Coz-QI-3tG"/>
                                             <outlet property="noteLabel" destination="Fss-6Z-tzj" id="FaY-vW-uqR"/>
@@ -969,7 +969,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Z1J-H1-Lsq"/>
+        <segue reference="UXl-bW-aFi"/>
         <segue reference="U3j-4k-9yX"/>
     </inferredMetricsTieBreakers>
     <resources>
