@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var category:String = ""
     var edit: Bool = false
     var anin: Bool = false
+    var notes = [Note]()
+    var medias = [Media]()
     
     static func shared() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate

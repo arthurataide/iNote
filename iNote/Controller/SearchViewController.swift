@@ -9,21 +9,121 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-
+    @IBOutlet weak var searchTableView: UITableView!
+    @IBOutlet weak var searchTextField: UITextField!
+    
+    var cellIdentifier = "cell"
+    var index = 0
+    var notes = [Note]()
+    var searchedNotes = [Note]()
+    var medias = [Media]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        //searchTableView.register(SearchNoteTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        searchTableView.delegate = self
+        searchTableView.dataSource = self
+        searchTableView.rowHeight = 140
+        
+        notes = AppDelegate.shared().notes
+        medias = AppDelegate.shared().medias
+        
+        searchedNotes = notes
+        
+        searchTextField.becomeFirstResponder()
+        //print(notes)
+        //print(searchTableView.rowHeight)
+
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func searchEditingText(_ sender: UITextField) {
+        
+        if let text = sender.text{
+            
+            if text != ""{
+                searchedNotes = [Note]()
+                
+                for note in notes{
+                    if note.title.uppercased().contains(text.uppercased()) || note.note.uppercased().contains(text.uppercased()){
+                        searchedNotes.append(note)
+                    }
+                }
+                
+            }else{
+                searchedNotes = notes
+            }
+            searchTableView.reloadData()
+        }
+        
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchToNote"{
+            let createNoteViewController = segue.destination as! CreateNoteViewController
+            var imagesData = [ImageData]()
+            var audioData:AudioData?
+            
+            for m in AppDelegate.shared().medias {
+                if m.noteId == searchedNotes[index].id && m.type == "IMAGE" {
+                    imagesData.append(
+                        ImageData(mediaId:m.id,
+                                  image: Common.convertBase64ToImage(m.media),
+                                  imageString:m.media)
+                    )
+                }else if m.noteId == searchedNotes[index].id && m.type == "AUDIO" {
+                    audioData = AudioData(mediaId: m.id, audioString: m.media)
+                }
+            }
+            
+            createNoteViewController.editNote = searchedNotes[index]
+            createNoteViewController.imagesData = imagesData
+            createNoteViewController.audioData = audioData
+            createNoteViewController.editingNote = true
+        }
+    }
+}
+
+
+extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchedNotes.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as!  SearchNoteTableViewCell
+        
+        cell.titleLabel.text = searchedNotes[indexPath.row].title
+        cell.noteTextView.text = searchedNotes[indexPath.row].note
+        cell.dateLabel.text =  "\(searchedNotes[indexPath.row].noteDate) \(searchedNotes[indexPath.row].noteTime)"
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        index = indexPath.row
+        performSegue(withIdentifier: "searchToNote", sender: self)
+//        var imagesData = [ImageData]()
+//        var audioData:AudioData?
+//
+//        for m in AppDelegate.shared().medias {
+//            if m.noteId == notes[indexPath.row].id && m.type == "IMAGE" {
+//                imagesData.append(
+//                    ImageData(mediaId:m.id,
+//                              image: Common.convertBase64ToImage(m.media),
+//                              imageString:m.media)
+//                )
+//            }else if m.noteId == note.id && m.type == "AUDIO" {
+//                audioData = AudioData(mediaId: m.id, audioString: m.media)
+//            }
+//        }
+//
+//        createNoteViewController.editNote = note
+//        createNoteViewController.imagesData = imagesData
+//        createNoteViewController.audioData = audioData
+//        createNoteViewController.editingNote = true
+    }
 
 }
+
+

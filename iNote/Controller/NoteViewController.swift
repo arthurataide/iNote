@@ -43,6 +43,10 @@ final class NoteViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         Data.shared.load()
         notesCollections = Data.shared.notes.sorted { $0.title < $1.title }
+        
+        AppDelegate.shared().notes = Data.shared.data
+        AppDelegate.shared().medias = Data.shared.medias
+        
         configureDataSource()
         configureSnapshot()
         //sortSnapshot(typeSort: 1)
@@ -211,18 +215,23 @@ extension NoteViewController: UICollectionViewDelegate {
                 return
         }
         var imagesData = [ImageData]()
+        var audioData:AudioData?
+        
         for m in Data.shared.medias {
-            if m.noteId == note.id && m.type == "IMAGE"{
+            if m.noteId == note.id && m.type == "IMAGE" {
                 imagesData.append(
                     ImageData(mediaId:m.id,
                               image: Common.convertBase64ToImage(m.media),
                               imageString:m.media)
                 )
+            }else if m.noteId == note.id && m.type == "AUDIO" {
+                audioData = AudioData(mediaId: m.id, audioString: m.media)
             }
         }
         
         createNoteViewController.editNote = note
         createNoteViewController.imagesData = imagesData
+        createNoteViewController.audioData = audioData
         createNoteViewController.editingNote = true
     }
 }
