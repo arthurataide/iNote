@@ -33,16 +33,8 @@ class CategoriesViewController: UIViewController {
         newCategory()
     }
     
-    @IBAction func addTapped(_ sender: UIButton) {
-//        if categories[index] == "No Category"{
-//            AppDelegate.shared().category = ""
-//        }else{
-//            AppDelegate.shared().category = categories[index]
-//        }
-//        print(AppDelegate.shared().category)
-//        delegate?.CategorySelected(AppDelegate.shared().category)
-//        dismiss(animated: true, completion: nil)
-        //self.navigationController?.dismiss(animated: true)
+    @IBAction func backButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
 }

@@ -23,6 +23,7 @@ class SearchViewController: UIViewController {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         searchTableView.rowHeight = 140
+        //searchTableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0);
         
         notes = AppDelegate.shared().notes
         medias = AppDelegate.shared().medias
@@ -93,11 +94,20 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as!  SearchNoteTableViewCell
         
         cell.titleLabel.text = searchedNotes[indexPath.row].title
-        cell.noteTextView.text = searchedNotes[indexPath.row].note
+        cell.noteLabel.text = searchedNotes[indexPath.row].note
         cell.dateLabel.text =  "\(searchedNotes[indexPath.row].noteDate) \(searchedNotes[indexPath.row].noteTime)"
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor(named:"DarkBlue")?.cgColor
+        cell.layer.cornerRadius = 15
+        //cell.layer.inset = nil
+        //cell.separatorInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0);
         
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 10
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)

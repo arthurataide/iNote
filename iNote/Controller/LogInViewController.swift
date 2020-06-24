@@ -145,6 +145,7 @@ class LogInViewController: UIViewController {
                 print("Sign in failed \(error)")
                 DispatchQueue.main.async {
                     self.showMessage("User", error.errorDescription.description, "OK")
+                    self.hideButtons(hide: false)
                 }
                 //self.fetchCurrentAuthSession()
             }

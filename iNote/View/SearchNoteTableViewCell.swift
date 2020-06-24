@@ -10,10 +10,9 @@ import UIKit
 
 class SearchNoteTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var noteImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var noteLabel: UILabel!
     
 
 //    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
