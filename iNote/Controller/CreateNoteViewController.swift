@@ -616,8 +616,22 @@ final class CreateNoteViewController: UIViewController, UINavigationControllerDe
     }
     
     func getPhoto() {
+        let alert = UIAlertController(title: "Note", message: "Select an image.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Camera", comment: "Camera"), style: .default, handler: { alert -> Void in
+            self.openImagePicker(sourceType: .camera)
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Photo Library", comment: "Photo Library"), style: .default, handler: { alert -> Void in
+            self.openImagePicker(sourceType: .photoLibrary)
+        }))
+            
+        //alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "No"), style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func openImagePicker(sourceType: UIImagePickerController.SourceType){
         let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
+        vc.sourceType = sourceType
         vc.allowsEditing = true
         vc.delegate = self
         present(vc, animated: true)

@@ -670,6 +670,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="Fss-6Z-tzj" secondAttribute="bottom" constant="8" id="zXY-ka-9Sw"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dateLabel" destination="4Lo-pa-Xyx" id="Coz-QI-3tG"/>
                                             <outlet property="noteLabel" destination="Fss-6Z-tzj" id="FaY-vW-uqR"/>
