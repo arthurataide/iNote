@@ -5,6 +5,8 @@ This is a college's project for Advanced iOS Application Development course. In 
 
 iNote is an iOS Application which you can create and edit notes. Text, images and audios are supported.
 
+iNote and NoteDroid(Note App for Android) have the same requirements and were built trying to follow the same design.
+
 
 ## Features
 
