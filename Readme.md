@@ -1,17 +1,41 @@
 # Inote App
 
 
-This **INote**, an app that is being developed and designed by **Arthur Ataide** and **Jose Marmolejos** for college purpose.
+This is a college's project for Advanced iOS Application Development course. In this project I demonstrated things I learned through the course.
+
+iNote is an iOS Application which you can create and edit notes. Text, images and audios are supported.
 
 
-## Project Requirements
+## Features
 
-*   Create a native application for iPhone or iPad (or Universal) that allows the user to take and organize notes.
-*    Your application should allow user to organize notes by subject that they choose. Every note taken should store a date and time it was taken.
-*    User should be allowed to sort notes by title or by date/time that were created.
-*    User should also be allowed to search for specific note by title or by keyword that may be contained in a note.
-*    User should be allowed to take a picture (or use a picture that was previously taken) and store it as part of a note.
-*    Information on where the note was taken (location) should also be captured as part of the note.
-*    User should be allowed to see the location on a map for every note that was taken.
-*    User should be allowed to record audio and associate this audio file with the note for future use.
+* Authentication (Default)
+* Create, remove and edit notes
+* Sort and filter notes
+* Group by category
+* Attach images from gallery and camera
+* Record and play audio
+* Location tracker
+* Share notes
 
+## Platform
+* iOS
+
+## Built With
+* **IDE:** Xcode
+* **Patern:** MVC
+* **Map:** Google Play Services
+* **Auth:** AWS Authentication
+* **Cloud Database:** AWS DataStore (DynamoDB)
+
+## Screenshots
+
+**Launch Screen**
+<img src="/media-iNote/launchScreen.png" width="300" height="600">
+
+**Authentication**
+
+<img src="/media-iNote/landing.jpg" width="300" height="600"> <img src="/media-iNote/sign-in.png" width="300" height="600"> <img src="/media-iNote/sign-up.png" width="300" height="600">
+
+**Notes**
+
+<img src="/media-iNote/notes.jpg" width="300" height="600"> <img src="/media-iNote/add-notes.png" width="300" height="600"> <img src="/media-iNote/add-cat.png" width="300" height="600">
