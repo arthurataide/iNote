@@ -31,7 +31,7 @@ iNote is an iOS Application which you can create and edit notes. Text, images an
 
 **Launch Screen**
 
-<img src="/media-iNote/launchScreen.PNG" width="250" height="600">
+<img src="/media-iNote/launchScreen.PNG" width="270" height="600">
 
 **Authentication**
 
